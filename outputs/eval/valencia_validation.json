@@ -1,0 +1,90 @@
+{
+ "reference": "Copernicus EMS EMSR935 observedEvent (VHR optical, expert)",
+ "nisar": "T167_2026-10-23",
+ "scores": {
+  "confident flood": {
+   "n_px": 886562,
+   "n_blocks": 257,
+   "IoU": 0.0053,
+   "F1": 0.0106,
+   "precision": 0.0073,
+   "recall": 0.0193,
+   "kappa": 0.0085,
+   "OA": 0.9947,
+   "ci95": {
+    "IoU": [
+     0.003,
+     0.0078
+    ],
+    "F1": [
+     0.0059,
+     0.0154
+    ],
+    "precision": [
+     0.0037,
+     0.0116
+    ],
+    "recall": [
+     0.0128,
+     0.0262
+    ],
+    "kappa": [
+     0.0042,
+     0.0129
+    ],
+    "OA": [
+     0.9935,
+     0.9959
+    ]
+   }
+  },
+  "incl. possible": {
+   "n_px": 886562,
+   "n_blocks": 257,
+   "IoU": 0.0073,
+   "F1": 0.0145,
+   "precision": 0.0078,
+   "recall": 0.105,
+   "kappa": 0.0118,
+   "OA": 0.9791,
+   "ci95": {
+    "IoU": [
+     0.0041,
+     0.0105
+    ],
+    "F1": [
+     0.0081,
+     0.0208
+    ],
+    "precision": [
+     0.0043,
+     0.0114
+    ],
+    "recall": [
+     0.082,
+     0.128
+    ],
+    "kappa": [
+     0.0062,
+     0.0176
+    ],
+    "OA": [
+     0.9752,
+     0.9827
+    ]
+   }
+  }
+ },
+ "damage_vs_flood": {
+  "Damaged": {
+   "buildings": 46,
+   "inside_flood": 2,
+   "within_100m": 13
+  },
+  "Possibly damaged": {
+   "buildings": 873,
+   "inside_flood": 20,
+   "within_100m": 303
+  }
+ }
+}

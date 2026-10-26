@@ -1,0 +1,24 @@
+[
+ {
+  "id": "assam",
+  "title": "Upper Assam floods \u00b7 July 2026",
+  "subtitle": "Golaghat \u00b7 Jorhat \u00b7 Sivasagar \u00b7 Charaideo \u00b7 Majuli",
+  "country": "India",
+  "center": [
+   94.35524738224876,
+   26.75008304995462
+  ],
+  "peak_km2": 1130
+ },
+ {
+  "id": "thailand",
+  "title": "Chao Phraya floods \u00b7 Sep\u2013Oct 2026",
+  "subtitle": "Ayutthaya \u00b7 Pathum Thani \u00b7 northern Bangkok",
+  "country": "Thailand",
+  "center": [
+   100.55145112751867,
+   14.15013844258542
+  ],
+  "peak_km2": 470
+ }
+]

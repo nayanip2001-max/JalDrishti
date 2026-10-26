@@ -1,0 +1,66 @@
+{
+ "train": [
+  "40:2026-07-22:2026-07-21",
+  "163:2026-08-12:2026-08-10",
+  "40:2026-08-15:2026-08-15"
+ ],
+ "features": [
+  "hh_minus_hv",
+  "hh_rel_p10",
+  "hh_rel_p50",
+  "hv_rel_p50",
+  "d_hh",
+  "d_hv",
+  "hh_s7",
+  "d_hh_m7",
+  "d_hh_m15",
+  "hand",
+  "slope",
+  "jrc",
+  "worldcover"
+ ],
+ "cv_iou": [
+  0.8273568210673896,
+  0.8199451199827827,
+  0.8523093725007954,
+  0.8286020448638632,
+  0.8419396047154369
+ ],
+ "best_rounds": [
+  483,
+  543,
+  377,
+  540,
+  620
+ ],
+ "rounds": 540,
+ "params": {
+  "objective": "binary",
+  "learning_rate": 0.2,
+  "num_threads": 4,
+  "num_leaves": 63,
+  "min_data_in_leaf": 200,
+  "feature_fraction": 0.8,
+  "bagging_fraction": 0.8,
+  "bagging_freq": 1,
+  "lambda_l2": 1.0,
+  "verbose": -1,
+  "seed": 0
+ },
+ "gain_importance": {
+  "hh_rel_p50": 4055856.0,
+  "hh_rel_p10": 2450316.0,
+  "d_hh_m7": 530069.0,
+  "hv_rel_p50": 388801.0,
+  "hh_s7": 318713.0,
+  "d_hh_m15": 221513.0,
+  "worldcover": 176634.0,
+  "hand": 97791.0,
+  "jrc": 91392.0,
+  "d_hv": 68768.0,
+  "d_hh": 61841.0,
+  "hh_minus_hv": 48017.0,
+  "slope": 47661.0
+ },
+ "test": {}
+}

@@ -1,0 +1,19 @@
+# Large/regenerable data: rebuild with the scripts (see README)
+/data/
+logs/
+outputs/quicklook/
+outputs/eval/*.npz
+.venv/
+__pycache__/
+*.pyc
+scripts_probe.py
+
+# Keep only the deployed models; experiment models are reproducible from scripts/lodo*.sh
+models/*
+!models/lgbm_final_rel02.txt
+!models/lgbm_adapt_th.txt
+
+# Web
+web/node_modules/
+web/dist/
+.DS_Store

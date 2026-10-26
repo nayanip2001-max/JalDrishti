@@ -1,0 +1,4669 @@
+{
+ "aoi": {
+  "id": "assam",
+  "corners": [
+   [
+    93.69442420136834,
+    27.21263023576539
+   ],
+   [
+    95.01607056312918,
+    27.21263023576539
+   ],
+   [
+    95.01607056312918,
+    26.287535864143848
+   ],
+   [
+    93.69442420136834,
+    26.287535864143848
+   ]
+  ],
+  "bounds": [
+   93.69442420136834,
+   26.287535864143848,
+   95.01607056312918,
+   27.21263023576539
+  ]
+ },
+ "event": {
+  "title": "Upper Assam floods \u00b7 July 2026",
+  "subtitle": "Golaghat \u00b7 Jorhat \u00b7 Sivasagar \u00b7 Charaideo \u00b7 Majuli",
+  "country": "India",
+  "context": "Cloudburst over Mon district, Nagaland on 19 Jul 2026 swelled the Dikhow, Disang, Janji and Dhansiri while a high Brahmaputra blocked their drainage (Wikipedia: 2026 Assam floods; Assam University report).",
+  "window": [
+   "2026-06-10",
+   "2026-10-25"
+  ],
+  "marker": {
+   "date": "2026-07-19",
+   "label": "Cloudburst, Mon (Nagaland)"
+  },
+  "phases": [
+   {
+    "name": "Before",
+    "from": "2026-06-10",
+    "to": "2026-07-18",
+    "color": "#94a3b8"
+   },
+   {
+    "name": "During",
+    "from": "2026-07-18",
+    "to": "2026-08-20",
+    "color": "#22d3ee"
+   },
+   {
+    "name": "After / recovery",
+    "from": "2026-08-20",
+    "to": "2026-10-25",
+    "color": "#34d399"
+   }
+  ],
+  "caveat": "July is Sali rice transplanting season, so some newly flooded paddies count as new water; the 15 Aug map (290 km\u00b2, paddies still flooded) caps that share. The Assam University report counts ~2.12 lakh people displaced: displacement is a subset of living inside the flood extent."
+ },
+ "classes": {
+  "0": {
+   "name": "no data",
+   "color": "#000000"
+  },
+  "1": {
+   "name": "dry",
+   "color": "#000000"
+  },
+  "2": {
+   "name": "permanent / pre-existing water",
+   "color": "#1e40af"
+  },
+  "3": {
+   "name": "flood (open water)",
+   "color": "#22d3ee"
+  },
+  "4": {
+   "name": "possible flood (open water)",
+   "color": "#f59e0b"
+  },
+  "5": {
+   "name": "flooded vegetation",
+   "color": "#a78bfa"
+  },
+  "6": {
+   "name": "possible flooded vegetation",
+   "color": "#d946ef"
+  },
+  "7": {
+   "name": "uncertain",
+   "color": "#94a3b8"
+  }
+ },
+ "evidence_scale": {
+  "l_now": [
+   -8,
+   8
+  ],
+  "l_before": [
+   -8,
+   8
+  ],
+  "l_terrain": [
+   -12,
+   4
+  ],
+  "d_hh": [
+   -15,
+   15
+  ]
+ },
+ "scenes": [
+  {
+   "id": "T040_2026-07-10_nullTest",
+   "track": 40,
+   "date": "2026-07-10",
+   "kind": "null_test",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28"
+   ],
+   "mode": null,
+   "areas_km2": {
+    "dry": 11913.5,
+    "permanent / pre-existing water": 956.6,
+    "flood (open water)": 2.9,
+    "possible flood (open water)": 70.0,
+    "flooded vegetation": 3.0,
+    "possible flooded vegetation": 19.2,
+    "uncertain": 212.8
+   },
+   "exposure": null,
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-07-10_nullTest.webp",
+   "prob": "prob/T040_2026-07-10_nullTest.webp",
+   "sar": "sar/T040_2026-07-10.webp",
+   "ev": [
+    "ev/T040_2026-07-10_nullTest_1.png",
+    "ev/T040_2026-07-10_nullTest_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-07-22",
+   "track": 40,
+   "date": "2026-07-22",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 9661.5,
+    "permanent / pre-existing water": 1119.6,
+    "flood (open water)": 1127.1,
+    "possible flood (open water)": 789.4,
+    "flooded vegetation": 3.1,
+    "possible flooded vegetation": 22.3,
+    "uncertain": 455.1
+   },
+   "exposure": {
+    "low": {
+     "people": 322240,
+     "cropland_km2": 1072.1,
+     "builtup_km2": 0.0,
+     "roads_km": 46.2,
+     "rail_km": 13.0
+    },
+    "high": {
+     "people": 661920,
+     "cropland_km2": 1785.8,
+     "builtup_km2": 0.28,
+     "roads_km": 157.8,
+     "rail_km": 42.7
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 8203,
+       "cropland_km2": 27.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 13993,
+       "cropland_km2": 43.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.1
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 22828,
+       "cropland_km2": 46.1,
+       "builtup_km2": 0.0,
+       "roads_km": 6.6,
+       "rail_km": 2.6
+      },
+      "high": {
+       "people": 49606,
+       "cropland_km2": 89.2,
+       "builtup_km2": 0.0,
+       "roads_km": 22.0,
+       "rail_km": 9.5
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 3225,
+       "cropland_km2": 6.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.9,
+       "rail_km": 0.8
+      },
+      "high": {
+       "people": 11196,
+       "cropland_km2": 19.6,
+       "builtup_km2": 0.02,
+       "roads_km": 5.0,
+       "rail_km": 2.1
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 72728,
+       "cropland_km2": 231.1,
+       "builtup_km2": 0.0,
+       "roads_km": 18.1,
+       "rail_km": 1.7
+      },
+      "high": {
+       "people": 130435,
+       "cropland_km2": 346.6,
+       "builtup_km2": 0.02,
+       "roads_km": 54.0,
+       "rail_km": 8.4
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 77333,
+       "cropland_km2": 310.2,
+       "builtup_km2": 0.0,
+       "roads_km": 8.9,
+       "rail_km": 2.3
+      },
+      "high": {
+       "people": 143939,
+       "cropland_km2": 458.1,
+       "builtup_km2": 0.2,
+       "roads_km": 28.6,
+       "rail_km": 6.2
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 994,
+       "cropland_km2": 3.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3164,
+       "cropland_km2": 8.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 40980,
+       "cropland_km2": 150.7,
+       "builtup_km2": 0.0,
+       "roads_km": 1.3,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 117272,
+       "cropland_km2": 325.9,
+       "builtup_km2": 0.01,
+       "roads_km": 8.7,
+       "rail_km": 0.7
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 55,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 212,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 13932,
+       "cropland_km2": 67.8,
+       "builtup_km2": 0.0,
+       "roads_km": 1.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 27337,
+       "cropland_km2": 118.0,
+       "builtup_km2": 0.0,
+       "roads_km": 4.6,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 831,
+       "cropland_km2": 1.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1891,
+       "cropland_km2": 3.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 68,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 315,
+       "cropland_km2": 0.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 492,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2071,
+       "cropland_km2": 1.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 80432,
+       "cropland_km2": 225.0,
+       "builtup_km2": 0.0,
+       "roads_km": 9.2,
+       "rail_km": 5.6
+      },
+      "high": {
+       "people": 160200,
+       "cropland_km2": 369.7,
+       "builtup_km2": 0.03,
+       "roads_km": 32.9,
+       "rail_km": 15.7
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 19,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 135,
+       "cropland_km2": 0.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 269,
+       "cropland_km2": 0.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-07-22.webp",
+   "prob": "prob/T040_2026-07-22.webp",
+   "sar": "sar/T040_2026-07-22.webp",
+   "ev": [
+    "ev/T040_2026-07-22_1.png",
+    "ev/T040_2026-07-22_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-08-15",
+   "track": 40,
+   "date": "2026-08-15",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 11261.2,
+    "permanent / pre-existing water": 971.9,
+    "flood (open water)": 290.3,
+    "possible flood (open water)": 361.4,
+    "flooded vegetation": 2.6,
+    "possible flooded vegetation": 20.4,
+    "uncertain": 269.3
+   },
+   "exposure": {
+    "low": {
+     "people": 62305,
+     "cropland_km2": 278.0,
+     "builtup_km2": 0.0,
+     "roads_km": 5.2,
+     "rail_km": 0.4
+    },
+    "high": {
+     "people": 202462,
+     "cropland_km2": 618.0,
+     "builtup_km2": 0.2,
+     "roads_km": 32.0,
+     "rail_km": 2.8
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 677,
+       "cropland_km2": 2.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2355,
+       "cropland_km2": 6.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 1672,
+       "cropland_km2": 5.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 12894,
+       "cropland_km2": 28.5,
+       "builtup_km2": 0.0,
+       "roads_km": 1.9,
+       "rail_km": 0.3
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 101,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1123,
+       "cropland_km2": 2.0,
+       "builtup_km2": 0.01,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 16234,
+       "cropland_km2": 67.5,
+       "builtup_km2": 0.0,
+       "roads_km": 2.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 45096,
+       "cropland_km2": 139.8,
+       "builtup_km2": 0.0,
+       "roads_km": 10.4,
+       "rail_km": 0.4
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 11772,
+       "cropland_km2": 67.8,
+       "builtup_km2": 0.0,
+       "roads_km": 1.2,
+       "rail_km": 0.2
+      },
+      "high": {
+       "people": 42291,
+       "cropland_km2": 156.1,
+       "builtup_km2": 0.17,
+       "roads_km": 7.3,
+       "rail_km": 0.7
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 152,
+       "cropland_km2": 1.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 679,
+       "cropland_km2": 2.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 2155,
+       "cropland_km2": 8.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 15133,
+       "cropland_km2": 33.8,
+       "builtup_km2": 0.0,
+       "roads_km": 2.8,
+       "rail_km": 0.4
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 45,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 3744,
+       "cropland_km2": 22.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9736,
+       "cropland_km2": 46.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.9,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 24,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 320,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 25,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 159,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 161,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 639,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 25579,
+       "cropland_km2": 102.5,
+       "builtup_km2": 0.0,
+       "roads_km": 1.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 71974,
+       "cropland_km2": 200.9,
+       "builtup_km2": 0.01,
+       "roads_km": 7.6,
+       "rail_km": 0.8
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 16,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-08-15.webp",
+   "prob": "prob/T040_2026-08-15.webp",
+   "sar": "sar/T040_2026-08-15.webp",
+   "ev": [
+    "ev/T040_2026-08-15_1.png",
+    "ev/T040_2026-08-15_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-08-27",
+   "track": 40,
+   "date": "2026-08-27",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12007.6,
+    "permanent / pre-existing water": 850.2,
+    "flood (open water)": 68.2,
+    "possible flood (open water)": 106.4,
+    "flooded vegetation": 3.3,
+    "possible flooded vegetation": 21.5,
+    "uncertain": 120.9
+   },
+   "exposure": {
+    "low": {
+     "people": 8905,
+     "cropland_km2": 60.4,
+     "builtup_km2": 0.0,
+     "roads_km": 2.0,
+     "rail_km": 0.2
+    },
+    "high": {
+     "people": 45493,
+     "cropland_km2": 155.1,
+     "builtup_km2": 0.02,
+     "roads_km": 15.4,
+     "rail_km": 1.6
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 73,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 397,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 138,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1271,
+       "cropland_km2": 1.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.2
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 29,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 265,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 2057,
+       "cropland_km2": 13.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 11643,
+       "cropland_km2": 41.6,
+       "builtup_km2": 0.0,
+       "roads_km": 4.7,
+       "rail_km": 0.4
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 1930,
+       "cropland_km2": 17.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.7,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 10198,
+       "cropland_km2": 45.7,
+       "builtup_km2": 0.01,
+       "roads_km": 4.0,
+       "rail_km": 0.4
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 34,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 341,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 825,
+       "cropland_km2": 0.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5032,
+       "cropland_km2": 3.1,
+       "builtup_km2": 0.0,
+       "roads_km": 1.7,
+       "rail_km": 0.3
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 7,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 24,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 276,
+       "cropland_km2": 1.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1643,
+       "cropland_km2": 5.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.7,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 16,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 149,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 11,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 49,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 57,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 249,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 3446,
+       "cropland_km2": 27.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 14210,
+       "cropland_km2": 56.7,
+       "builtup_km2": 0.0,
+       "roads_km": 3.1,
+       "rail_km": 0.4
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 20,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-08-27.webp",
+   "prob": "prob/T040_2026-08-27.webp",
+   "sar": "sar/T040_2026-08-27.webp",
+   "ev": [
+    "ev/T040_2026-08-27_1.png",
+    "ev/T040_2026-08-27_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-09-08",
+   "track": 40,
+   "date": "2026-09-08",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12052.6,
+    "permanent / pre-existing water": 844.9,
+    "flood (open water)": 60.8,
+    "possible flood (open water)": 89.8,
+    "flooded vegetation": 3.3,
+    "possible flooded vegetation": 19.9,
+    "uncertain": 106.8
+   },
+   "exposure": {
+    "low": {
+     "people": 9673,
+     "cropland_km2": 52.4,
+     "builtup_km2": 0.0,
+     "roads_km": 2.2,
+     "rail_km": 0.3
+    },
+    "high": {
+     "people": 43756,
+     "cropland_km2": 130.6,
+     "builtup_km2": 0.01,
+     "roads_km": 13.3,
+     "rail_km": 1.7
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 100,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 559,
+       "cropland_km2": 1.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 243,
+       "cropland_km2": 0.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1966,
+       "cropland_km2": 3.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.3
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 46,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 364,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 2788,
+       "cropland_km2": 13.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 11072,
+       "cropland_km2": 35.2,
+       "builtup_km2": 0.0,
+       "roads_km": 4.4,
+       "rail_km": 0.2
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 1814,
+       "cropland_km2": 14.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.7,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 7747,
+       "cropland_km2": 29.8,
+       "builtup_km2": 0.01,
+       "roads_km": 3.3,
+       "rail_km": 0.5
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 37,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 290,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 936,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 5135,
+       "cropland_km2": 1.9,
+       "builtup_km2": 0.0,
+       "roads_km": 1.4,
+       "rail_km": 0.3
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 7,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 21,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 214,
+       "cropland_km2": 1.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1238,
+       "cropland_km2": 4.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 103,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 59,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 45,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 209,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 3423,
+       "cropland_km2": 21.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 14979,
+       "cropland_km2": 55.4,
+       "builtup_km2": 0.0,
+       "roads_km": 2.5,
+       "rail_km": 0.3
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 2,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 13,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-09-08.webp",
+   "prob": "prob/T040_2026-09-08.webp",
+   "sar": "sar/T040_2026-09-08.webp",
+   "ev": [
+    "ev/T040_2026-09-08_1.png",
+    "ev/T040_2026-09-08_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-09-20",
+   "track": 40,
+   "date": "2026-09-20",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12180.1,
+    "permanent / pre-existing water": 801.6,
+    "flood (open water)": 42.6,
+    "possible flood (open water)": 48.5,
+    "flooded vegetation": 3.0,
+    "possible flooded vegetation": 18.8,
+    "uncertain": 83.5
+   },
+   "exposure": {
+    "low": {
+     "people": 6127,
+     "cropland_km2": 34.4,
+     "builtup_km2": 0.0,
+     "roads_km": 1.4,
+     "rail_km": 0.2
+    },
+    "high": {
+     "people": 27941,
+     "cropland_km2": 72.0,
+     "builtup_km2": 0.01,
+     "roads_km": 9.3,
+     "rail_km": 1.4
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 99,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 492,
+       "cropland_km2": 0.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 106,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 749,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.1
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 37,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 280,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 1080,
+       "cropland_km2": 4.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5788,
+       "cropland_km2": 11.6,
+       "builtup_km2": 0.0,
+       "roads_km": 2.9,
+       "rail_km": 0.2
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 1235,
+       "cropland_km2": 9.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 5396,
+       "cropland_km2": 19.4,
+       "builtup_km2": 0.01,
+       "roads_km": 2.4,
+       "rail_km": 0.4
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 38,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 288,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 962,
+       "cropland_km2": 0.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 5678,
+       "cropland_km2": 2.7,
+       "builtup_km2": 0.0,
+       "roads_km": 1.5,
+       "rail_km": 0.5
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 6,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 29,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 206,
+       "cropland_km2": 1.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1062,
+       "cropland_km2": 3.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 11,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 76,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 8,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 51,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 52,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 227,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 2279,
+       "cropland_km2": 18.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7802,
+       "cropland_km2": 34.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.4,
+       "rail_km": 0.1
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 5,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 18,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-09-20.webp",
+   "prob": "prob/T040_2026-09-20.webp",
+   "sar": "sar/T040_2026-09-20.webp",
+   "ev": [
+    "ev/T040_2026-09-20_1.png",
+    "ev/T040_2026-09-20_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-10-02",
+   "track": 40,
+   "date": "2026-10-02",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12228.6,
+    "permanent / pre-existing water": 737.9,
+    "flood (open water)": 42.6,
+    "possible flood (open water)": 58.2,
+    "flooded vegetation": 3.2,
+    "possible flooded vegetation": 18.4,
+    "uncertain": 89.2
+   },
+   "exposure": {
+    "low": {
+     "people": 9918,
+     "cropland_km2": 26.1,
+     "builtup_km2": 0.02,
+     "roads_km": 1.6,
+     "rail_km": 0.1
+    },
+    "high": {
+     "people": 40090,
+     "cropland_km2": 55.9,
+     "builtup_km2": 0.3,
+     "roads_km": 12.6,
+     "rail_km": 0.9
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 129,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 612,
+       "cropland_km2": 0.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 318,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1639,
+       "cropland_km2": 1.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.1
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 72,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 456,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 1977,
+       "cropland_km2": 4.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7604,
+       "cropland_km2": 10.0,
+       "builtup_km2": 0.01,
+       "roads_km": 3.2,
+       "rail_km": 0.1
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 1805,
+       "cropland_km2": 5.9,
+       "builtup_km2": 0.02,
+       "roads_km": 0.4,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 7144,
+       "cropland_km2": 10.7,
+       "builtup_km2": 0.27,
+       "roads_km": 2.3,
+       "rail_km": 0.2
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 111,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 504,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 1782,
+       "cropland_km2": 1.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9458,
+       "cropland_km2": 6.0,
+       "builtup_km2": 0.01,
+       "roads_km": 1.3,
+       "rail_km": 0.3
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 21,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 94,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 412,
+       "cropland_km2": 2.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1676,
+       "cropland_km2": 5.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 34,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 232,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 33,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 102,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 236,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 969,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 2983,
+       "cropland_km2": 11.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9573,
+       "cropland_km2": 21.5,
+       "builtup_km2": 0.01,
+       "roads_km": 3.3,
+       "rail_km": 0.2
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 20,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-10-02.webp",
+   "prob": "prob/T040_2026-10-02.webp",
+   "sar": "sar/T040_2026-10-02.webp",
+   "ev": [
+    "ev/T040_2026-10-02_1.png",
+    "ev/T040_2026-10-02_2.png"
+   ]
+  },
+  {
+   "id": "T040_2026-10-14",
+   "track": 40,
+   "date": "2026-10-14",
+   "kind": "post",
+   "refs": [
+    "2026-06-16",
+    "2026-06-28",
+    "2026-07-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12327.5,
+    "permanent / pre-existing water": 675.4,
+    "flood (open water)": 32.3,
+    "possible flood (open water)": 46.7,
+    "flooded vegetation": 2.5,
+    "possible flooded vegetation": 16.6,
+    "uncertain": 76.3
+   },
+   "exposure": {
+    "low": {
+     "people": 7915,
+     "cropland_km2": 17.9,
+     "builtup_km2": 0.03,
+     "roads_km": 1.4,
+     "rail_km": 0.1
+    },
+    "high": {
+     "people": 33889,
+     "cropland_km2": 38.6,
+     "builtup_km2": 0.34,
+     "roads_km": 10.9,
+     "rail_km": 0.9
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 105,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 523,
+       "cropland_km2": 0.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 199,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1085,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 63,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 414,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 1579,
+       "cropland_km2": 3.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6517,
+       "cropland_km2": 8.0,
+       "builtup_km2": 0.0,
+       "roads_km": 2.4,
+       "rail_km": 0.2
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 1526,
+       "cropland_km2": 4.4,
+       "builtup_km2": 0.02,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 6250,
+       "cropland_km2": 7.9,
+       "builtup_km2": 0.3,
+       "roads_km": 2.1,
+       "rail_km": 0.2
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 92,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 477,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 1699,
+       "cropland_km2": 1.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 8980,
+       "cropland_km2": 5.6,
+       "builtup_km2": 0.01,
+       "roads_km": 1.5,
+       "rail_km": 0.2
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 25,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 104,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 334,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1411,
+       "cropland_km2": 4.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 30,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 204,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 31,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 115,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 234,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 969,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 1998,
+       "cropland_km2": 5.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6828,
+       "cropland_km2": 11.4,
+       "builtup_km2": 0.03,
+       "roads_km": 3.0,
+       "rail_km": 0.2
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T040_2026-10-14.webp",
+   "prob": "prob/T040_2026-10-14.webp",
+   "sar": "sar/T040_2026-10-14.webp",
+   "ev": [
+    "ev/T040_2026-10-14_1.png",
+    "ev/T040_2026-10-14_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-07-07_nullTest",
+   "track": 163,
+   "date": "2026-07-07",
+   "kind": "null_test",
+   "refs": [
+    "2026-06-25"
+   ],
+   "mode": null,
+   "areas_km2": {
+    "dry": 9210.4,
+    "permanent / pre-existing water": 1453.6,
+    "flood (open water)": 56.0,
+    "possible flood (open water)": 142.3,
+    "flooded vegetation": 1.8,
+    "possible flooded vegetation": 15.4,
+    "uncertain": 191.3
+   },
+   "exposure": null,
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-07-07_nullTest.webp",
+   "prob": "prob/T163_2026-07-07_nullTest.webp",
+   "sar": "sar/T163_2026-07-07.webp",
+   "ev": [
+    "ev/T163_2026-07-07_nullTest_1.png",
+    "ev/T163_2026-07-07_nullTest_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-07-19",
+   "track": 163,
+   "date": "2026-07-19",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 10163.5,
+    "permanent / pre-existing water": 1346.7,
+    "flood (open water)": 366.8,
+    "possible flood (open water)": 716.4,
+    "flooded vegetation": 1.7,
+    "possible flooded vegetation": 15.0,
+    "uncertain": 558.8
+   },
+   "exposure": {
+    "low": {
+     "people": 106031,
+     "cropland_km2": 355.3,
+     "builtup_km2": 0.0,
+     "roads_km": 8.8,
+     "rail_km": 1.8
+    },
+    "high": {
+     "people": 387006,
+     "cropland_km2": 1030.4,
+     "builtup_km2": 0.02,
+     "roads_km": 75.5,
+     "rail_km": 17.1
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 5071,
+       "cropland_km2": 14.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 11831,
+       "cropland_km2": 32.3,
+       "builtup_km2": 0.0,
+       "roads_km": 1.0,
+       "rail_km": 0.6
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 4547,
+       "cropland_km2": 12.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.3
+      },
+      "high": {
+       "people": 20350,
+       "cropland_km2": 40.1,
+       "builtup_km2": 0.0,
+       "roads_km": 5.7,
+       "rail_km": 3.1
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 1497,
+       "cropland_km2": 3.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 8073,
+       "cropland_km2": 16.1,
+       "builtup_km2": 0.0,
+       "roads_km": 1.7,
+       "rail_km": 0.5
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 17397,
+       "cropland_km2": 49.5,
+       "builtup_km2": 0.0,
+       "roads_km": 2.9,
+       "rail_km": 0.6
+      },
+      "high": {
+       "people": 64652,
+       "cropland_km2": 156.7,
+       "builtup_km2": 0.0,
+       "roads_km": 23.6,
+       "rail_km": 5.1
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 31137,
+       "cropland_km2": 119.2,
+       "builtup_km2": 0.0,
+       "roads_km": 2.3,
+       "rail_km": 0.3
+      },
+      "high": {
+       "people": 92616,
+       "cropland_km2": 279.1,
+       "builtup_km2": 0.01,
+       "roads_km": 16.1,
+       "rail_km": 2.5
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 710,
+       "cropland_km2": 1.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3348,
+       "cropland_km2": 8.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.7,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 13746,
+       "cropland_km2": 50.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 64718,
+       "cropland_km2": 181.0,
+       "builtup_km2": 0.0,
+       "roads_km": 5.9,
+       "rail_km": 1.0
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 275,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 494,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 3805,
+       "cropland_km2": 20.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 11224,
+       "cropland_km2": 55.3,
+       "builtup_km2": 0.0,
+       "roads_km": 2.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 746,
+       "cropland_km2": 1.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2301,
+       "cropland_km2": 3.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 58,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 201,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 110,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 987,
+       "cropland_km2": 1.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 26908,
+       "cropland_km2": 81.9,
+       "builtup_km2": 0.0,
+       "roads_km": 1.9,
+       "rail_km": 0.4
+      },
+      "high": {
+       "people": 106053,
+       "cropland_km2": 255.1,
+       "builtup_km2": 0.01,
+       "roads_km": 18.0,
+       "rail_km": 4.3
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 11,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 22,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 147,
+       "cropland_km2": 0.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-07-19.webp",
+   "prob": "prob/T163_2026-07-19.webp",
+   "sar": "sar/T163_2026-07-19.webp",
+   "ev": [
+    "ev/T163_2026-07-19_1.png",
+    "ev/T163_2026-07-19_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-08-12",
+   "track": 163,
+   "date": "2026-08-12",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 11327.7,
+    "permanent / pre-existing water": 1118.1,
+    "flood (open water)": 174.8,
+    "possible flood (open water)": 254.1,
+    "flooded vegetation": 3.6,
+    "possible flooded vegetation": 21.6,
+    "uncertain": 268.3
+   },
+   "exposure": {
+    "low": {
+     "people": 40033,
+     "cropland_km2": 167.8,
+     "builtup_km2": 0.0,
+     "roads_km": 4.1,
+     "rail_km": 0.3
+    },
+    "high": {
+     "people": 128480,
+     "cropland_km2": 408.6,
+     "builtup_km2": 0.02,
+     "roads_km": 26.7,
+     "rail_km": 3.0
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 1858,
+       "cropland_km2": 6.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4774,
+       "cropland_km2": 13.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.7,
+       "rail_km": 0.1
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 92,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1748,
+       "cropland_km2": 3.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.3
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 62,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 732,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 16104,
+       "cropland_km2": 56.3,
+       "builtup_km2": 0.0,
+       "roads_km": 2.0,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 41212,
+       "cropland_km2": 116.7,
+       "builtup_km2": 0.0,
+       "roads_km": 11.5,
+       "rail_km": 1.3
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 8204,
+       "cropland_km2": 44.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.9,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 28154,
+       "cropland_km2": 112.8,
+       "builtup_km2": 0.0,
+       "roads_km": 5.1,
+       "rail_km": 0.3
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 45,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 516,
+       "cropland_km2": 0.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 1544,
+       "cropland_km2": 7.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 8898,
+       "cropland_km2": 22.1,
+       "builtup_km2": 0.0,
+       "roads_km": 2.3,
+       "rail_km": 0.2
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 44,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 2621,
+       "cropland_km2": 15.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7192,
+       "cropland_km2": 35.6,
+       "builtup_km2": 0.0,
+       "roads_km": 1.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 41,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 365,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 13,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 41,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 50,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 343,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 9394,
+       "cropland_km2": 37.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 34444,
+       "cropland_km2": 101.6,
+       "builtup_km2": 0.0,
+       "roads_km": 4.7,
+       "rail_km": 0.8
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 12,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-08-12.webp",
+   "prob": "prob/T163_2026-08-12.webp",
+   "sar": "sar/T163_2026-08-12.webp",
+   "ev": [
+    "ev/T163_2026-08-12_1.png",
+    "ev/T163_2026-08-12_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-08-24",
+   "track": 163,
+   "date": "2026-08-24",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "QPDH",
+   "areas_km2": {
+    "dry": 9606.0,
+    "permanent / pre-existing water": 1001.1,
+    "flood (open water)": 94.3,
+    "possible flood (open water)": 165.7,
+    "flooded vegetation": 0.5,
+    "possible flooded vegetation": 7.8,
+    "uncertain": 202.1
+   },
+   "exposure": {
+    "low": {
+     "people": 18777,
+     "cropland_km2": 88.8,
+     "builtup_km2": 0.0,
+     "roads_km": 1.4,
+     "rail_km": 0.0
+    },
+    "high": {
+     "people": 69410,
+     "cropland_km2": 239.3,
+     "builtup_km2": 0.04,
+     "roads_km": 13.5,
+     "rail_km": 1.9
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 101,
+       "cropland_km2": 0.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 684,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 44,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1291,
+       "cropland_km2": 3.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 24,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 474,
+       "cropland_km2": 1.3,
+       "builtup_km2": 0.01,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 7599,
+       "cropland_km2": 31.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 22327,
+       "cropland_km2": 72.4,
+       "builtup_km2": 0.01,
+       "roads_km": 6.0,
+       "rail_km": 0.8
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 4806,
+       "cropland_km2": 27.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 16097,
+       "cropland_km2": 68.4,
+       "builtup_km2": 0.01,
+       "roads_km": 2.6,
+       "rail_km": 0.2
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 30,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 376,
+       "cropland_km2": 0.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 385,
+       "cropland_km2": 1.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3498,
+       "cropland_km2": 5.5,
+       "builtup_km2": 0.0,
+       "roads_km": 1.0,
+       "rail_km": 0.2
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 47,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 746,
+       "cropland_km2": 4.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2537,
+       "cropland_km2": 12.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 12,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 128,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 2,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 18,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 18,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 172,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 5000,
+       "cropland_km2": 23.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 21754,
+       "cropland_km2": 73.3,
+       "builtup_km2": 0.0,
+       "roads_km": 2.1,
+       "rail_km": 0.7
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-08-24.webp",
+   "prob": "prob/T163_2026-08-24.webp",
+   "sar": "sar/T163_2026-08-24.webp",
+   "ev": [
+    "ev/T163_2026-08-24_1.png",
+    "ev/T163_2026-08-24_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-09-05",
+   "track": 163,
+   "date": "2026-09-05",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 11854.6,
+    "permanent / pre-existing water": 986.1,
+    "flood (open water)": 48.0,
+    "possible flood (open water)": 100.0,
+    "flooded vegetation": 2.8,
+    "possible flooded vegetation": 17.4,
+    "uncertain": 160.0
+   },
+   "exposure": {
+    "low": {
+     "people": 10255,
+     "cropland_km2": 42.9,
+     "builtup_km2": 0.0,
+     "roads_km": 1.9,
+     "rail_km": 0.2
+    },
+    "high": {
+     "people": 47227,
+     "cropland_km2": 130.3,
+     "builtup_km2": 0.02,
+     "roads_km": 15.6,
+     "rail_km": 1.9
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 279,
+       "cropland_km2": 1.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1349,
+       "cropland_km2": 3.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 51,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 730,
+       "cropland_km2": 1.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 26,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 317,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 5195,
+       "cropland_km2": 23.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 16324,
+       "cropland_km2": 52.7,
+       "builtup_km2": 0.0,
+       "roads_km": 5.7,
+       "rail_km": 0.5
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 1750,
+       "cropland_km2": 10.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9402,
+       "cropland_km2": 34.7,
+       "builtup_km2": 0.0,
+       "roads_km": 3.0,
+       "rail_km": 0.3
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 65,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 400,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 1095,
+       "cropland_km2": 0.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 6781,
+       "cropland_km2": 5.0,
+       "builtup_km2": 0.0,
+       "roads_km": 2.3,
+       "rail_km": 0.4
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 52,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 387,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1589,
+       "cropland_km2": 6.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 16,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 108,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 17,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 52,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 52,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 297,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 1311,
+       "cropland_km2": 5.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 9810,
+       "cropland_km2": 26.7,
+       "builtup_km2": 0.0,
+       "roads_km": 2.7,
+       "rail_km": 0.6
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 13,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-09-05.webp",
+   "prob": "prob/T163_2026-09-05.webp",
+   "sar": "sar/T163_2026-09-05.webp",
+   "ev": [
+    "ev/T163_2026-09-05_1.png",
+    "ev/T163_2026-09-05_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-09-17",
+   "track": 163,
+   "date": "2026-09-17",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "QPDH",
+   "areas_km2": {
+    "dry": 9907.0,
+    "permanent / pre-existing water": 893.7,
+    "flood (open water)": 34.3,
+    "possible flood (open water)": 86.8,
+    "flooded vegetation": 2.1,
+    "possible flooded vegetation": 15.0,
+    "uncertain": 137.6
+   },
+   "exposure": {
+    "low": {
+     "people": 6275,
+     "cropland_km2": 30.4,
+     "builtup_km2": 0.0,
+     "roads_km": 1.1,
+     "rail_km": 0.1
+    },
+    "high": {
+     "people": 34846,
+     "cropland_km2": 103.4,
+     "builtup_km2": 0.02,
+     "roads_km": 10.4,
+     "rail_km": 1.0
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 181,
+       "cropland_km2": 0.8,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 905,
+       "cropland_km2": 2.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 49,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 717,
+       "cropland_km2": 1.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 13,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 196,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 2164,
+       "cropland_km2": 10.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7662,
+       "cropland_km2": 23.3,
+       "builtup_km2": 0.01,
+       "roads_km": 2.5,
+       "rail_km": 0.2
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 976,
+       "cropland_km2": 6.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6696,
+       "cropland_km2": 24.9,
+       "builtup_km2": 0.01,
+       "roads_km": 2.0,
+       "rail_km": 0.2
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 38,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 388,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 926,
+       "cropland_km2": 0.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 6015,
+       "cropland_km2": 5.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.9,
+       "rail_km": 0.3
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 4,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 43,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 131,
+       "cropland_km2": 0.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 772,
+       "cropland_km2": 3.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 15,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 125,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 4,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 31,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 60,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 396,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 1715,
+       "cropland_km2": 11.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 10888,
+       "cropland_km2": 43.1,
+       "builtup_km2": 0.0,
+       "roads_km": 2.4,
+       "rail_km": 0.2
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 11,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-09-17.webp",
+   "prob": "prob/T163_2026-09-17.webp",
+   "sar": "sar/T163_2026-09-17.webp",
+   "ev": [
+    "ev/T163_2026-09-17_1.png",
+    "ev/T163_2026-09-17_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-09-29",
+   "track": 163,
+   "date": "2026-09-29",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12266.7,
+    "permanent / pre-existing water": 772.8,
+    "flood (open water)": 10.7,
+    "possible flood (open water)": 32.2,
+    "flooded vegetation": 2.6,
+    "possible flooded vegetation": 16.8,
+    "uncertain": 65.6
+   },
+   "exposure": {
+    "low": {
+     "people": 3135,
+     "cropland_km2": 7.4,
+     "builtup_km2": 0.0,
+     "roads_km": 0.9,
+     "rail_km": 0.1
+    },
+    "high": {
+     "people": 19390,
+     "cropland_km2": 27.8,
+     "builtup_km2": 0.02,
+     "roads_km": 7.3,
+     "rail_km": 1.0
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 65,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 472,
+       "cropland_km2": 0.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 36,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 314,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 34,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 253,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 811,
+       "cropland_km2": 2.5,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 4345,
+       "cropland_km2": 8.0,
+       "builtup_km2": 0.01,
+       "roads_km": 1.5,
+       "rail_km": 0.3
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 406,
+       "cropland_km2": 1.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2520,
+       "cropland_km2": 5.2,
+       "builtup_km2": 0.01,
+       "roads_km": 1.4,
+       "rail_km": 0.0
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 44,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 315,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 763,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5408,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.0,
+       "roads_km": 1.6,
+       "rail_km": 0.4
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 5,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 28,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 117,
+       "cropland_km2": 0.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 776,
+       "cropland_km2": 2.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 16,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 114,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 5,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 27,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 63,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 409,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 768,
+       "cropland_km2": 2.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4391,
+       "cropland_km2": 9.5,
+       "builtup_km2": 0.0,
+       "roads_km": 1.6,
+       "rail_km": 0.2
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 3,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 2,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 14,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-09-29.webp",
+   "prob": "prob/T163_2026-09-29.webp",
+   "sar": "sar/T163_2026-09-29.webp",
+   "ev": [
+    "ev/T163_2026-09-29_1.png",
+    "ev/T163_2026-09-29_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-10-11",
+   "track": 163,
+   "date": "2026-10-11",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "QPDH",
+   "areas_km2": {
+    "dry": 10238.9,
+    "permanent / pre-existing water": 706.8,
+    "flood (open water)": 10.9,
+    "possible flood (open water)": 33.5,
+    "flooded vegetation": 2.1,
+    "possible flooded vegetation": 15.6,
+    "uncertain": 67.6
+   },
+   "exposure": {
+    "low": {
+     "people": 2677,
+     "cropland_km2": 7.3,
+     "builtup_km2": 0.0,
+     "roads_km": 0.8,
+     "rail_km": 0.1
+    },
+    "high": {
+     "people": 19037,
+     "cropland_km2": 26.6,
+     "builtup_km2": 0.03,
+     "roads_km": 7.6,
+     "rail_km": 0.9
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 58,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 400,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 34,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 371,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 26,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 225,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 759,
+       "cropland_km2": 2.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4482,
+       "cropland_km2": 7.8,
+       "builtup_km2": 0.01,
+       "roads_km": 1.9,
+       "rail_km": 0.2
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 319,
+       "cropland_km2": 1.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2584,
+       "cropland_km2": 4.7,
+       "builtup_km2": 0.02,
+       "roads_km": 1.3,
+       "rail_km": 0.2
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 37,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 349,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 568,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4965,
+       "cropland_km2": 2.2,
+       "builtup_km2": 0.0,
+       "roads_km": 1.4,
+       "rail_km": 0.3
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 7,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 56,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 114,
+       "cropland_km2": 0.7,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 745,
+       "cropland_km2": 2.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 8,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 119,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 6,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 29,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 55,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 453,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 685,
+       "cropland_km2": 2.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4248,
+       "cropland_km2": 8.2,
+       "builtup_km2": 0.0,
+       "roads_km": 1.7,
+       "rail_km": 0.2
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 10,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-10-11.webp",
+   "prob": "prob/T163_2026-10-11.webp",
+   "sar": "sar/T163_2026-10-11.webp",
+   "ev": [
+    "ev/T163_2026-10-11_1.png",
+    "ev/T163_2026-10-11_2.png"
+   ]
+  },
+  {
+   "id": "T163_2026-10-23",
+   "track": 163,
+   "date": "2026-10-23",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 12365.5,
+    "permanent / pre-existing water": 683.7,
+    "flood (open water)": 7.4,
+    "possible flood (open water)": 28.6,
+    "flooded vegetation": 3.0,
+    "possible flooded vegetation": 17.3,
+    "uncertain": 63.3
+   },
+   "exposure": {
+    "low": {
+     "people": 2655,
+     "cropland_km2": 4.1,
+     "builtup_km2": 0.0,
+     "roads_km": 1.2,
+     "rail_km": 0.2
+    },
+    "high": {
+     "people": 18159,
+     "cropland_km2": 18.5,
+     "builtup_km2": 0.03,
+     "roads_km": 7.9,
+     "rail_km": 1.1
+    },
+    "districts": {
+     "Biswanath": {
+      "low": {
+       "people": 58,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 407,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Charaideo": {
+      "low": {
+       "people": 47,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 407,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      }
+     },
+     "Dibrugarh": {
+      "low": {
+       "people": 53,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 290,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Golaghat": {
+      "low": {
+       "people": 580,
+       "cropland_km2": 1.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 3680,
+       "cropland_km2": 4.6,
+       "builtup_km2": 0.01,
+       "roads_km": 2.3,
+       "rail_km": 0.2
+      }
+     },
+     "Jorhat": {
+      "low": {
+       "people": 385,
+       "cropland_km2": 0.9,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2691,
+       "cropland_km2": 3.2,
+       "builtup_km2": 0.01,
+       "roads_km": 1.4,
+       "rail_km": 0.1
+      }
+     },
+     "Karbi Anglong East": {
+      "low": {
+       "people": 37,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 314,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Lakhimpur": {
+      "low": {
+       "people": 586,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4805,
+       "cropland_km2": 2.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.5,
+       "rail_km": 0.4
+      }
+     },
+     "Longleng": {
+      "low": {
+       "people": 4,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 39,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Majuli": {
+      "low": {
+       "people": 128,
+       "cropland_km2": 0.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 815,
+       "cropland_km2": 3.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      }
+     },
+     "Mokokchung": {
+      "low": {
+       "people": 23,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 136,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      }
+     },
+     "Mon": {
+      "low": {
+       "people": 12,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 30,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Papum Pare": {
+      "low": {
+       "people": 76,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 481,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Sivasagar": {
+      "low": {
+       "people": 666,
+       "cropland_km2": 1.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 4054,
+       "cropland_km2": 5.1,
+       "builtup_km2": 0.0,
+       "roads_km": 1.5,
+       "rail_km": 0.4
+      }
+     },
+     "Tuensang": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 1,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     },
+     "Wokha": {
+      "low": {
+       "people": 0,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T163_2026-10-23.webp",
+   "prob": "prob/T163_2026-10-23.webp",
+   "sar": "sar/T163_2026-10-23.webp",
+   "ev": [
+    "ev/T163_2026-10-23_1.png",
+    "ev/T163_2026-10-23_2.png"
+   ]
+  }
+ ],
+ "refs": {
+  "40": {
+   "sar": "sar/T040_ref.webp",
+   "dates": [
+    "2026-06-16",
+    "2026-06-28"
+   ]
+  },
+  "163": {
+   "sar": "sar/T163_ref.webp",
+   "dates": [
+    "2026-06-25"
+   ]
+  }
+ },
+ "sensor_compare": {
+  "date": "2026-07-22",
+  "image": "compare/agreement_2026-07-22.webp",
+  "nisar": "T040 2026-07-22T23:05Z",
+  "s1": "S1D orbit 77 2026-07-22T23:46Z",
+  "scores": {
+   "water": {
+    "NISAR L-band": {
+     "IoU": 0.645,
+     "precision": 0.8395,
+     "recall": 0.7357,
+     "ci": [
+      0.5764,
+      0.7055
+     ]
+    },
+    "Sentinel-1 C-band": {
+     "IoU": 0.5358,
+     "precision": 0.9607,
+     "recall": 0.5478,
+     "ci": [
+      0.4458,
+      0.6168
+     ]
+    }
+   },
+   "flood": {
+    "NISAR L-band": {
+     "IoU": 0.595,
+     "precision": 0.8048,
+     "recall": 0.6954,
+     "ci": [
+      0.5227,
+      0.662
+     ]
+    },
+    "Sentinel-1 C-band": {
+     "IoU": 0.4784,
+     "precision": 0.9483,
+     "recall": 0.4912,
+     "ci": [
+      0.3772,
+      0.5729
+     ]
+    }
+   }
+  },
+  "cropland_km2": {
+   "both": 38.9,
+   "L_only": 63.0,
+   "C_only": 22.7
+  },
+  "bounds": [
+   93.70683325023046,
+   26.608805758036436,
+   93.91324794462578,
+   27.07634867782277
+  ]
+ },
+ "validation": {
+  "protocol": "Leave-one-date-out: trained on two NISAR/Sentinel-2 pairs, scored on the third (other date or track). Reference: Sentinel-2 cloud-free open water. 95% CIs by spatial block bootstrap.",
+  "rules": {
+   "JalDrishti hybrid (ML + physics)": {
+    "22 Jul T040": {
+     "IoU": 0.7632,
+     "precision": 0.9005,
+     "recall": 0.8335,
+     "kappa": 0.8237,
+     "ci": [
+      0.7471,
+      0.7791
+     ]
+    },
+    "12 Aug T163": {
+     "IoU": 0.7952,
+     "precision": 0.8803,
+     "recall": 0.8916,
+     "kappa": 0.8579,
+     "ci": [
+      0.7713,
+      0.8132
+     ]
+    },
+    "15 Aug T040": {
+     "IoU": 0.8201,
+     "precision": 0.8721,
+     "recall": 0.9322,
+     "kappa": 0.88,
+     "ci": [
+      0.7994,
+      0.8384
+     ]
+    }
+   },
+   "ML only (LightGBM)": {
+    "22 Jul T040": {
+     "IoU": 0.7504,
+     "precision": 0.9125,
+     "recall": 0.8085,
+     "kappa": 0.8141,
+     "ci": [
+      0.7331,
+      0.7659
+     ]
+    },
+    "12 Aug T163": {
+     "IoU": 0.8102,
+     "precision": 0.9354,
+     "recall": 0.8582,
+     "kappa": 0.871,
+     "ci": [
+      0.7852,
+      0.83
+     ]
+    },
+    "15 Aug T040": {
+     "IoU": 0.7795,
+     "precision": 0.9071,
+     "recall": 0.8472,
+     "kappa": 0.8516,
+     "ci": [
+      0.7563,
+      0.8021
+     ]
+    }
+   },
+   "Fixed threshold \u221215 dB": {
+    "22 Jul T040": {
+     "IoU": 0.6316,
+     "precision": 0.9327,
+     "recall": 0.6617,
+     "kappa": 0.7158,
+     "ci": [
+      0.6066,
+      0.6531
+     ]
+    },
+    "12 Aug T163": {
+     "IoU": 0.7687,
+     "precision": 0.8941,
+     "recall": 0.8457,
+     "kappa": 0.8385,
+     "ci": [
+      0.7448,
+      0.7904
+     ]
+    },
+    "15 Aug T040": {
+     "IoU": 0.8074,
+     "precision": 0.9105,
+     "recall": 0.877,
+     "kappa": 0.872,
+     "ci": [
+      0.7852,
+      0.8297
+     ]
+    }
+   }
+  },
+  "selected": "JalDrishti hybrid (ML + physics)",
+  "null_tests": [
+   {
+    "track": 40,
+    "date": "2026-07-10",
+    "refs": [
+     "2026-06-16",
+     "2026-06-28"
+    ],
+    "false_flood_km2": 5.9,
+    "mapped_km2": 13178
+   },
+   {
+    "track": 163,
+    "date": "2026-07-07",
+    "refs": [
+     "2026-06-25"
+    ],
+    "false_flood_km2": 57.8,
+    "mapped_km2": 11071
+   }
+  ]
+ }
+}

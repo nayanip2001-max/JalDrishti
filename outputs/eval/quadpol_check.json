@@ -1,0 +1,30 @@
+{
+ "2026-07-07_corrected": {
+  "trees": {
+   "median_abs_phase_deg": 37.4,
+   "share_phase_gt_90": 0.192,
+   "median_HH_over_VV_dB": 0.39
+  },
+  "grassland": {
+   "median_abs_phase_deg": 34.4,
+   "share_phase_gt_90": 0.186,
+   "median_HH_over_VV_dB": -0.07
+  },
+  "cropland": {
+   "median_abs_phase_deg": 32.4,
+   "share_phase_gt_90": 0.194,
+   "median_HH_over_VV_dB": -0.59
+  },
+  "built-up": {
+   "median_abs_phase_deg": 68.7,
+   "share_phase_gt_90": 0.403,
+   "median_HH_over_VV_dB": 1.27
+  },
+  "open water": {
+   "median_abs_phase_deg": 67.1,
+   "share_phase_gt_90": 0.399,
+   "median_HH_over_VV_dB": -0.72
+  }
+ },
+ "note": "provisional GCOV HH-VV phase: metadata offset (+63 deg) unapplied; 24 Aug shows an extra ~180 deg ambiguity, so only 7 Jul is analysed"
+}
