@@ -167,6 +167,9 @@ export function LegendCard({ manifest }) {
         <span className="tag exposed">Exposed</span>
       </div>
       <p className="hint" style={{ margin: '8px 0 0' }}>Every layer carries one of these labels. Radar observations are never mixed with model estimates or forecasts.</p>
+      <p className="hint" style={{ margin: '10px 0 0' }}>
+        <a className="ext" href="https://github.com/nayanip2001-max/JalDrishti#readme" target="_blank" rel="noreferrer">Method, validation &amp; code on GitHub ↗</a>
+      </p>
     </div>
   )
 }

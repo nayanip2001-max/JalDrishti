@@ -194,3 +194,6 @@ h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.01em; }
 .story-nav button:disabled { opacity: .35; cursor: default; }
 .story-nav button.primary { background: var(--flood); color: #04222b; border-color: transparent; font-weight: 600; }
 @media (max-width: 760px) { .story { right: 10px; left: 10px; width: auto; bottom: 140px; } .storybtn { padding: 8px 12px; } }
+
+.ext { color: var(--flood); text-decoration: none; font-weight: 500; }
+.ext:hover { text-decoration: underline; }

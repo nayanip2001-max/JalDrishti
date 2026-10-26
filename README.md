@@ -6,7 +6,7 @@ JalDrishti ("water vision") maps where floodwater appeared, how it spread and ho
 
 Every map in the app is built from real NISAR observations, and every accuracy number was measured on a date the model never saw.
 
-**Live demo:** _link added after deployment_ · **Events:** Upper Assam, India (Jul 2026) · Chao Phraya, Thailand (Sep–Oct 2026)
+**Live demo:** https://nayanip2001-max.github.io/JalDrishti/ · **Events:** Upper Assam, India (Jul 2026) · Chao Phraya, Thailand (Sep–Oct 2026)
 
 ---
 
