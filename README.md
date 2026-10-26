@@ -40,7 +40,7 @@ Every layer carries one of the labels *Observed / Modelled / Predicted / Exposed
 | 15 Aug · track 40 | **0.820** [0.799–0.838] | 0.780 | 0.807 | 0.536 |
 | **Mean** | **0.793** | 0.780 | 0.736 | 0.597 |
 
-- **False alarms.** We compared two pre-flood dates with no flood between them, which should show nothing. JalDrishti flagged **2.9 km²** out of 13,000 km² mapped. The physics-only version flagged 44.5 km².
+- **False alarms.** We compared two pre-flood dates with no flood between them, which should show nothing. JalDrishti flagged **5.9 km²** (2.9 open water + 3.0 under vegetation) out of 13,178 km² mapped on track 40. The physics-only version flagged 47.5 km². Track 163 has only two reference passes, so its test falls back to the physics detector (57.8 km² of 11,071 km²).
 - **Why L-band.** On 22 Jul, Sentinel-1 (C-band) passed **41 minutes** after NISAR. We ran the same detector on both and scored them against the same reference:
 
   | | Water IoU | Precision | Recall |
