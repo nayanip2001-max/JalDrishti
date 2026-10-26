@@ -83,4 +83,4 @@ Other events work the same way: they are defined in `src/nisarflood/events.py`.
 
 NISAR data: NASA/JPL and ISRO, distributed by ASF DAAC. Sentinel-1 RTC, Sentinel-2 L2A, Copernicus GLO-30, ESA WorldCover and JRC GSW were accessed via Microsoft Planetary Computer. ASF GLO-30 HAND. WorldPop 2025. OpenStreetMap contributors. geoBoundaries. Copernicus EMS EMSR935. Basemaps by Esri.
 
-**Team:** _to be added_
+**Team JalWar:** Thrinayani P · Thrijagathi P · Minhaj Parveen H · Nilani S · Haseena F

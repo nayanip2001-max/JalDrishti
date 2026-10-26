@@ -170,6 +170,7 @@ export function LegendCard({ manifest }) {
       <p className="hint" style={{ margin: '10px 0 0' }}>
         <a className="ext" href="https://github.com/nayanip2001-max/JalDrishti#readme" target="_blank" rel="noreferrer">Method, validation &amp; code on GitHub ↗</a>
       </p>
+      <p className="hint" style={{ margin: '6px 0 0' }}>Team JalWar · Thrinayani P · Thrijagathi P · Minhaj Parveen H · Nilani S · Haseena F · NASA Space Apps 2026</p>
     </div>
   )
 }
