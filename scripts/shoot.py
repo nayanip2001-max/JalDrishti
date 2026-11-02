@@ -12,6 +12,8 @@ ap.add_argument("--w", type=int, default=1600); ap.add_argument("--h", type=int,
 ap.add_argument("--click"); ap.add_argument("--compare", action="store_true"); ap.add_argument("--mobile", action="store_true")
 ap.add_argument("--scroll", type=int, default=0, help="scroll the side panel by N px")
 ap.add_argument("--story", type=int, default=-1, help="story step to show (-1 closes the story)")
+ap.add_argument("--mode", help="beginner | intermediate | advanced (set before load)")
+ap.add_argument("--clicks", nargs="*", default=[], help="visible texts to click, in order, after load")
 a = ap.parse_args()
 
 IDLE = """() => { const m = window.__maps; if (!m) return false;
@@ -25,12 +27,16 @@ with sync_playwright() as p:
     errors = []
     pg.on("console", lambda m: m.type == "error" and errors.append(m.text))
     pg.on("pageerror", lambda e: errors.append(str(e)))
+    if a.mode:
+        pg.add_init_script(f"try {{ localStorage.setItem('jd-mode', '{a.mode}'); sessionStorage.setItem('jd-story-seen', '1') }} catch (e) {{}}")
     pg.goto(a.url)
     pg.wait_for_function(IDLE, timeout=90_000, polling=500)
     if a.story < 0 and pg.locator(".story").count():
         pg.locator(".story-x").click()
     for _ in range(max(a.story, 0)):
         pg.get_by_text("Next →").click(); pg.wait_for_timeout(1800)
+    for txt in a.clicks:
+        pg.get_by_text(txt, exact=True).first.click(); pg.wait_for_timeout(900)
     if a.compare:
         pg.get_by_text("Before / After").click()
     if a.click:
@@ -38,7 +44,7 @@ with sync_playwright() as p:
         pt = pg.evaluate(f"() => window.__maps.main.project([{lng}, {lat}])")
         pg.mouse.click(pt["x"], pt["y"])
     if a.scroll:
-        pg.evaluate(f"document.querySelector('.panel').scrollTop = {a.scroll}")
+        pg.evaluate(f"document.querySelector('.drawer-b').scrollTop = {a.scroll}")
     pg.wait_for_timeout(2500)
     pg.wait_for_function(IDLE, timeout=60_000, polling=500)
     pg.screenshot(path=a.out)

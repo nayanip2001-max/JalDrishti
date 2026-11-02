@@ -15,16 +15,15 @@ const BASEMAPS = {
   },
 }
 
-// Room the floating UI takes up. On phones the panel sits at the bottom instead of the left.
-const fitPadding = () => (window.innerWidth < 760
-  ? { top: 70, bottom: Math.round(window.innerHeight * 0.45), left: 16, right: 16 }
-  : { top: 90, bottom: 150, left: 380, right: 40 })
+// The map has its own grid cell now, so only a small margin is needed around the area of interest.
+const fitPadding = () => (window.innerWidth < 760 ? { top: 16, bottom: 16, left: 12, right: 12 } : { top: 36, bottom: 36, left: 36, right: 36 })
 
 // Overlays are inserted below the 'labels' layer so place names stay readable on top.
 function style(basemap) {
   const b = BASEMAPS[basemap]
   return {
     version: 8,
+    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
     sources: {
       base: { type: 'raster', tiles: b.tiles, tileSize: 256, attribution: b.attribution, maxzoom: b.maxzoom },
       labels: { type: 'raster', tiles: b.labels, tileSize: 256, maxzoom: b.maxzoom },
@@ -37,7 +36,7 @@ function style(basemap) {
 }
 
 // Add or update one georeferenced image overlay. Call only after the style has loaded.
-function setImage(map, id, url, corners, opacity, visible) {
+function setImage(map, id, url, corners, opacity, visible, beforeId = 'labels') {
   const src = map.getSource(id)
   if (!url) {
     if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none')
@@ -45,13 +44,36 @@ function setImage(map, id, url, corners, opacity, visible) {
   }
   if (!src) {
     map.addSource(id, { type: 'image', url, coordinates: corners })
-    map.addLayer({ id, type: 'raster', source: id, paint: { 'raster-opacity': opacity, 'raster-fade-duration': 0, 'raster-resampling': id === 'sar' ? 'linear' : 'nearest' } }, 'labels')
+    map.addLayer({ id, type: 'raster', source: id, paint: { 'raster-opacity': opacity, 'raster-fade-duration': 0, 'raster-resampling': id === 'sar' ? 'linear' : 'nearest' } }, map.getLayer(beforeId) ? beforeId : 'labels')
   } else if (src.url !== url) {
     src.updateImage({ url, coordinates: corners })
     src.url = url
   }
   map.setPaintProperty(id, 'raster-opacity', opacity)
   map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none')
+}
+
+// District outlines + labels and roads/rail, drawn above the rasters but below basemap labels.
+function setVectors(map, base, il, layers) {
+  if (!map.getSource('districts')) {
+    map.addSource('districts', { type: 'geojson', data: base + il.districts })
+    map.addSource('roads', { type: 'geojson', data: base + il.roads })
+    map.addLayer({ id: 'roads-line', type: 'line', source: 'roads', filter: ['!=', ['get', 'kind'], 'railway'],
+      paint: { 'line-color': '#fde68a', 'line-opacity': 0.75,
+        'line-width': ['match', ['get', 'kind'], ['motorway', 'trunk'], 2, 'primary', 1.5, 1] } }, 'labels')
+    map.addLayer({ id: 'rail-line', type: 'line', source: 'roads', filter: ['==', ['get', 'kind'], 'railway'],
+      paint: { 'line-color': '#f87171', 'line-width': 1.6, 'line-dasharray': [3, 2] } }, 'labels')
+    map.addLayer({ id: 'districts-line', type: 'line', source: 'districts',
+      paint: { 'line-color': '#e2e8f0', 'line-opacity': 0.7, 'line-width': 1.1, 'line-dasharray': [4, 3] } })
+    map.addLayer({ id: 'districts-label', type: 'symbol', source: 'districts',
+      layout: { 'text-field': ['get', 'name'], 'text-font': ['Open Sans Semibold'], 'text-size': 12, 'text-transform': 'uppercase', 'text-letter-spacing': 0.08 },
+      paint: { 'text-color': '#e2e8f0', 'text-halo-color': '#0b1220', 'text-halo-width': 1.6 } })
+  }
+  const vis = (on) => (on ? 'visible' : 'none')
+  map.setLayoutProperty('roads-line', 'visibility', vis(layers.roads))
+  map.setLayoutProperty('rail-line', 'visibility', vis(layers.roads))
+  map.setLayoutProperty('districts-line', 'visibility', vis(layers.districts))
+  map.setLayoutProperty('districts-label', 'visibility', vis(layers.districts))
 }
 
 export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera }) {
@@ -103,6 +125,12 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
     setImage(main, 'cmp', cmp && base + cmp.image, corners, opacity.overlay, !!(cmp && layers.compare && scene.date === cmp.date))
     const ref = manifest.refs[String(scene.track)]
     setImage(before, 'sar', ref && base + ref.sar, corners, 1, true)
+    const il = manifest.impact_layers
+    if (il) {
+      setImage(main, 'cropland', base + il.cropland, corners, 0.75, layers.cropland, 'prob')  // under the flood layers
+      setImage(main, 'population', base + il.population, corners, 0.8, layers.population, 'prob')
+      setVectors(main, base, il, layers)
+    }
   }, [ready, scene, layers, opacity, base, corners, manifest])
 
   useEffect(() => {

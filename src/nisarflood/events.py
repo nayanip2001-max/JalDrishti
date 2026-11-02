@@ -1,7 +1,9 @@
 """Flood events: everything event-specific lives here so every script works for any event.
 
 `last_pre` is the last date treated as "before the flood" (reference passes are the
-same-track passes on or before it). Dates and descriptions cite public reporting.
+same-track passes on or before it). `timeline` = dated, sourced context events shown on
+the app's timeline (kind: rain | dam | river | official). Dates and descriptions cite
+public reporting.
 """
 
 EVENTS = {
@@ -19,6 +21,10 @@ EVENTS = {
                    ("After / recovery", "2026-08-20", "2026-10-25", "#34d399")],
         "context": "Cloudburst over Mon district, Nagaland on 19 Jul 2026 swelled the Dikhow, Disang, Janji and Dhansiri "
                    "while a high Brahmaputra blocked their drainage (Wikipedia: 2026 Assam floods; Assam University report).",
+        "timeline": [
+            {"date": "2026-07-19", "kind": "rain", "label": "Cloudburst over Mon district, Nagaland",
+             "source": "Wikipedia: 2026 Assam floods"},
+        ],
         "caveat": "July is Sali rice transplanting season, so some newly flooded paddies count as new water; the 15 Aug map "
                   "(290 km², paddies still flooded) caps that share. The Assam University report counts ~2.12 lakh people "
                   "displaced: displacement is a subset of living inside the flood extent.",
@@ -37,6 +43,16 @@ EVENTS = {
         "context": "A depression flooded Bangkok and central Thailand from 24 to 30 Sep 2026 (Wikipedia: 2026 Bangkok floods). "
                    "Chao Phraya Dam releases then pushed the river beyond embankments in Ayutthaya, and officials warned of further "
                    "rises from northern runoff on 4 Oct (Khaosod English; Thai PBS World).",
+        "timeline": [
+            {"date": "2026-09-24", "kind": "rain", "label": "Depression rains begin over Bangkok and central Thailand",
+             "source": "Wikipedia: 2026 Bangkok floods"},
+            {"date": "2026-09-24", "kind": "dam", "label": "Dam releases push the Chao Phraya beyond embankments in Ayutthaya",
+             "source": "Thai PBS World / Khaosod English"},
+            {"date": "2026-09-29", "kind": "river", "label": "Bangkok floodwaters begin to ease",
+             "source": "Wikipedia: 2026 Bangkok floods"},
+            {"date": "2026-10-04", "kind": "official", "label": "ONWR warns Ayutthaya of a further ~10 cm rise from northern runoff",
+             "source": "Khaosod English, 4 Oct 2026"},
+        ],
         "caveat": "Central Thailand is intensively irrigated rice land; standing water in paddies before 20 Sep is treated as "
                   "normal, so mapped flood is water that is new since then. Dense Bangkok streets are beyond what radar can map.",
     },

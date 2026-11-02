@@ -19,7 +19,9 @@ Every map in the app is built from real NISAR observations, and every accuracy n
 | After | Water receding pass by pass, down to the false-alarm noise floor | **Observed** |
 | Impact | People, cropland, roads and rail inside the flood, per district | **Exposed** (not damage) |
 
-Every layer carries one of the labels *Observed / Modelled / Predicted / Exposed / Damaged*. Radar observations are never mixed with estimates.
+Every layer carries one of the labels *Observed / Modelled / Predicted / Exposed / Damaged*.
+
+**One dashboard, three depths.** A header toggle switches between **Beginner** (plain answers: where, how big, when, how sure, who is affected, how radar works), **Intermediate** (evidence: classes, probability, temporal and district analysis, model performance, sources) and **Advanced** (observations and orbit metadata, features and importance, model card, full validation metrics, raw pixel values and model trace). A **Science | Impact** switch changes the map layers and the emphasis. Every number opens a detail panel; clicking the map explains that pixel. The timeline shows rainfall, sourced events (rain, dam releases, official warnings) and every NISAR pass. Radar observations are never mixed with estimates.
 
 ## Method
 

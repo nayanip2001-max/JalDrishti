@@ -53,6 +53,32 @@
     "to": "2026-10-25",
     "color": "#22d3ee"
    }
+  ],
+  "timeline": [
+   {
+    "date": "2026-09-24",
+    "kind": "rain",
+    "label": "Depression rains begin over Bangkok and central Thailand",
+    "source": "Wikipedia: 2026 Bangkok floods"
+   },
+   {
+    "date": "2026-09-24",
+    "kind": "dam",
+    "label": "Dam releases push the Chao Phraya beyond embankments in Ayutthaya",
+    "source": "Thai PBS World / Khaosod English"
+   },
+   {
+    "date": "2026-09-29",
+    "kind": "river",
+    "label": "Bangkok floodwaters begin to ease",
+    "source": "Wikipedia: 2026 Bangkok floods"
+   },
+   {
+    "date": "2026-10-04",
+    "kind": "official",
+    "label": "ONWR warns Ayutthaya of a further ~10 cm rise from northern runoff",
+    "source": "Khaosod English, 4 Oct 2026"
+   }
   ]
  },
  "classes": {
@@ -136,7 +162,21 @@
    "ev": [
     "ev/T004_2026-09-18_nullTest_1.png",
     "ev/T004_2026-09-18_nullTest_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_031_004_D_082_4005_DHDH_A_20260918T114745_20260918T114824_P05023_F_F_J_001",
+    "direction": "Descending",
+    "frame": 82,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "\u2014",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_031_004_D_082_4005_DHDH_A_20260918T114745_20260918T114824_P05023_F_F_J_001"
+   }
   },
   {
    "id": "T004_2026-09-30",
@@ -1176,7 +1216,48 @@
    "ev": [
     "ev/T004_2026-09-30_1.png",
     "ev/T004_2026-09-30_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_032_004_D_082_4005_DHDH_A_20260930T114745_20260930T114820_P05023_N_F_J_001",
+    "direction": "Descending",
+    "frame": 82,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_032_004_D_082_4005_DHDH_A_20260930T114745_20260930T114820_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     1670.6,
+     262.1,
+     136.1,
+     83.4,
+     57.4,
+     43.6,
+     35.7,
+     30.5,
+     27.6,
+     27.2,
+     25.8,
+     23.0,
+     21.8,
+     21.6,
+     21.9,
+     22.5,
+     23.3,
+     23.5,
+     21.6,
+     13.1
+    ],
+    "confident_share": 0.374
+   },
+   "ev3": "ev/T004_2026-09-30_3.png"
   },
   {
    "id": "T004_2026-10-12",
@@ -2248,7 +2329,48 @@
    "ev": [
     "ev/T004_2026-10-12_1.png",
     "ev/T004_2026-10-12_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_033_004_D_082_4005_DHDH_A_20261012T114745_20261012T114820_P05023_N_F_J_001",
+    "direction": "Descending",
+    "frame": 82,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_033_004_D_082_4005_DHDH_A_20261012T114745_20261012T114820_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     1683.5,
+     282.0,
+     146.6,
+     89.2,
+     61.0,
+     45.5,
+     36.2,
+     30.6,
+     27.6,
+     27.0,
+     25.0,
+     22.2,
+     20.8,
+     20.3,
+     20.1,
+     20.4,
+     20.7,
+     20.3,
+     18.4,
+     10.7
+    ],
+    "confident_share": 0.353
+   },
+   "ev3": "ev/T004_2026-10-12_3.png"
   },
   {
    "id": "T011_2026-09-18_nullTest",
@@ -2278,7 +2400,21 @@
    "ev": [
     "ev/T011_2026-09-18_nullTest_1.png",
     "ev/T011_2026-09-18_nullTest_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_031_011_A_009_4005_DHDH_A_20260918T224526_20260918T224604_P05023_F_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "\u2014",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_031_011_A_009_4005_DHDH_A_20260918T224526_20260918T224604_P05023_F_F_J_001"
+   }
   },
   {
    "id": "T011_2026-09-30",
@@ -3478,7 +3614,48 @@
    "ev": [
     "ev/T011_2026-09-30_1.png",
     "ev/T011_2026-09-30_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_032_011_A_009_4005_DHDH_A_20260930T224526_20260930T224605_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_032_011_A_009_4005_DHDH_A_20260930T224526_20260930T224605_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2718.1,
+     611.7,
+     311.1,
+     195.2,
+     151.1,
+     118.5,
+     99.5,
+     93.2,
+     87.1,
+     120.7,
+     98.6,
+     90.6,
+     90.2,
+     89.8,
+     87.1,
+     87.2,
+     90.1,
+     87.4,
+     72.0,
+     33.0
+    ],
+    "confident_share": 0.342
+   },
+   "ev3": "ev/T011_2026-09-30_3.png"
   },
   {
    "id": "T011_2026-10-12",
@@ -4646,7 +4823,48 @@
    "ev": [
     "ev/T011_2026-10-12_1.png",
     "ev/T011_2026-10-12_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_033_011_A_009_4005_DHDH_A_20261012T224526_20261012T224605_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_033_011_A_009_4005_DHDH_A_20261012T224526_20261012T224605_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2938.3,
+     564.5,
+     281.0,
+     175.1,
+     132.1,
+     104.0,
+     86.7,
+     82.2,
+     78.4,
+     110.5,
+     92.6,
+     84.0,
+     83.6,
+     83.7,
+     82.2,
+     82.9,
+     85.1,
+     82.3,
+     68.9,
+     34.7
+    ],
+    "confident_share": 0.348
+   },
+   "ev3": "ev/T011_2026-10-12_3.png"
   },
   {
    "id": "T112_2026-09-13_nullTest",
@@ -4675,7 +4893,21 @@
    "ev": [
     "ev/T112_2026-09-13_nullTest_1.png",
     "ev/T112_2026-09-13_nullTest_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_030_112_A_009_4005_DHDH_A_20260913T225346_20260913T225420_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "\u2014",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_030_112_A_009_4005_DHDH_A_20260913T225346_20260913T225420_P05023_N_F_J_001"
+   }
   },
   {
    "id": "T112_2026-09-25",
@@ -5154,7 +5386,48 @@
    "ev": [
     "ev/T112_2026-09-25_1.png",
     "ev/T112_2026-09-25_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_031_112_A_009_4005_DHDH_A_20260925T225346_20260925T225420_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_031_112_A_009_4005_DHDH_A_20260925T225346_20260925T225420_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     1306.8,
+     357.0,
+     185.8,
+     117.7,
+     98.2,
+     72.3,
+     64.1,
+     62.2,
+     64.9,
+     79.5,
+     60.9,
+     58.4,
+     60.7,
+     64.0,
+     68.1,
+     73.1,
+     78.2,
+     82.7,
+     81.0,
+     59.0
+    ],
+    "confident_share": 0.439
+   },
+   "ev3": "ev/T112_2026-09-25_3.png"
   },
   {
    "id": "T112_2026-10-07",
@@ -5649,7 +5922,48 @@
    "ev": [
     "ev/T112_2026-10-07_1.png",
     "ev/T112_2026-10-07_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_032_112_A_009_4005_DHDH_A_20261007T225346_20261007T225420_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_032_112_A_009_4005_DHDH_A_20261007T225346_20261007T225420_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     1303.1,
+     329.3,
+     167.6,
+     107.7,
+     94.0,
+     69.0,
+     62.1,
+     60.1,
+     62.5,
+     77.7,
+     63.4,
+     61.6,
+     65.7,
+     70.9,
+     76.8,
+     84.9,
+     94.2,
+     103.2,
+     107.5,
+     90.8
+    ],
+    "confident_share": 0.483
+   },
+   "ev3": "ev/T112_2026-10-07_3.png"
   },
   {
    "id": "T112_2026-10-19",
@@ -6160,7 +6474,48 @@
    "ev": [
     "ev/T112_2026-10-19_1.png",
     "ev/T112_2026-10-19_2.png"
-   ]
+   ],
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_033_112_A_009_4005_DHDH_A_20261019T225346_20261019T225420_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 9,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_033_112_A_009_4005_DHDH_A_20261019T225346_20261019T225420_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     1332.1,
+     295.2,
+     146.9,
+     95.2,
+     81.9,
+     62.1,
+     56.0,
+     55.2,
+     58.6,
+     76.6,
+     61.0,
+     60.0,
+     65.1,
+     71.9,
+     80.2,
+     90.8,
+     104.3,
+     118.9,
+     130.2,
+     116.7
+    ],
+    "confident_share": 0.523
+   },
+   "ev3": "ev/T112_2026-10-19_3.png"
   }
  ],
  "refs": {
@@ -6169,7 +6524,8 @@
    "dates": [
     "2026-08-13",
     "2026-08-25",
-    "2026-09-06"
+    "2026-09-06",
+    "2026-09-18"
    ]
   },
   "11": {
@@ -6177,14 +6533,16 @@
    "dates": [
     "2026-08-13",
     "2026-08-25",
-    "2026-09-06"
+    "2026-09-06",
+    "2026-09-18"
    ]
   },
   "112": {
    "sar": "sar/T112_ref.webp",
    "dates": [
     "2026-08-20",
-    "2026-09-01"
+    "2026-09-01",
+    "2026-09-13"
    ]
   }
  },
@@ -6275,5 +6633,1704 @@
     "mapped_km2": 3088
    }
   ]
+ },
+ "anc": {
+  "files": [
+   "anc/anc_1.png",
+   "anc/anc_2.png"
+  ],
+  "scale": {
+   "hh_db": [
+    -30,
+    5
+   ],
+   "hv_db": [
+    -35,
+    0
+   ],
+   "hand_m": [
+    0,
+    60
+   ],
+   "slope_deg": [
+    0,
+    45
+   ],
+   "jrc_pct": [
+    0,
+    100
+   ],
+   "pop_log10_per_km2": [
+    0,
+    4.5
+   ]
+  },
+  "worldcover": {
+   "10": "Tree cover",
+   "20": "Shrubland",
+   "30": "Grassland",
+   "40": "Cropland",
+   "50": "Built-up",
+   "60": "Bare / sparse",
+   "70": "Snow and ice",
+   "80": "Permanent water",
+   "90": "Herbaceous wetland",
+   "95": "Mangroves",
+   "100": "Moss and lichen"
+  },
+  "districts": [
+   {
+    "id": 1,
+    "name": "Ban Mo",
+    "bbox": [
+     100.6222,
+     14.5485,
+     100.8049,
+     14.6758
+    ],
+    "center": [
+     100.719,
+     14.6113
+    ]
+   },
+   {
+    "id": 2,
+    "name": "Bang Ban",
+    "bbox": [
+     100.41,
+     14.3073,
+     100.5219,
+     14.4595
+    ],
+    "center": [
+     100.4648,
+     14.3854
+    ]
+   },
+   {
+    "id": 3,
+    "name": "Bang Bua Thong",
+    "bbox": [
+     100.3306,
+     13.863,
+     100.4508,
+     14.0004
+    ],
+    "center": [
+     100.3944,
+     13.9306
+    ]
+   },
+   {
+    "id": 4,
+    "name": "Bang Kapi",
+    "bbox": [
+     100.6013,
+     13.7384,
+     100.6789,
+     13.8193
+    ],
+    "center": [
+     100.6401,
+     13.7692
+    ]
+   },
+   {
+    "id": 5,
+    "name": "Bang Khae",
+    "bbox": [
+     100.3527,
+     13.668,
+     100.4278,
+     13.7539
+    ],
+    "center": [
+     100.3951,
+     13.7161
+    ]
+   },
+   {
+    "id": 6,
+    "name": "Bang Khen",
+    "bbox": [
+     100.5865,
+     13.8425,
+     100.6858,
+     13.8998
+    ],
+    "center": [
+     100.6306,
+     13.8668
+    ]
+   },
+   {
+    "id": 7,
+    "name": "Bang Kho Laem",
+    "bbox": [
+     100.49,
+     13.6827,
+     100.5318,
+     13.7125
+    ],
+    "center": [
+     100.5099,
+     13.6968
+    ]
+   },
+   {
+    "id": 8,
+    "name": "Bang Kruai",
+    "bbox": [
+     100.3192,
+     13.7889,
+     100.5153,
+     13.8367
+    ],
+    "center": [
+     100.4222,
+     13.813
+    ]
+   },
+   {
+    "id": 9,
+    "name": "Bang Len",
+    "bbox": [
+     100.0515,
+     13.8903,
+     100.2982,
+     14.1792
+    ],
+    "center": [
+     100.1859,
+     14.0474
+    ]
+   },
+   {
+    "id": 10,
+    "name": "Bang Pa-In",
+    "bbox": [
+     100.5175,
+     14.1277,
+     100.6844,
+     14.3242
+    ],
+    "center": [
+     100.5945,
+     14.2384
+    ]
+   },
+   {
+    "id": 11,
+    "name": "Bang Pahan",
+    "bbox": [
+     100.491,
+     14.4019,
+     100.6034,
+     14.5542
+    ],
+    "center": [
+     100.5464,
+     14.474
+    ]
+   },
+   {
+    "id": 12,
+    "name": "Bang Phlat",
+    "bbox": [
+     100.4659,
+     13.7619,
+     100.5175,
+     13.8133
+    ],
+    "center": [
+     100.4939,
+     13.7872
+    ]
+   },
+   {
+    "id": 13,
+    "name": "Bang Phli",
+    "bbox": [
+     100.6291,
+     13.5114,
+     100.7935,
+     13.7182
+    ],
+    "center": [
+     100.7268,
+     13.6215
+    ]
+   },
+   {
+    "id": 14,
+    "name": "Bang Pla Ma",
+    "bbox": [
+     99.984,
+     14.2368,
+     100.2824,
+     14.4542
+    ],
+    "center": [
+     100.1475,
+     14.351
+    ]
+   },
+   {
+    "id": 15,
+    "name": "Bang Rak",
+    "bbox": [
+     100.512,
+     13.7181,
+     100.5447,
+     13.738
+    ],
+    "center": [
+     100.524,
+     13.727
+    ]
+   },
+   {
+    "id": 16,
+    "name": "Bang Sai",
+    "bbox": [
+     100.414,
+     14.1111,
+     100.5805,
+     14.3291
+    ],
+    "center": [
+     100.4848,
+     14.2136
+    ]
+   },
+   {
+    "id": 17,
+    "name": "Bang Sai",
+    "bbox": [
+     100.2314,
+     14.2021,
+     100.371,
+     14.4072
+    ],
+    "center": [
+     100.2974,
+     14.3162
+    ]
+   },
+   {
+    "id": 18,
+    "name": "Bang Sao Thong",
+    "bbox": [
+     100.7623,
+     13.5486,
+     100.8593,
+     13.7166
+    ],
+    "center": [
+     100.8094,
+     13.6364
+    ]
+   },
+   {
+    "id": 19,
+    "name": "Bang Sue",
+    "bbox": [
+     100.5063,
+     13.7979,
+     100.545,
+     13.8496
+    ],
+    "center": [
+     100.5283,
+     13.82
+    ]
+   },
+   {
+    "id": 20,
+    "name": "Bang Yai",
+    "bbox": [
+     100.2968,
+     13.8157,
+     100.4482,
+     13.9116
+    ],
+    "center": [
+     100.3703,
+     13.8559
+    ]
+   },
+   {
+    "id": 21,
+    "name": "Bangkok Noi",
+    "bbox": [
+     100.4536,
+     13.7432,
+     100.491,
+     13.7872
+    ],
+    "center": [
+     100.4716,
+     13.7625
+    ]
+   },
+   {
+    "id": 22,
+    "name": "Bangkok Yai",
+    "bbox": [
+     100.4621,
+     13.7224,
+     100.492,
+     13.7482
+    ],
+    "center": [
+     100.4764,
+     13.7353
+    ]
+   },
+   {
+    "id": 23,
+    "name": "Bueng Kum",
+    "bbox": [
+     100.6245,
+     13.7707,
+     100.6766,
+     13.8474
+    ],
+    "center": [
+     100.6513,
+     13.8084
+    ]
+   },
+   {
+    "id": 24,
+    "name": "Chaloem Phra Kiat",
+    "bbox": [
+     100.8446,
+     14.5527,
+     100.9644,
+     14.7467
+    ],
+    "center": [
+     100.9088,
+     14.6598
+    ]
+   },
+   {
+    "id": 25,
+    "name": "Chatuchak",
+    "bbox": [
+     100.5371,
+     13.7947,
+     100.5911,
+     13.8589
+    ],
+    "center": [
+     100.5653,
+     13.8265
+    ]
+   },
+   {
+    "id": 26,
+    "name": "Chom Thong",
+    "bbox": [
+     100.4347,
+     13.6557,
+     100.489,
+     13.7179
+    ],
+    "center": [
+     100.4631,
+     13.6872
+    ]
+   },
+   {
+    "id": 27,
+    "name": "Din Daeng",
+    "bbox": [
+     100.5434,
+     13.7551,
+     100.5749,
+     13.8011
+    ],
+    "center": [
+     100.5634,
+     13.7752
+    ]
+   },
+   {
+    "id": 28,
+    "name": "Don Mueang",
+    "bbox": [
+     100.5589,
+     13.8876,
+     100.6266,
+     13.9552
+    ],
+    "center": [
+     100.5936,
+     13.9252
+    ]
+   },
+   {
+    "id": 29,
+    "name": "Don Phut",
+    "bbox": [
+     100.575,
+     14.5542,
+     100.6601,
+     14.6551
+    ],
+    "center": [
+     100.6149,
+     14.6096
+    ]
+   },
+   {
+    "id": 30,
+    "name": "Dusit",
+    "bbox": [
+     100.499,
+     13.7527,
+     100.5374,
+     13.8004
+    ],
+    "center": [
+     100.5182,
+     13.78
+    ]
+   },
+   {
+    "id": 31,
+    "name": "Huai Khwang",
+    "bbox": [
+     100.5633,
+     13.7411,
+     100.6041,
+     13.803
+    ],
+    "center": [
+     100.5831,
+     13.7674
+    ]
+   },
+   {
+    "id": 32,
+    "name": "Khan Na Yao",
+    "bbox": [
+     100.646,
+     13.7812,
+     100.705,
+     13.857
+    ],
+    "center": [
+     100.6773,
+     13.8213
+    ]
+   },
+   {
+    "id": 33,
+    "name": "Khlong Luang",
+    "bbox": [
+     100.5821,
+     13.9956,
+     100.7555,
+     14.2111
+    ],
+    "center": [
+     100.6766,
+     14.0947
+    ]
+   },
+   {
+    "id": 34,
+    "name": "Khlong Sam Wa",
+    "bbox": [
+     100.6708,
+     13.8155,
+     100.799,
+     13.9314
+    ],
+    "center": [
+     100.7393,
+     13.8746
+    ]
+   },
+   {
+    "id": 35,
+    "name": "Khlong San",
+    "bbox": [
+     100.4922,
+     13.7051,
+     100.5123,
+     13.7392
+    ],
+    "center": [
+     100.502,
+     13.7228
+    ]
+   },
+   {
+    "id": 36,
+    "name": "Khlong Toei",
+    "bbox": [
+     100.5507,
+     13.6961,
+     100.6017,
+     13.7428
+    ],
+    "center": [
+     100.5723,
+     13.7157
+    ]
+   },
+   {
+    "id": 37,
+    "name": "Krathum Baen",
+    "bbox": [
+     100.1697,
+     13.6029,
+     100.3502,
+     13.7248
+    ],
+    "center": [
+     100.274,
+     13.6593
+    ]
+   },
+   {
+    "id": 38,
+    "name": "Lak Si",
+    "bbox": [
+     100.5436,
+     13.8496,
+     100.5948,
+     13.9145
+    ],
+    "center": [
+     100.568,
+     13.8798
+    ]
+   },
+   {
+    "id": 39,
+    "name": "Lam Luk Ka",
+    "bbox": [
+     100.6051,
+     13.9163,
+     100.9148,
+     14.0682
+    ],
+    "center": [
+     100.7912,
+     13.9783
+    ]
+   },
+   {
+    "id": 40,
+    "name": "Lat Bua Luang",
+    "bbox": [
+     100.2129,
+     14.1135,
+     100.4615,
+     14.227
+    ],
+    "center": [
+     100.3504,
+     14.1691
+    ]
+   },
+   {
+    "id": 41,
+    "name": "Lat Krabang",
+    "bbox": [
+     100.7066,
+     13.6896,
+     100.8788,
+     13.8004
+    ],
+    "center": [
+     100.7929,
+     13.7438
+    ]
+   },
+   {
+    "id": 42,
+    "name": "Lat Lum Kaeo",
+    "bbox": [
+     100.3316,
+     13.9673,
+     100.4966,
+     14.1151
+    ],
+    "center": [
+     100.4075,
+     14.0474
+    ]
+   },
+   {
+    "id": 43,
+    "name": "Lat Phrao",
+    "bbox": [
+     100.5883,
+     13.7948,
+     100.6371,
+     13.8493
+    ],
+    "center": [
+     100.6087,
+     13.8243
+    ]
+   },
+   {
+    "id": 44,
+    "name": "Maha Rat",
+    "bbox": [
+     100.4783,
+     14.5057,
+     100.6036,
+     14.63
+    ],
+    "center": [
+     100.5374,
+     14.5744
+    ]
+   },
+   {
+    "id": 45,
+    "name": "Min Buri",
+    "bbox": [
+     100.6968,
+     13.7732,
+     100.8078,
+     13.8493
+    ],
+    "center": [
+     100.7542,
+     13.8087
+    ]
+   },
+   {
+    "id": 46,
+    "name": "Mueang Ang Thong",
+    "bbox": [
+     100.3867,
+     14.518,
+     100.5001,
+     14.6323
+    ],
+    "center": [
+     100.4433,
+     14.5787
+    ]
+   },
+   {
+    "id": 47,
+    "name": "Mueang Chachoengsao",
+    "bbox": [
+     100.8551,
+     13.6309,
+     101.1441,
+     13.8044
+    ],
+    "center": [
+     101.0144,
+     13.7192
+    ]
+   },
+   {
+    "id": 48,
+    "name": "Mueang Nonthaburi",
+    "bbox": [
+     100.4276,
+     13.8096,
+     100.5503,
+     13.8952
+    ],
+    "center": [
+     100.4913,
+     13.8575
+    ]
+   },
+   {
+    "id": 49,
+    "name": "Mueang Pathum Thani",
+    "bbox": [
+     100.4486,
+     13.9367,
+     100.6065,
+     14.0742
+    ],
+    "center": [
+     100.5357,
+     13.9931
+    ]
+   },
+   {
+    "id": 50,
+    "name": "Mueang Saraburi",
+    "bbox": [
+     100.8446,
+     14.4178,
+     101.0015,
+     14.5789
+    ],
+    "center": [
+     100.9266,
+     14.4988
+    ]
+   },
+   {
+    "id": 51,
+    "name": "Mueang Suphan Buri",
+    "bbox": [
+     99.9177,
+     14.334,
+     100.2531,
+     14.6106
+    ],
+    "center": [
+     100.0669,
+     14.4882
+    ]
+   },
+   {
+    "id": 52,
+    "name": "Nakhon Chai Si",
+    "bbox": [
+     100.0984,
+     13.7048,
+     100.2673,
+     13.9227
+    ],
+    "center": [
+     100.1788,
+     13.8215
+    ]
+   },
+   {
+    "id": 53,
+    "name": "Nakhon Luang",
+    "bbox": [
+     100.5645,
+     14.3932,
+     100.6898,
+     14.5542
+    ],
+    "center": [
+     100.6257,
+     14.4681
+    ]
+   },
+   {
+    "id": 54,
+    "name": "Nong Chok",
+    "bbox": [
+     100.7874,
+     13.7379,
+     100.9385,
+     13.9465
+    ],
+    "center": [
+     100.8573,
+     13.8526
+    ]
+   },
+   {
+    "id": 55,
+    "name": "Nong Khae",
+    "bbox": [
+     100.7595,
+     14.2427,
+     100.962,
+     14.4625
+    ],
+    "center": [
+     100.8637,
+     14.3687
+    ]
+   },
+   {
+    "id": 56,
+    "name": "Nong Khaem",
+    "bbox": [
+     100.3302,
+     13.655,
+     100.3852,
+     13.738
+    ],
+    "center": [
+     100.3552,
+     13.6957
+    ]
+   },
+   {
+    "id": 57,
+    "name": "Nong Saeng",
+    "bbox": [
+     100.7474,
+     14.4307,
+     100.854,
+     14.5342
+    ],
+    "center": [
+     100.8036,
+     14.4843
+    ]
+   },
+   {
+    "id": 58,
+    "name": "Nong Suea",
+    "bbox": [
+     100.7551,
+     14.0448,
+     100.9518,
+     14.276
+    ],
+    "center": [
+     100.8382,
+     14.1619
+    ]
+   },
+   {
+    "id": 59,
+    "name": "Pa Mok",
+    "bbox": [
+     100.3995,
+     14.439,
+     100.5001,
+     14.54
+    ],
+    "center": [
+     100.453,
+     14.4899
+    ]
+   },
+   {
+    "id": 60,
+    "name": "Pak Kret",
+    "bbox": [
+     100.3805,
+     13.8776,
+     100.5675,
+     13.9947
+    ],
+    "center": [
+     100.4947,
+     13.926
+    ]
+   },
+   {
+    "id": 61,
+    "name": "Pathum Wan",
+    "bbox": [
+     100.5157,
+     13.7228,
+     100.5529,
+     13.7531
+    ],
+    "center": [
+     100.5356,
+     13.7394
+    ]
+   },
+   {
+    "id": 62,
+    "name": "Phachi",
+    "bbox": [
+     100.6522,
+     14.3614,
+     100.7971,
+     14.5049
+    ],
+    "center": [
+     100.7266,
+     14.4392
+    ]
+   },
+   {
+    "id": 63,
+    "name": "Phak Hai",
+    "bbox": [
+     100.2444,
+     14.3964,
+     100.4267,
+     14.5106
+    ],
+    "center": [
+     100.3397,
+     14.4518
+    ]
+   },
+   {
+    "id": 64,
+    "name": "Phasi Charoen",
+    "bbox": [
+     100.4134,
+     13.6876,
+     100.4716,
+     13.7479
+    ],
+    "center": [
+     100.4415,
+     13.7237
+    ]
+   },
+   {
+    "id": 65,
+    "name": "Phaya Thai",
+    "bbox": [
+     100.5279,
+     13.7627,
+     100.5616,
+     13.7979
+    ],
+    "center": [
+     100.545,
+     13.7818
+    ]
+   },
+   {
+    "id": 66,
+    "name": "Phra Khanong",
+    "bbox": [
+     100.5839,
+     13.6779,
+     100.6402,
+     13.7068
+    ],
+    "center": [
+     100.6136,
+     13.6923
+    ]
+   },
+   {
+    "id": 67,
+    "name": "Phra Nakhon",
+    "bbox": [
+     100.4879,
+     13.7386,
+     100.5094,
+     13.7727
+    ],
+    "center": [
+     100.498,
+     13.7554
+    ]
+   },
+   {
+    "id": 68,
+    "name": "Phra Nakhon Si Ayutthaya",
+    "bbox": [
+     100.4986,
+     14.2797,
+     100.6297,
+     14.4071
+    ],
+    "center": [
+     100.5585,
+     14.3525
+    ]
+   },
+   {
+    "id": 69,
+    "name": "Phra Phutthabat",
+    "bbox": [
+     100.7081,
+     14.5998,
+     100.9436,
+     14.8047
+    ],
+    "center": [
+     100.8053,
+     14.7199
+    ]
+   },
+   {
+    "id": 70,
+    "name": "Phra Pradaeng",
+    "bbox": [
+     100.5142,
+     13.5988,
+     100.5934,
+     13.7062
+    ],
+    "center": [
+     100.5528,
+     13.6533
+    ]
+   },
+   {
+    "id": 71,
+    "name": "Phutthamonthon",
+    "bbox": [
+     100.2361,
+     13.7631,
+     100.3339,
+     13.9048
+    ],
+    "center": [
+     100.2879,
+     13.8304
+    ]
+   },
+   {
+    "id": 72,
+    "name": "Pom Prap Sattru Phai",
+    "bbox": [
+     100.5039,
+     13.738,
+     100.5174,
+     13.7637
+    ],
+    "center": [
+     100.5112,
+     13.7508
+    ]
+   },
+   {
+    "id": 73,
+    "name": "Prawet",
+    "bbox": [
+     100.6341,
+     13.6563,
+     100.7124,
+     13.7379
+    ],
+    "center": [
+     100.677,
+     13.6991
+    ]
+   },
+   {
+    "id": 74,
+    "name": "Ratchathewi",
+    "bbox": [
+     100.5192,
+     13.7479,
+     100.565,
+     13.7743
+    ],
+    "center": [
+     100.5386,
+     13.7571
+    ]
+   },
+   {
+    "id": 75,
+    "name": "Sai Mai",
+    "bbox": [
+     100.6087,
+     13.8742,
+     100.6923,
+     13.9503
+    ],
+    "center": [
+     100.6533,
+     13.9063
+    ]
+   },
+   {
+    "id": 76,
+    "name": "Sai Noi",
+    "bbox": [
+     100.2624,
+     13.8696,
+     100.3562,
+     14.1402
+    ],
+    "center": [
+     100.3094,
+     14.0064
+    ]
+   },
+   {
+    "id": 77,
+    "name": "Sam Khok",
+    "bbox": [
+     100.4221,
+     14.03,
+     100.5893,
+     14.1301
+    ],
+    "center": [
+     100.5228,
+     14.0826
+    ]
+   },
+   {
+    "id": 78,
+    "name": "Sam Phran",
+    "bbox": [
+     100.0603,
+     13.6493,
+     100.3375,
+     13.8034
+    ],
+    "center": [
+     100.2177,
+     13.7248
+    ]
+   },
+   {
+    "id": 79,
+    "name": "Samko",
+    "bbox": [
+     100.1913,
+     14.5366,
+     100.3197,
+     14.664
+    ],
+    "center": [
+     100.2532,
+     14.6053
+    ]
+   },
+   {
+    "id": 80,
+    "name": "Samphanthawong",
+    "bbox": [
+     100.4998,
+     13.7294,
+     100.5157,
+     13.7468
+    ],
+    "center": [
+     100.5085,
+     13.7386
+    ]
+   },
+   {
+    "id": 81,
+    "name": "Sao Hai",
+    "bbox": [
+     100.7745,
+     14.5125,
+     100.8942,
+     14.6665
+    ],
+    "center": [
+     100.839,
+     14.5746
+    ]
+   },
+   {
+    "id": 82,
+    "name": "Saphan Sung",
+    "bbox": [
+     100.659,
+     13.7325,
+     100.7164,
+     13.7983
+    ],
+    "center": [
+     100.6913,
+     13.7626
+    ]
+   },
+   {
+    "id": 83,
+    "name": "Sathon",
+    "bbox": [
+     100.5082,
+     13.7009,
+     100.5538,
+     13.7262
+    ],
+    "center": [
+     100.5309,
+     13.7142
+    ]
+   },
+   {
+    "id": 84,
+    "name": "Sena",
+    "bbox": [
+     100.274,
+     14.2094,
+     100.4376,
+     14.4062
+    ],
+    "center": [
+     100.3755,
+     14.2959
+    ]
+   },
+   {
+    "id": 85,
+    "name": "Si Prachan",
+    "bbox": [
+     100.0512,
+     14.5311,
+     100.2443,
+     14.7707
+    ],
+    "center": [
+     100.15,
+     14.6346
+    ]
+   },
+   {
+    "id": 86,
+    "name": "Song Phi Nong",
+    "bbox": [
+     99.7679,
+     14.0642,
+     100.2386,
+     14.3409
+    ],
+    "center": [
+     99.9974,
+     14.1943
+    ]
+   },
+   {
+    "id": 87,
+    "name": "Suan Luang",
+    "bbox": [
+     100.5982,
+     13.7008,
+     100.6591,
+     13.7501
+    ],
+    "center": [
+     100.6281,
+     13.7259
+    ]
+   },
+   {
+    "id": 88,
+    "name": "Taling Chan",
+    "bbox": [
+     100.4062,
+     13.7401,
+     100.4697,
+     13.8013
+    ],
+    "center": [
+     100.4352,
+     13.7717
+    ]
+   },
+   {
+    "id": 89,
+    "name": "Tha Ruea",
+    "bbox": [
+     100.6018,
+     14.4859,
+     100.7827,
+     14.6064
+    ],
+    "center": [
+     100.7069,
+     14.5392
+    ]
+   },
+   {
+    "id": 90,
+    "name": "Thanyaburi",
+    "bbox": [
+     100.6014,
+     13.9655,
+     100.9148,
+     14.0996
+    ],
+    "center": [
+     100.7613,
+     14.0301
+    ]
+   },
+   {
+    "id": 91,
+    "name": "Thawi Watthana",
+    "bbox": [
+     100.3279,
+     13.736,
+     100.4111,
+     13.8041
+    ],
+    "center": [
+     100.3683,
+     13.7753
+    ]
+   },
+   {
+    "id": 92,
+    "name": "Thon Buri",
+    "bbox": [
+     100.4685,
+     13.6948,
+     100.4986,
+     13.7422
+    ],
+    "center": [
+     100.4854,
+     13.7154
+    ]
+   },
+   {
+    "id": 93,
+    "name": "Uthai",
+    "bbox": [
+     100.6007,
+     14.2982,
+     100.793,
+     14.416
+    ],
+    "center": [
+     100.6953,
+     14.3564
+    ]
+   },
+   {
+    "id": 94,
+    "name": "Vadhana",
+    "bbox": [
+     100.5501,
+     13.7047,
+     100.6068,
+     13.7484
+    ],
+    "center": [
+     100.5838,
+     13.7317
+    ]
+   },
+   {
+    "id": 95,
+    "name": "Wang Noi",
+    "bbox": [
+     100.614,
+     14.1431,
+     100.8232,
+     14.3297
+    ],
+    "center": [
+     100.7241,
+     14.2453
+    ]
+   },
+   {
+    "id": 96,
+    "name": "Wang Thonglang",
+    "bbox": [
+     100.5884,
+     13.7512,
+     100.6307,
+     13.8028
+    ],
+    "center": [
+     100.6097,
+     13.7786
+    ]
+   },
+   {
+    "id": 97,
+    "name": "Wihan Daeng",
+    "bbox": [
+     100.8915,
+     14.2437,
+     101.0633,
+     14.4364
+    ],
+    "center": [
+     100.9802,
+     14.3464
+    ]
+   },
+   {
+    "id": 98,
+    "name": "Wiset Chai Chan",
+    "bbox": [
+     100.1959,
+     14.4794,
+     100.4044,
+     14.6629
+    ],
+    "center": [
+     100.3123,
+     14.5546
+    ]
+   },
+   {
+    "id": 99,
+    "name": "Yan Nawa",
+    "bbox": [
+     100.517,
+     13.6693,
+     100.5549,
+     13.7193
+    ],
+    "center": [
+     100.5395,
+     13.6907
+    ]
+   }
+  ]
+ },
+ "impact_layers": {
+  "cropland": "impact/cropland.webp",
+  "population": "impact/population.webp",
+  "districts": "districts.geojson",
+  "roads": "roads.geojson"
+ },
+ "class_scale": 32,
+ "model": {
+  "name": "JalDrishti hybrid",
+  "learner": "LightGBM gradient-boosted trees (binary: open water vs not)",
+  "trees": 712,
+  "params": {
+   "learning_rate": 0.2,
+   "num_leaves": 63,
+   "min_data_in_leaf": 200,
+   "feature_fraction": 0.8,
+   "bagging_fraction": 0.8,
+   "lambda_l2": 1.0
+  },
+  "trained_on": [
+   "40:2026-07-22:2026-07-21",
+   "163:2026-08-12:2026-08-10",
+   "40:2026-08-15:2026-08-15",
+   "thailand@112:2026-10-07:2026-10-07"
+  ],
+  "spatial_cv_iou": [
+   0.853
+  ],
+  "features": [
+   {
+    "name": "hh_minus_hv",
+    "gain": 57193.0,
+    "description": "HH \u2212 HV (dB): polarisation ratio; separates smooth water, vegetation and urban scattering"
+   },
+   {
+    "name": "hh_rel_p10",
+    "gain": 8016964.0,
+    "description": "HH backscatter relative to the scene's darkest 10% (dB): how water-like, scene-normalised"
+   },
+   {
+    "name": "hh_rel_p50",
+    "gain": 1032726.0,
+    "description": "HH backscatter relative to the scene median (dB): dark compared with this scene's typical land"
+   },
+   {
+    "name": "hv_rel_p50",
+    "gain": 543613.0,
+    "description": "HV cross-pol backscatter relative to the scene median (dB): vegetation volume vs smooth water"
+   },
+   {
+    "name": "d_hh",
+    "gain": 138477.0,
+    "description": "HH change from the pre-flood reference median (dB): strong drop = new open water"
+   },
+   {
+    "name": "d_hv",
+    "gain": 114248.0,
+    "description": "HV change from the pre-flood reference median (dB)"
+   },
+   {
+    "name": "hh_s7",
+    "gain": 355936.0,
+    "description": "HH texture: standard deviation in a 7\u00d77 window (water is smooth, land is rough)"
+   },
+   {
+    "name": "d_hh_m7",
+    "gain": 896835.0,
+    "description": "HH change averaged over 7\u00d77 pixels (140 m): spatially coherent change, not speckle"
+   },
+   {
+    "name": "d_hh_m15",
+    "gain": 613259.0,
+    "description": "HH change averaged over 15\u00d715 pixels (300 m): neighbourhood context"
+   },
+   {
+    "name": "hand",
+    "gain": 109759.0,
+    "description": "Height Above Nearest Drainage (m), ASF GLO-30 HAND: low ground floods first"
+   },
+   {
+    "name": "slope",
+    "gain": 67519.0,
+    "description": "Terrain slope (\u00b0) from Copernicus GLO-30"
+   },
+   {
+    "name": "jrc",
+    "gain": 360510.0,
+    "description": "JRC Global Surface Water occurrence 1984\u20132021 (%): how often this place was water historically"
+   },
+   {
+    "name": "worldcover",
+    "gain": 370985.0,
+    "description": "ESA WorldCover 2021 land-cover class (categorical)"
+   }
+  ],
+  "rule": "flood water = P(water now) > 0.5, OR (HH < \u221215 dB and HAND < 10 m) as a physics rescue (rescued pixels get p \u2265 0.51); new flood = water now \u00d7 (1 \u2212 water in the pre-flood reference passes), outside JRC permanent water",
+  "veg_rule": "flooded vegetation = HH rises > 3\u03c3 above no-change and more than HV, HV stable, under trees/grass/wetland (not cropland)",
+  "tiers": {
+   "confident": "p > 0.8",
+   "possible": "0.5 < p \u2264 0.8",
+   "uncertain": "0.35 < p \u2264 0.5"
+  },
+  "physics_terms": "Per-pixel log-odds from the scene-adaptive water/land Gaussian mixture (water-like now, dry before) and terrain priors (HAND bands after Nobre et al. 2011, slope); shown in the pixel panel."
+ },
+ "rainfall": {
+  "days": [
+   "2026-08-10",
+   "2026-08-11",
+   "2026-08-12",
+   "2026-08-13",
+   "2026-08-14",
+   "2026-08-15",
+   "2026-08-16",
+   "2026-08-17",
+   "2026-08-18",
+   "2026-08-19",
+   "2026-08-20",
+   "2026-08-21",
+   "2026-08-22",
+   "2026-08-23",
+   "2026-08-24",
+   "2026-08-25",
+   "2026-08-26",
+   "2026-08-27",
+   "2026-08-28",
+   "2026-08-29",
+   "2026-08-30",
+   "2026-08-31",
+   "2026-09-01",
+   "2026-09-02",
+   "2026-09-03",
+   "2026-09-04",
+   "2026-09-05",
+   "2026-09-06",
+   "2026-09-07",
+   "2026-09-08",
+   "2026-09-09",
+   "2026-09-10",
+   "2026-09-11",
+   "2026-09-12",
+   "2026-09-13",
+   "2026-09-14",
+   "2026-09-15",
+   "2026-09-16",
+   "2026-09-17",
+   "2026-09-18",
+   "2026-09-19",
+   "2026-09-20",
+   "2026-09-21",
+   "2026-09-22",
+   "2026-09-23",
+   "2026-09-24",
+   "2026-09-25",
+   "2026-09-26",
+   "2026-09-27",
+   "2026-09-28",
+   "2026-09-29",
+   "2026-09-30",
+   "2026-10-01",
+   "2026-10-02",
+   "2026-10-03",
+   "2026-10-04",
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-10",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20",
+   "2026-10-21",
+   "2026-10-22",
+   "2026-10-23",
+   "2026-10-24",
+   "2026-10-25"
+  ],
+  "mm": [
+   8.3,
+   3.8,
+   4.9,
+   2.5,
+   5.3,
+   3.6,
+   0.3,
+   5.9,
+   5.4,
+   5.2,
+   13.5,
+   3.5,
+   7.2,
+   10.7,
+   0.3,
+   3.5,
+   4.2,
+   8.8,
+   21.6,
+   18.4,
+   12.0,
+   10.7,
+   6.4,
+   5.3,
+   5.9,
+   1.2,
+   2.2,
+   11.7,
+   3.1,
+   11.8,
+   14.0,
+   17.7,
+   10.3,
+   9.9,
+   6.5,
+   21.6,
+   17.4,
+   14.8,
+   8.9,
+   18.6,
+   16.5,
+   10.6,
+   16.3,
+   6.7,
+   11.8,
+   54.9,
+   68.5,
+   42.9,
+   30.3,
+   12.6,
+   1.8,
+   1.1,
+   1.6,
+   1.1,
+   2.9,
+   3.8,
+   9.3,
+   11.1,
+   1.7,
+   1.7,
+   0.5,
+   18.6,
+   6.7,
+   0.3,
+   8.4,
+   8.0,
+   11.6,
+   3.3,
+   8.8,
+   7.1,
+   2.7,
+   2.8,
+   1.4,
+   1.1,
+   3.3,
+   4.2,
+   2.0
+  ],
+  "source": "ERA5 reanalysis (Copernicus/ECMWF) via Open-Meteo archive, mean of a 3\u00d73 point grid over the area",
+  "note": "NASA GPM IMERG will replace this once the GES DISC archive is authorised for the project's Earthdata account"
  }
 }

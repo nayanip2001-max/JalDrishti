@@ -9,9 +9,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import numpy as np
 import rasterio
-from rasterio.warp import reproject, Resampling, calculate_default_transform, transform_bounds
+from rasterio.warp import Resampling, transform_bounds
 from PIL import Image
-from nisarflood.aoi import grid
+from nisarflood.webgrid import WebGrid, enc, save_sar
 from nisarflood.stack import scenes, load
 from nisarflood.detect import CLASSES
 from nisarflood.events import EVENTS
@@ -27,32 +27,13 @@ for sub in ("cls", "prob", "sar", "ev"):
 COLORS = {0: (0, 0, 0, 0), 1: (0, 0, 0, 0), 2: (30, 64, 175, 170), 3: (34, 211, 238, 240),
           4: (245, 158, 11, 105), 5: (167, 139, 250, 240), 6: (217, 70, 239, 95), 7: (148, 163, 184, 70)}
 
-crs, transform, w, h = grid(AOI)
-west, south, east, north = rasterio.transform.array_bounds(h, w, transform)
-dst_crs = "EPSG:3857"
-dt, dw, dh = calculate_default_transform(crs, dst_crs, w, h, west, south, east, north, resolution=25)
-db = rasterio.transform.array_bounds(dh, dw, dt)
-lon0, lat0, lon1, lat1 = transform_bounds(dst_crs, "EPSG:4326", *db)
-corners = [[lon0, lat1], [lon1, lat1], [lon1, lat0], [lon0, lat0]]
+G = WebGrid(AOI)
+warp = G.warp
+lon0, lat0, lon1, lat1 = G.bounds
+corners = G.corners
 
 
-def warp(a, resampling, nodata=np.nan, factor=1):
-    out = np.full((dh // factor, dw // factor), nodata, dtype=a.dtype)
-    t = dt * rasterio.Affine.scale(factor)
-    reproject(a, out, src_transform=transform, src_crs=crs, dst_transform=t, dst_crs=dst_crs,
-              src_nodata=nodata, dst_nodata=nodata, resampling=resampling)
-    return out
-
-
-def enc(a, lo, hi):
-    return np.clip(np.round((np.nan_to_num(a, nan=lo) - lo) / (hi - lo) * 255), 0, 255).astype(np.uint8)
-
-
-def sar_img(hh_db, path):
-    g = warp(hh_db, Resampling.average, factor=2)  # 50 m: speckle does not compress, and this is a backdrop
-    v = enc(g, -24, 0)
-    alpha = np.where(np.isfinite(g), 255, 0).astype(np.uint8)  # outside the swath stays transparent
-    Image.fromarray(np.stack([v, v, v, alpha], -1), "RGBA").save(path, "WEBP", quality=72, alpha_quality=50, method=6)
+sar_img = lambda hh_db, path: save_sar(G, hh_db, path)
 
 
 summary = json.loads((src_dir / "summary.json").read_text())
@@ -106,9 +87,9 @@ for s in scenes(AOI):
     d = load(s, AOI, bands=("HHHH",))
     sar_img(d["HHHH"], web / "sar" / f"T{s['track']:03d}_{s['date']}.webp")
     by_track.setdefault(s["track"], []).append((s["date"], d["HHHH"]))
-for rec in summary:
+for rec in summary:  # reference list of the flood passes (a null test uses one pass fewer)
     t = rec["track"]
-    if str(t) not in manifest["refs"]:
+    if rec["kind"] == "post" and str(t) not in manifest["refs"]:
         refs = [a for dte, a in by_track[t] if dte in rec["refs"]]
         sar_img(np.nanmedian(np.stack(refs), 0), web / "sar" / f"T{t:03d}_ref.webp")
         manifest["refs"][str(t)] = {"sar": f"sar/T{t:03d}_ref.webp", "dates": rec["refs"]}
