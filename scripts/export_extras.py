@@ -21,6 +21,7 @@ from nisarflood.stack import scenes, load
 from nisarflood.events import EVENTS
 
 AOI, SRC = sys.argv[1], Path(sys.argv[2])
+STATIC_ONLY = "--static-only" in sys.argv  # rebuild lookups/overlays/cards without re-reading the radar
 web = Path(f"web/public/data/{AOI}")
 anc_dir = Path(f"data/processed/ancillary/{AOI}")
 mpath = web / "manifest.json"
@@ -47,7 +48,7 @@ NATIVE = {"DHDH": "10 m (multilooked 2×2 to 20 m)", "QPDH": "20 m"}
 # ---- per pass ----------------------------------------------------------------------------------------
 by_key = {(s["track"], s["date"]): s for s in scenes(AOI)}
 px_km2 = abs(G.transform.a * G.transform.e) / 1e6
-for sc in m["scenes"]:
+for sc in ([] if STATIC_ONLY else m["scenes"]):
     g = granules.get((sc["track"], sc["date"]))
     tok = g.split("_") if g else []
     # NISAR_L2_PR_GCOV_<cycle>_<track>_<A|D>_<frame>_...
@@ -76,7 +77,7 @@ for sc in m["scenes"]:
     print("pass", sc["id"], flush=True)
 
 # ---- reference passes: the before/after "before" image uses every reference pass of the flood passes --
-for tr in {sc["track"] for sc in m["scenes"] if sc["kind"] == "post"}:
+for tr in ({sc["track"] for sc in m["scenes"] if sc["kind"] == "post"} if not STATIC_ONLY else []):
     ref_dates = next(sc["refs"] for sc in m["scenes"] if sc["kind"] == "post" and sc["track"] == tr)
     stack = [load(by_key[(tr, d)], AOI, bands=("HHHH",))["HHHH"] for d in ref_dates]
     save_sar(G, np.nanmedian(np.stack(stack), 0), web / "sar" / f"T{tr:03d}_ref.webp")
@@ -91,7 +92,9 @@ anc1 = np.stack([enc(G.warp(hand, Resampling.average, factor=f), *SCALE["hand_m"
                  enc(G.warp(jrc, Resampling.average, factor=f), *SCALE["jrc_pct"])], -1)
 with rasterio.open(anc_dir / "pop_wp2025.tif") as p:
     pop = G.warp(p.read(1).astype("float32"), Resampling.average, factor=f, src_transform=p.transform, src_crs=p.crs)
-wp_cell_km2 = 0.01  # WorldPop cells are ~100 m: values are people per ~0.01 km²
+    # WorldPop is a 3 arc-second grid: true cell area shrinks with latitude (≈0.0077 km² at 27°N).
+    lat = np.radians((p.bounds.bottom + p.bounds.top) / 2)
+    wp_cell_km2 = (abs(p.transform.e) * 111.32) * (abs(p.transform.a) * 111.32 * np.cos(lat))
 density = np.nan_to_num(pop) / wp_cell_km2
 anc2 = np.stack([G.warp(wc, Resampling.nearest, nodata=0, factor=f), G.warp(dist, Resampling.nearest, nodata=0, factor=f),
                  enc(np.log10(1 + density), *SCALE["pop_log10_per_km2"])], -1).astype(np.uint8)
