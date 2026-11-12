@@ -41,7 +41,9 @@ export const NAV = {
 
 // Events with live monitoring get a Live Monitor entry, second in every mode.
 const LIVE_ITEM = { id: 'live', label: 'Live Monitor', icon: 'pulse' }
-export const navFor = (mode, live) => (live ? [NAV[mode][0], LIVE_ITEM, ...NAV[mode].slice(1)] : NAV[mode])
+// "Map a Region" (any area, any date) closes every mode's list.
+const REGION_ITEM = { id: 'region', label: 'Map a Region', icon: 'target' }
+export const navFor = (mode, live) => [...(live ? [NAV[mode][0], LIVE_ITEM, ...NAV[mode].slice(1)] : NAV[mode]), REGION_ITEM]
 
 // Where a section lives when the mode changes and it has no exact twin.
 export const SECTION_FALLBACK = { event: 'overview', overview: 'event', how: 'overview', observations: 'flood', features: 'flood',

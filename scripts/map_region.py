@@ -247,8 +247,15 @@ except Exception as exc:
 
 out = {"region": NAME, "date": pdate, "track": rec["track"], "reference_dates": rec["refs"], "areas_km2": rec["areas_km2"],
        "exposure": rec.get("exposure"), "method": rec.get("method"), "source": json.loads((REG / f"{NAME}.json").read_text())["source"],
-       "files": sorted(p.name for p in OUT.iterdir()),
-       "caveat": "Not validated for this region: accuracy was measured in Assam and Thailand. Exposure is not damage."}
+       "bbox": json.loads((REG / f"{NAME}.json").read_text())["bounds"],
+       "files": sorted(p.name for p in OUT.iterdir() if p.suffix != ".zip"),
+       "caveat": "Not validated for this region: accuracy was measured in Assam, Thailand and Chennai. Exposure is not damage."}
 (OUT / "summary.json").write_text(json.dumps(out, indent=1))
+# One zip for the dashboard's "Map a Region" step 4 (drop it on the page to see the map).
+import zipfile
+with zipfile.ZipFile(OUT / f"jaldrishti_{NAME}.zip", "w", zipfile.ZIP_DEFLATED) as z:
+    for f in sorted(OUT.iterdir()):
+        if f.suffix != ".zip":
+            z.write(f, f.name)
 fl = rec["areas_km2"]["flood (open water)"] + rec["areas_km2"]["flooded vegetation"]
 print(f"\n[map_region] done: {fl:,.1f} km² confident flood on {pdate}. Files in {OUT}")

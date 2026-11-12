@@ -52,7 +52,13 @@ NISAR sees a place every few days. For the days in between, each pixel blends th
 
 ## Map any region
 
-`scripts/map_region.py` maps any area, two ways:
+**In the dashboard: the "Map a Region" tab** (every mode).
+1. **Choose an area:** search any place (OpenStreetMap), draw a box with two clicks, or use the current map view.
+2. **Check NISAR:** the page asks NASA's ASF archive directly from your browser which NISAR passes cover the box near your date, how much of the box each covers, and whether there are at least two earlier passes on the same track to compare against. It lists every pass date in the window to pick from. These are the same rules as the mapping script, so a green check means the run will work.
+3. **Make the map:** the page gives one line to paste into the free Colab notebook (or a command-line call). The mapping needs a NASA Earthdata login and a few minutes of computing, so it cannot run inside a static web page.
+4. **See it here:** drop the notebook's `jaldrishti_<name>.zip` on the page. It is read in your browser, not uploaded, and the confident flood is drawn on the map with its areas, dates and the caveat *not validated for this region*.
+
+Under the hood, `scripts/map_region.py` maps any area, two ways:
 
 - **From NISAR:** `python scripts/map_region.py --name mytown --bbox W S E N --date 2026-11-04` finds the best-covering pass within ±1 day and at least two earlier passes on the same track, streams only the subset and maps it.
 - **From your own files:** `--upload after_2026-11-04.tif --refs before_2026-10-11.tif before_2026-10-23.tif`. Uploads are checked before use: a projected CRS (not lat/lon), 1–30 m pixels, HH and HV bands, plausible backscatter (dB is converted), dates in the file names, references dated before the flood scene, and at least 50% overlap.

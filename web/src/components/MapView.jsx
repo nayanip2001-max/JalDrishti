@@ -76,7 +76,19 @@ function setVectors(map, base, il, layers) {
   map.setLayoutProperty('districts-label', 'visibility', vis(layers.districts))
 }
 
-export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera, modelDay }) {
+// "Map a Region" overlays: the chosen box (dashed amber) and a loaded result's confident flood (cyan).
+const rect = (b) => ({ type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [[[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]], [b[0], b[1]]]] } })
+const EMPTY = { type: 'FeatureCollection', features: [] }
+function setGeo(map, id, data, layers) {
+  const src = map.getSource(id)
+  if (src) src.setData(data)
+  else {
+    map.addSource(id, { type: 'geojson', data })
+    for (const l of layers) map.addLayer({ ...l, id: `${id}-${l.type}`, source: id })
+  }
+}
+
+export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera, modelDay, region, onRegionBox }) {
   const mainEl = useRef(null)
   const beforeEl = useRef(null)
   const maps = useRef({})
@@ -84,6 +96,12 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
   const [ready, setReady] = useState(0)
   const [split, setSplit] = useState(0.5)
   const corners = manifest.aoi.corners
+  // Box drawing reads the latest props from a ref, so the map's click handler is registered once.
+  const draw = useRef({ on: false, a: null })
+  draw.current.on = !!region?.drawing
+  draw.current.onBox = onRegionBox
+  draw.current.onPick = onPick
+  if (!region?.drawing) draw.current.a = null
 
   useEffect(() => {
     const opts = { style: style(basemap), bounds: manifest.aoi.bounds, fitBoundsOptions: { padding: fitPadding() }, attributionControl: { compact: true } }
@@ -93,7 +111,19 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
     main.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-right')
     const sync = () => before.jumpTo({ center: main.getCenter(), zoom: main.getZoom(), bearing: main.getBearing(), pitch: main.getPitch() })
     main.on('move', sync)
-    main.on('click', (e) => onPick([e.lngLat.lng, e.lngLat.lat]))
+    main.on('click', (e) => {
+      const d = draw.current, p = [e.lngLat.lng, e.lngLat.lat]
+      if (!d.on) return d.onPick(p)
+      if (!d.a) { d.a = p; return }
+      const r5 = (v) => Math.round(v * 1e4) / 1e4
+      const b = [Math.min(d.a[0], p[0]), Math.min(d.a[1], p[1]), Math.max(d.a[0], p[0]), Math.max(d.a[1], p[1])].map(r5)
+      d.a = null
+      d.onBox?.(b)
+    })
+    main.on('mousemove', (e) => {
+      const d = draw.current
+      if (d.on && d.a) main.getSource('rg-box')?.setData(rect([Math.min(d.a[0], e.lngLat.lng), Math.min(d.a[1], e.lngLat.lat), Math.max(d.a[0], e.lngLat.lng), Math.max(d.a[1], e.lngLat.lat)]))
+    })
     main.getCanvas().style.cursor = 'crosshair'
     let loaded = 0
     const done = () => { if (++loaded === 2) setReady((r) => r + 1) }
@@ -135,6 +165,17 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
       setVectors(main, base, il, layers)
     }
   }, [ready, scene, layers, opacity, base, corners, manifest, modelDay])
+
+  useEffect(() => {
+    const { main } = maps.current
+    if (!ready || !main) return
+    setGeo(main, 'rg-res', region?.result?.geojson ?? EMPTY, [
+      { type: 'fill', paint: { 'fill-color': '#22d3ee', 'fill-opacity': 0.6 } },
+      { type: 'line', paint: { 'line-color': '#67e8f9', 'line-width': 0.8 } }])
+    setGeo(main, 'rg-box', region?.box ? rect(region.box) : EMPTY, [
+      { type: 'fill', paint: { 'fill-color': '#f59e0b', 'fill-opacity': 0.06 } },
+      { type: 'line', paint: { 'line-color': '#f59e0b', 'line-width': 2, 'line-dasharray': [3, 2] } }])
+  }, [ready, region?.box, region?.result, region?.drawing])
 
   useEffect(() => {
     const { main } = maps.current

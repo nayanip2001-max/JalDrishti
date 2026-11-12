@@ -1,9 +1,19 @@
 // Layout pieces around the map: navigation rail, contextual drawer and the map legend.
+import { useEffect, useRef, useState } from 'react'
 import { Icon } from './ui.jsx'
 
 export function NavRail({ items, section, onSection }) {
+  // On phones the rail is a horizontal bar: fade its right edge only while more tabs are hidden there.
+  const ref = useRef(null)
+  const [more, setMore] = useState(false)
+  const check = () => { const n = ref.current; if (n) setMore(n.scrollWidth - n.clientWidth - n.scrollLeft > 4) }
+  useEffect(() => {
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [items])
   return (
-    <nav className="rail" aria-label="Sections">
+    <nav ref={ref} onScroll={check} className={`rail ${more ? 'many' : ''}`} aria-label="Sections">
       {items.map((n) => (
         <button key={n.id} className={section === n.id ? 'on' : ''} onClick={() => onSection(n.id)} aria-current={section === n.id ? 'page' : undefined}>
           <Icon name={n.icon} size={20} />
