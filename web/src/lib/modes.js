@@ -39,11 +39,15 @@ export const NAV = {
   ],
 }
 
+// Events with live monitoring get a Live Monitor entry, second in every mode.
+const LIVE_ITEM = { id: 'live', label: 'Live Monitor', icon: 'pulse' }
+export const navFor = (mode, live) => (live ? [NAV[mode][0], LIVE_ITEM, ...NAV[mode].slice(1)] : NAV[mode])
+
 // Where a section lives when the mode changes and it has no exact twin.
 export const SECTION_FALLBACK = { event: 'overview', overview: 'event', how: 'overview', observations: 'flood', features: 'flood',
   model: 'validation', flood: 'observations', temporal: 'observations' }
-export const resolveSection = (mode, id) => {
-  const ids = NAV[mode].map((n) => n.id)
+export const resolveSection = (mode, id, live = false) => {
+  const ids = navFor(mode, live).map((n) => n.id)
   if (ids.includes(id)) return id
   const alt = SECTION_FALLBACK[id]
   return ids.includes(alt) ? alt : ids[0]

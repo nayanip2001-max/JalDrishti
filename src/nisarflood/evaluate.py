@@ -59,3 +59,17 @@ def otsu(x, bins=256):
     m0 = np.cumsum(hist * mids) / np.maximum(w0, 1)
     m1 = (np.sum(hist * mids) - np.cumsum(hist * mids)) / np.maximum(w1, 1)
     return float(mids[np.argmax(w0 * w1 * (m0 - m1) ** 2)])
+
+
+def sea_mask(worldcover, side="east", buffer_px=5):
+    """Open sea: the permanent-water (WorldCover 80) region touching the coastal edge of the AOI, plus a small buffer.
+
+    Excluded from training and scoring for coastal events: open sea is trivially "water" and would inflate scores.
+    Inland lakes, tanks and rivers that do not touch that edge stay in.
+    """
+    from scipy.ndimage import label, binary_dilation
+    lab, _ = label(worldcover == 80)
+    edge = {"east": lab[:, -1], "west": lab[:, 0], "north": lab[0], "south": lab[-1]}[side]
+    ids = np.setdiff1d(np.unique(edge), [0])
+    sea = np.isin(lab, ids)
+    return binary_dilation(sea, iterations=buffer_px) if buffer_px else sea

@@ -18,7 +18,15 @@ def scenes(aoi):
     for m in d.glob("manifest_T*.csv"):
         with open(m) as fh:
             rows += [dict(r, track=int(r["track"]), path=d / r["file"]) for r in csv.DictReader(fh)]
-    return sorted((r for r in rows if r["path"].exists()), key=lambda r: (r["track"], r["date"]))
+    best = {}
+    for r in rows:
+        if not r["path"].exists():
+            continue
+        r["product"] = "UR" if "_UR_" in r.get("granule", "") or r["file"].endswith("_UR.tif") else "PR"
+        k = (r["track"], r["date"])
+        if k not in best or (best[k]["product"] == "UR" and r["product"] == "PR"):  # science product wins
+            best[k] = r
+    return sorted(best.values(), key=lambda r: (r["track"], r["date"]))
 
 
 def lee(img, size=5, enl=18.0):

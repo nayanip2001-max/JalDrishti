@@ -20,5 +20,17 @@
    14.15013844258542
   ],
   "peak_km2": 470
+ },
+ {
+  "id": "chennai",
+  "title": "Chennai northeast monsoon \u00b7 Oct\u2013Nov 2026",
+  "subtitle": "Chennai \u00b7 Tiruvallur \u00b7 Kancheepuram \u00b7 Chengalpattu",
+  "country": "India",
+  "center": [
+   80.14953167493448,
+   13.049919559751569
+  ],
+  "live": true,
+  "peak_km2": 9
  }
 ]

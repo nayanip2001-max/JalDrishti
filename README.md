@@ -6,7 +6,7 @@ JalDrishti ("water vision") maps where floodwater appeared, how it spread and ho
 
 Every map in the app is built from real NISAR observations, and every accuracy number was measured on a date the model never saw.
 
-**Live demo:** https://nayanip2001-max.github.io/JalDrishti/ · **Events:** Upper Assam, India (Jul 2026) · Chao Phraya, Thailand (Sep–Oct 2026)
+**Live demo:** https://nayanip2001-max.github.io/JalDrishti/ · **Events:** Upper Assam, India (Jul 2026) · Chao Phraya, Thailand (Sep–Oct 2026) · **Chennai, India — live** (northeast monsoon, Oct–Nov 2026)
 
 ---
 
@@ -22,6 +22,42 @@ Every map in the app is built from real NISAR observations, and every accuracy n
 Every layer carries one of the labels *Observed / Modelled / Predicted / Exposed / Damaged*.
 
 **One dashboard, three depths.** A header toggle switches between **Beginner** (plain answers: where, how big, when, how sure, who is affected, how radar works), **Intermediate** (evidence: classes, probability, temporal and district analysis, model performance, sources) and **Advanced** (observations and orbit metadata, features and importance, model card, full validation metrics, raw pixel values and model trace). A **Science | Impact** switch changes the map layers and the emphasis. Every number opens a detail panel; clicking the map explains that pixel. The timeline shows rainfall, sourced events (rain, dam releases, official warnings) and every NISAR pass. Radar observations are never mixed with estimates.
+
+**Three things no flood product we know of does together:** it updates itself from NISAR's hours-latency *Urgent Response* products, it fills the days between passes by blending passes from different orbit tracks (and shows that this beats the obvious alternative), and anyone can map a new region from a laptop or a free Colab notebook.
+
+## Live monitor (Chennai)
+
+A GitHub Actions job checks NASA's catalogue every 3 hours. When a new NISAR pass over Chennai appears, it streams only the Chennai subset, maps it against a stored reference pack and republishes the site. The **Live Monitor** tab shows the status, the latest observation and its age, and the expected next passes from the 12-day repeat.
+
+- **Urgent Response products change the latency.** The science product (GCOV) took 50–377 h after the pass to appear. On 11 Nov 2026 the Urgent Response GCOV appeared **10.4 h** after the pass. JalDrishti uses a UR product until the science product replaces it, and labels which one it used. Every latency in the table is computed from NASA's own catalogue insert time; passes mapped before the monitor started are marked *backfill*.
+- **Coverage.** Tracks 149 (descending) and 156 (ascending) image the whole city on back-to-back days every 12 days. Track 84 covers only the western 41% (the suburbs west of ~80.18° E).
+- **Then and now.** For Cyclone Michaung (3–5 Dec 2023), the ASF archive has **no Sentinel-1 acquisition** over central Chennai between 30 Nov and 25 Dec 2023. In 2026, NISAR images the whole city twice every 12 days.
+- **Chennai accuracy (fixed protocol, `scripts/chennai_eval.sh`).** Scored against Sentinel-2 water on the monsoon dates (hybrid IoU):
+
+  | Date · track | Assam model | Thailand-adapted | **Chennai-adapted (deployed)** | Threshold −15 dB | Otsu |
+  |---|---|---|---|---|---|
+  | 30 Oct · T84 | 0.440 | 0.556 | **0.578** | 0.440 | 0.123 |
+  | 4 Nov · T156 | 0.547 | 0.682 | **0.557** | 0.542 | 0.217 |
+  | 11 Nov · T84 (UR) | 0.508 | 0.554 | **0.604** | 0.498 | 0.184 |
+  | **Mean** | 0.498 | 0.597 | **0.580** | 0.493 | 0.175 |
+
+  The deployed model was chosen before scoring and is not swapped after, even though the Thailand-adapted model scored higher on 4 Nov and on the mean. It beats the threshold on every monsoon date, but the confidence intervals overlap on each date. Dry-season dates score ≤ 0.36 for every method (little water to find). Confident new flood so far is small (2–7 km² per pass): this is an early, moderate monsoon, and street flooding is not visible to backscatter.
+
+## Between passes (Modelled)
+
+NISAR sees a place every few days. For the days in between, each pixel blends the nearest earlier and later passes that saw it, **from any track**, weighted by time. Passes from different orbits fill each other's gaps. It is labelled **Modelled**, never Observed, and gives no estimate more than 12 days from a pass, so it never forecasts.
+
+- **Validation (leave-one-pass-out, Assam + Thailand).** Each pass was hidden and predicted from the others. Blending beat copying the nearest pass on **17 of 20** passes (2 ties; sign test p = 0.0013), mean IoU 0.472 vs 0.423.
+- **Negative result.** We also built a per-pixel hidden Markov flood-state model driven by rain and terrain (`src/nisarflood/tracker.py`). Fitted on Thailand it helped in Assam, but fitted on Assam it failed in Thailand (0 of 7), and a physically constrained version was worse in both directions. It is not deployed.
+
+## Map any region
+
+`scripts/map_region.py` maps any area, two ways:
+
+- **From NISAR:** `python scripts/map_region.py --name mytown --bbox W S E N --date 2026-11-04` finds the best-covering pass within ±1 day and at least two earlier passes on the same track, streams only the subset and maps it.
+- **From your own files:** `--upload after_2026-11-04.tif --refs before_2026-10-11.tif before_2026-10-23.tif`. Uploads are checked before use: a projected CRS (not lat/lon), 1–30 m pixels, HH and HV bands, plausible backscatter (dB is converted), dates in the file names, references dated before the flood scene, and at least 50% overlap.
+
+Outputs: a GeoTIFF (class and probability), a GeoJSON of confident flood, a quicklook PNG and a summary marked *not validated for this region*. The same thing runs in a free notebook: [`notebooks/map_any_region.ipynb`](notebooks/map_any_region.ipynb) (open in Colab; asks for your free NASA Earthdata login).
 
 ## Method
 
@@ -59,7 +95,8 @@ Every layer carries one of the labels *Observed / Modelled / Predicted / Exposed
 - **Revisit.** NISAR is not real-time. Here, two tracks give a pass every ~3 days. A flash flood can drain between passes. In Valencia (DANA, Oct 2026) the only post-event pass came 4 days later, and its swath edge missed most of the area mapped by Copernicus EMS (EMSR935). We report this as a limitation, not a result.
 - **Paddies.** July is Sali rice transplanting season. Some newly flooded paddies count as "new water", so the 22 Jul figures are upper bounds. The 15 Aug map (290 km², with paddies still flooded) caps that share.
 - **Exposure ≠ damage.** Our 3.2–6.6 lakh people *living inside* the 22 Jul flood extent compares with the Assam University report of ~2.12 lakh *displaced*. Displaced people are a subset of those living inside the extent.
-- **Urban flooding.** Water between buildings cannot be mapped reliably from backscatter alone. Coherence from NISAR GSLC/GUNW products is the next step.
+- **Urban flooding.** Water between buildings cannot be mapped reliably from backscatter alone. This matters most in Chennai, where open water shows up in tanks, lakes, marshland (Pallikaranai) and the city's edges. Coherence from NISAR GUNW products (also in the Urgent Response stream) is the next step.
+- **Live monitor dependencies.** The 3-hourly job needs a NASA Earthdata login stored as repository secrets. GitHub pauses scheduled jobs after 60 days without commits; each new map is a commit, so an active season keeps it running.
 - **Provisional NISAR products.** In GCOV, the HH–VV phase calibration stored in the metadata (+63°) is not applied to the data. Once it is applied, 7 Jul behaves physically: built-up areas show double bounce, with 40% of pixels above 90° phase against ~19% elsewhere. However, 24 Aug shows an extra ~180° ambiguity. JalDrishti therefore does not depend on co-pol phase.
 - **Validation sources.** NRSC/Bhuvan and ASDMA products could not be accessed. Validation uses Sentinel-2, Sentinel-1 and Copernicus EMS.
 
@@ -79,10 +116,12 @@ python scripts/export_web.py assam data/processed/flood/assam_v2               #
 cd web && npm install && npm run dev
 ```
 
-Other events work the same way: they are defined in `src/nisarflood/events.py`.
+Other events work the same way: they are defined in `src/nisarflood/events.py`. Regions mapped with `map_region.py` are added from `data/regions/`.
+
+Live monitor: `python scripts/build_refpack.py chennai --model models/lgbm_chennai_C_adapt.txt` builds the reference pack (published as the `livepack` release), and `python scripts/live_update.py chennai` checks for and maps new passes (`--check-only` lists them with their latency). Tests: `python -m pytest -q tests`.
 
 ## Data and credits
 
-NISAR data: NASA/JPL and ISRO, distributed by ASF DAAC. Sentinel-1 RTC, Sentinel-2 L2A, Copernicus GLO-30, ESA WorldCover and JRC GSW were accessed via Microsoft Planetary Computer. ASF GLO-30 HAND. WorldPop 2025. OpenStreetMap contributors. geoBoundaries. Copernicus EMS EMSR935. Basemaps by Esri.
+NISAR data: NASA/JPL and ISRO, distributed by ASF DAAC. Sentinel-1 RTC, Sentinel-2 L2A, Copernicus GLO-30, ESA WorldCover and JRC GSW were accessed via Microsoft Planetary Computer. ASF GLO-30 HAND. WorldPop 2025. OpenStreetMap contributors. geoBoundaries. Copernicus EMS EMSR935. Rainfall: ERA5 via Open-Meteo. Basemaps by Esri.
 
 **Team JalWar:** Thrinayani P · Thrijagathi P · Minhaj Parveen H · Nilani S · Haseena F

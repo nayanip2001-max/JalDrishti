@@ -1,0 +1,315 @@
+{
+ "fit_on": "assam",
+ "test": "thailand",
+ "factor": 10,
+ "version": 2,
+ "theta": {
+  "a0 recession": -0.8249,
+  "a1 recession\u00d7log HAND": 0.0593,
+  "b0 onset": -11.5708,
+  "b1 onset\u00d7log HAND": -2.1169,
+  "b2 onset\u00d7rain": 6.5923,
+  "w evidence weight": 1.0,
+  "c evidence offset": -3.8918
+ },
+ "fit_logloss": 0.12094489732968708,
+ "passes": {
+  "T004_2026-09-30": {
+   "date": "2026-09-30",
+   "track": 4,
+   "nearest_other_pass_days": 0,
+   "gap-fill: tracker": {
+    "IoU": 0.054,
+    "precision": 0.055,
+    "recall": 0.909,
+    "n": 60103,
+    "flood_cells": 886
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.451,
+    "precision": 0.641,
+    "recall": 0.604,
+    "n": 60103,
+    "flood_cells": 886
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.479,
+    "precision": 0.668,
+    "recall": 0.629,
+    "n": 60103,
+    "flood_cells": 886
+   },
+   "nowcast: tracker": {
+    "IoU": 0.027,
+    "precision": 0.028,
+    "recall": 0.374,
+    "n": 60103,
+    "flood_cells": 886
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.453,
+    "precision": 0.641,
+    "recall": 0.607,
+    "n": 60103,
+    "flood_cells": 886
+   }
+  },
+  "T004_2026-10-12": {
+   "date": "2026-10-12",
+   "track": 4,
+   "nearest_other_pass_days": 0,
+   "gap-fill: tracker": {
+    "IoU": 0.403,
+    "precision": 0.576,
+    "recall": 0.573,
+    "n": 62300,
+    "flood_cells": 674
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.496,
+    "precision": 0.58,
+    "recall": 0.773,
+    "n": 62300,
+    "flood_cells": 674
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.509,
+    "precision": 0.583,
+    "recall": 0.8,
+    "n": 62300,
+    "flood_cells": 674
+   },
+   "nowcast: tracker": {
+    "IoU": 0.273,
+    "precision": 0.557,
+    "recall": 0.349,
+    "n": 62300,
+    "flood_cells": 674
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.498,
+    "precision": 0.583,
+    "recall": 0.773,
+    "n": 62300,
+    "flood_cells": 674
+   }
+  },
+  "T011_2026-09-30": {
+   "date": "2026-09-30",
+   "track": 11,
+   "nearest_other_pass_days": 0,
+   "gap-fill: tracker": {
+    "IoU": 0.118,
+    "precision": 0.121,
+    "recall": 0.826,
+    "n": 112064,
+    "flood_cells": 3693
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.427,
+    "precision": 0.847,
+    "recall": 0.463,
+    "n": 112064,
+    "flood_cells": 3693
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.632,
+    "precision": 0.894,
+    "recall": 0.683,
+    "n": 112064,
+    "flood_cells": 3693
+   },
+   "nowcast: tracker": {
+    "IoU": 0.021,
+    "precision": 0.027,
+    "recall": 0.099,
+    "n": 112064,
+    "flood_cells": 3693
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.424,
+    "precision": 0.848,
+    "recall": 0.459,
+    "n": 112064,
+    "flood_cells": 3693
+   }
+  },
+  "T011_2026-10-12": {
+   "date": "2026-10-12",
+   "track": 11,
+   "nearest_other_pass_days": 0,
+   "gap-fill: tracker": {
+    "IoU": 0.42,
+    "precision": 0.847,
+    "recall": 0.454,
+    "n": 113578,
+    "flood_cells": 3648
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.754,
+    "precision": 0.801,
+    "recall": 0.928,
+    "n": 113578,
+    "flood_cells": 3648
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.761,
+    "precision": 0.804,
+    "recall": 0.935,
+    "n": 113578,
+    "flood_cells": 3648
+   },
+   "nowcast: tracker": {
+    "IoU": 0.058,
+    "precision": 0.548,
+    "recall": 0.061,
+    "n": 113578,
+    "flood_cells": 3648
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.754,
+    "precision": 0.801,
+    "recall": 0.928,
+    "n": 113578,
+    "flood_cells": 3648
+   }
+  },
+  "T112_2026-09-25": {
+   "date": "2026-09-25",
+   "track": 112,
+   "nearest_other_pass_days": 5,
+   "gap-fill: tracker": {
+    "IoU": 0.062,
+    "precision": 0.062,
+    "recall": 1.0,
+    "n": 60891,
+    "flood_cells": 3745
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.347,
+    "precision": 0.483,
+    "recall": 0.553,
+    "n": 60891,
+    "flood_cells": 3745
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.571,
+    "precision": 0.739,
+    "recall": 0.716,
+    "n": 60891,
+    "flood_cells": 3745
+   },
+   "nowcast: tracker": {
+    "IoU": 0.062,
+    "precision": 0.062,
+    "recall": 1.0,
+    "n": 60891,
+    "flood_cells": 3745
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.29,
+    "precision": 0.782,
+    "recall": 0.316,
+    "n": 60891,
+    "flood_cells": 3745
+   }
+  },
+  "T112_2026-10-07": {
+   "date": "2026-10-07",
+   "track": 112,
+   "nearest_other_pass_days": 5,
+   "gap-fill: tracker": {
+    "IoU": 0.261,
+    "precision": 0.425,
+    "recall": 0.404,
+    "n": 60827,
+    "flood_cells": 6403
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.706,
+    "precision": 0.831,
+    "recall": 0.824,
+    "n": 60827,
+    "flood_cells": 6403
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.814,
+    "precision": 0.872,
+    "recall": 0.925,
+    "n": 60827,
+    "flood_cells": 6403
+   },
+   "nowcast: tracker": {
+    "IoU": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "n": 60827,
+    "flood_cells": 6403
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.683,
+    "precision": 0.808,
+    "recall": 0.815,
+    "n": 60827,
+    "flood_cells": 6403
+   }
+  },
+  "T112_2026-10-19": {
+   "date": "2026-10-19",
+   "track": 112,
+   "nearest_other_pass_days": 7,
+   "gap-fill: tracker": {
+    "IoU": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "n": 62166,
+    "flood_cells": 7772
+   },
+   "gap-fill: nearest pass": {
+    "IoU": 0.863,
+    "precision": 0.911,
+    "recall": 0.942,
+    "n": 62166,
+    "flood_cells": 7772
+   },
+   "gap-fill: linear interpolation": {
+    "IoU": 0.863,
+    "precision": 0.911,
+    "recall": 0.942,
+    "n": 62166,
+    "flood_cells": 7772
+   },
+   "nowcast: tracker": {
+    "IoU": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "n": 62166,
+    "flood_cells": 7772
+   },
+   "nowcast: carry last forward": {
+    "IoU": 0.863,
+    "precision": 0.911,
+    "recall": 0.942,
+    "n": 62166,
+    "flood_cells": 7772
+   }
+  }
+ },
+ "mean": {
+  "gap-fill: tracker": {
+   "mean IoU": 0.188
+  },
+  "gap-fill: nearest pass": {
+   "mean IoU": 0.578
+  },
+  "gap-fill: linear interpolation": {
+   "mean IoU": 0.661
+  },
+  "nowcast: tracker": {
+   "mean IoU": 0.063
+  },
+  "nowcast: carry last forward": {
+   "mean IoU": 0.566
+  }
+ }
+}

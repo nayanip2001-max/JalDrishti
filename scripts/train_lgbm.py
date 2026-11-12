@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import numpy as np, rasterio, lightgbm as lgb
 from nisarflood.stack import scenes, load
 from nisarflood.features import build
-from nisarflood.evaluate import evaluate, otsu
+from nisarflood.evaluate import evaluate, otsu, sea_mask
 from nisarflood.events import EVENTS
 
 AOI, BLOCK = "assam", 128  # training event; test pairs may name another event
@@ -54,12 +54,16 @@ def pair_data(spec):
     anc, all_sc = event_data(aoi)
     if (aoi, track) not in _refs:
         last_pre = EVENTS[aoi]["last_pre"]
-        _refs[(aoi, track)] = [load(s, aoi) for s in all_sc if s["track"] == track and s["date"] <= last_pre]
+        _refs[(aoi, track)] = {s["date"]: load(s, aoi) for s in all_sc if s["track"] == track and s["date"] <= last_pre}
     post = load(next(s for s in all_sc if s["track"] == track and s["date"] == nd), aoi)
-    X, names, valid = build(post, _refs[(aoi, track)], anc)
+    # A pair dated inside the reference period is never compared with itself.
+    refs = [r for d, r in _refs[(aoi, track)].items() if d != nd]
+    X, names, valid = build(post, refs, anc)
     keep = [i for i, n in enumerate(names) if n not in drop]
     lab = rasterio.open(f"data/processed/labels/{aoi}/s2_{s2d}.tif").read(1)
     mask = valid & (lab > 0) & (np.nan_to_num(anc["slope"]) < 10)
+    if EVENTS[aoi].get("coast"):
+        mask &= ~sea_mask(anc["worldcover"], EVENTS[aoi]["coast"])
     return X[..., keep], [names[i] for i in keep], lab == 2, mask, post["HHHH"], anc["hand"]
 
 

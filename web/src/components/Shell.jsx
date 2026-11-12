@@ -1,11 +1,10 @@
 // Layout pieces around the map: navigation rail, contextual drawer and the map legend.
 import { Icon } from './ui.jsx'
-import { NAV } from '../lib/modes.js'
 
-export function NavRail({ mode, section, onSection }) {
+export function NavRail({ items, section, onSection }) {
   return (
     <nav className="rail" aria-label="Sections">
-      {NAV[mode].map((n) => (
+      {items.map((n) => (
         <button key={n.id} className={section === n.id ? 'on' : ''} onClick={() => onSection(n.id)} aria-current={section === n.id ? 'page' : undefined}>
           <Icon name={n.icon} size={20} />
           <span>{n.label}</span>
@@ -28,7 +27,7 @@ export function Drawer({ title, crumb, onBack, onClose, open, children }) {
   )
 }
 
-export function MapLegend({ manifest, layers, mode, scene }) {
+export function MapLegend({ manifest, layers, mode, scene, modelDay }) {
   const simple = mode === 'beginner'
   const cls = [
     ['3', simple ? 'Flood' : 'Flood (open water)'], ['5', simple ? 'Flood under plants' : 'Flooded vegetation'],
@@ -38,7 +37,8 @@ export function MapLegend({ manifest, layers, mode, scene }) {
   const cmp = manifest.sensor_compare && layers.compare && scene.date === manifest.sensor_compare.date
   return (
     <div className="legend-float">
-      {layers.flood && cls.map(([k, l]) => <span key={k}><i style={{ background: manifest.classes[k].color }} />{l}</span>)}
+      {modelDay && <span><i style={{ background: 'linear-gradient(90deg,#2dd4bf33,#2dd4bf)' }} />Modelled flood (likelihood, not observed)</span>}
+      {layers.flood && !modelDay && cls.map(([k, l]) => <span key={k}><i style={{ background: manifest.classes[k].color }} />{l}</span>)}
       {cmp && <><span><i style={{ background: '#d946ef' }} />Only NISAR</span><span><i style={{ background: '#fb923c' }} />Only Sentinel-1</span><span><i style={{ background: '#22d3ee' }} />Both</span></>}
       {layers.cropland && <span><i style={{ background: '#84cc16' }} />Cropland</span>}
       {layers.population && <span><i style={{ background: 'linear-gradient(90deg,#312e81,#db2777,#fef08a)' }} />People/km² (low → high)</span>}

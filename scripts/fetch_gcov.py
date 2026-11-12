@@ -1,4 +1,8 @@
-"""Subset NISAR GCOV scenes for one event's tracks (science 'PR' products only).
+"""Subset NISAR GCOV scenes for one event's tracks.
+
+Science products ('PR') are preferred. Where none exists yet, the low-latency Urgent
+Response product ('UR', hours after the pass instead of days) is used and saved with a
+'_UR' suffix; once the science product appears it is fetched too and takes precedence.
 
 Usage: fetch_gcov.py <event> [comma-separated tracks]
 """
@@ -9,12 +13,14 @@ import asf_search as asf, earthaccess
 from shapely.geometry import box
 from nisarflood.aoi import AOIS, utm_bounds
 from nisarflood.events import EVENTS
-from nisarflood.gcov import subset
+from nisarflood.gcov import subset, best_products
 
 EVENT = sys.argv[1]
 ev = EVENTS[EVENT]
 TRACKS = {int(t) for t in sys.argv[2].split(",")} if len(sys.argv) > 2 else set(ev["tracks"])
 start, end = ev["fetch"]
+if end is None:  # open-ended (live) event: up to now
+    import datetime as _dt; end = (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(days=1)).strftime("%Y-%m-%d")
 
 out = Path(f"data/processed/gcov/{EVENT}"); out.mkdir(parents=True, exist_ok=True)
 tag = "-".join(map(str, sorted(TRACKS)))
@@ -33,14 +39,7 @@ earthaccess.login(strategy="netrc")
 bounds = utm_bounds(EVENT)
 r = asf.search(dataset=asf.DATASET.NISAR, processingLevel="GCOV",
                intersectsWith=box(*AOIS[EVENT]["bounds"]).wkt, start=start, end=end, maxResults=500)
-scenes = {}
-for g in r:
-    p = g.properties
-    if "_PR_" not in p["sceneName"] or p["pathNumber"] not in TRACKS:
-        continue
-    key = (p["pathNumber"], p["startTime"][:10])
-    if key not in scenes or p["sceneName"] > scenes[key]["sceneName"]:  # keep latest reprocessing
-        scenes[key] = p
+scenes, _ = best_products([g.properties for g in r], TRACKS)
 log = out / f"manifest_T{tag}.csv"
 new = not log.exists()
 with open(log, "a", newline="") as fh:
@@ -49,7 +48,8 @@ with open(log, "a", newline="") as fh:
         w.writerow(["track", "date", "mode", "file", "bands", "granule"])
     for (track, date), p in sorted(scenes.items()):
         mode = p["sceneName"].split("_")[9]
-        dst = out / f"T{track:03d}_{date}_{mode}.tif"
+        ur = "_UR" if p["sceneName"].split("_")[2] == "UR" else ""
+        dst = out / f"T{track:03d}_{date}_{mode}{ur}.tif"
         if dst.exists():
             continue
         t = time.time()

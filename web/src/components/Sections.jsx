@@ -3,6 +3,7 @@
 import { Card, Metric, Badge, Explain, Note, KV, LayerToggle, Seg, LinkButton, Icon } from './ui.jsx'
 import { RangeBars, ProbHistogram, TrackLines, ChartLegend } from './Charts.jsx'
 import { atLeast } from '../lib/modes.js'
+import { ModelledCard } from './Modelled.jsx'
 import { fmtDate, fmtDateLong, floodKm2, possibleKm2, num, range, people, pct, posts, peakOf, prevSameTrack, phaseOf, trackColor, meanSelected } from '../lib/format.js'
 
 const CLASS_COLORS = { flood: 'var(--flood)', veg: 'var(--veg)', possible: 'var(--possible)', perm: 'var(--perm)' }
@@ -196,6 +197,7 @@ export function TemporalView({ ctx }) {
         <ChartLegend items={tracks.map((tr) => ({ label: `Track ${tr}`, color: trackColor(tracks, tr) })).concat(m.rainfall && atLeast(mode, 'intermediate') ? [{ label: 'Daily rain', color: '#64748b' }] : [])} />
         {mode !== 'beginner' && <p className="muted small">Each orbit track sees a different footprint, so compare points along the same line.</p>}
       </Card>
+      <ModelledCard ctx={ctx} />
       <Card title={mode === 'beginner' ? 'Pick a day' : 'All passes'}>
         <table className="tbl clickable">
           <thead><tr><th>Date</th>{mode !== 'beginner' && <th>Track</th>}<th>Flood km²</th>{atLeast(mode, 'intermediate') && <th>Possible</th>}</tr></thead>

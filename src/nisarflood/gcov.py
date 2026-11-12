@@ -75,3 +75,23 @@ def subset(url, bounds, out_path, res=20):
         for i, n in enumerate(names, 1):
             dst.set_band_description(i, n)
     return out_path, names
+
+
+def best_products(props, tracks):
+    """One product per (track, date) from ASF search results' properties.
+
+    Science products ('PR') win over Urgent Response ('UR', low latency); among equals the latest
+    reprocessing (lexically greatest scene name) wins. Other product types are ignored.
+    Returns {(track, date): properties} and {(track, date): [every scene name]}.
+    """
+    best, every = {}, {}
+    for p in props:
+        kind = p["sceneName"].split("_")[2]
+        if kind not in ("PR", "UR") or p["pathNumber"] not in tracks:
+            continue
+        key = (p["pathNumber"], p["startTime"][:10])
+        every.setdefault(key, []).append(p["sceneName"])
+        rank = (kind == "PR", p["sceneName"])
+        if key not in best or rank > (best[key]["sceneName"].split("_")[2] == "PR", best[key]["sceneName"]):
+            best[key] = p
+    return best, every

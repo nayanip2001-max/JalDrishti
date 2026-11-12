@@ -19,6 +19,7 @@ from PIL import Image
 from nisarflood.webgrid import WebGrid, enc, save_sar
 from nisarflood.stack import scenes, load
 from nisarflood.events import EVENTS
+from nisarflood.webexport import SCALE, obs_meta, pass_extras
 
 AOI, SRC = sys.argv[1], Path(sys.argv[2])
 STATIC_ONLY = "--static-only" in sys.argv  # rebuild lookups/overlays/cards without re-reading the radar
@@ -34,46 +35,16 @@ rd = lambda n: rasterio.open(anc_dir / f"{n}.tif").read(1)
 
 WORLDCOVER = {10: "Tree cover", 20: "Shrubland", 30: "Grassland", 40: "Cropland", 50: "Built-up", 60: "Bare / sparse",
               70: "Snow and ice", 80: "Permanent water", 90: "Herbaceous wetland", 95: "Mangroves", 100: "Moss and lichen"}
-SCALE = {"hh_db": [-30, 5], "hv_db": [-35, 0], "hand_m": [0, 60], "slope_deg": [0, 45], "jrc_pct": [0, 100],
-         "pop_log10_per_km2": [0, 4.5]}
-
-# ---- NISAR acquisition metadata, from the fetch manifests -------------------------------------------
-granules = {}
-for f in Path(f"data/processed/gcov/{AOI}").glob("manifest_T*.csv"):
-    for r in csv.DictReader(open(f)):
-        granules[(int(r["track"]), r["date"])] = r["granule"]
-POLS = {"DHDH": ["HH", "HV"], "QPDH": ["HH", "HV", "VH", "VV"]}
-NATIVE = {"DHDH": "10 m (multilooked 2×2 to 20 m)", "QPDH": "20 m"}
-
 # ---- per pass ----------------------------------------------------------------------------------------
 by_key = {(s["track"], s["date"]): s for s in scenes(AOI)}
 px_km2 = abs(G.transform.a * G.transform.e) / 1e6
 for sc in ([] if STATIC_ONLY else m["scenes"]):
-    g = granules.get((sc["track"], sc["date"]))
-    tok = g.split("_") if g else []
-    # NISAR_L2_PR_GCOV_<cycle>_<track>_<A|D>_<frame>_...
-    sc["obs"] = {"granule": g, "direction": {"A": "Ascending", "D": "Descending"}.get(tok[6]) if g else None,
-                 "frame": int(tok[7]) if g else None, "polarisations": POLS.get(sc.get("mode") or "", ["HH", "HV"]),
-                 "native_resolution": NATIVE.get(sc.get("mode") or "", "—"), "product": "NISAR L2 GCOV (provisional v1), frequency A",
-                 "quantity": "RTC γ⁰ (terrain-flattened backscatter), dB", "processing": "20 m grid, 5×5 Lee filter",
-                 "asf_url": f"https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList={g}" if g else None}
+    sc["obs"] = obs_meta(by_key.get((sc["track"], sc["date"]), {}).get("granule"), sc.get("mode"))
     if sc["kind"] != "post":
         continue
     with rasterio.open(SRC / f"{sc['id']}.tif") as r:
         L = {d: r.read(i + 1) for i, d in enumerate(r.descriptions)}
-    cls = L["class"]
-    valid = cls > 0
-    counts, _ = np.histogram(L["p_flood"][valid], bins=20, range=(0, 1))
-    conf = np.isin(cls, (3, 5)).sum(); poss = np.isin(cls, (4, 6)).sum()
-    sc["prob_hist"] = {"bins": 20, "km2": [round(float(c * px_km2), 1) for c in counts],
-                       "confident_share": round(float(conf / max(conf + poss, 1)), 3)}
-    rad = load(by_key[(sc["track"], sc["date"])], AOI)
-    f = 4
-    ev3 = np.stack([enc(G.warp(rad["HHHH"], Resampling.average, factor=f), *SCALE["hh_db"]),
-                    enc(G.warp(rad["HVHV"], Resampling.average, factor=f), *SCALE["hv_db"]),
-                    (G.warp(cls.astype(np.uint8), Resampling.nearest, nodata=0, factor=f) * 32).astype(np.uint8)], -1)
-    Image.fromarray(ev3, "RGB").save(web / "ev" / f"{sc['id']}_3.png", optimize=True)
-    sc["ev3"] = f"ev/{sc['id']}_3.png"
+    pass_extras(G, web, sc, L, load(by_key[(sc["track"], sc["date"])], AOI), px_km2)
     print("pass", sc["id"], flush=True)
 
 # ---- reference passes: the before/after "before" image uses every reference pass of the flood passes --
@@ -131,7 +102,8 @@ m["impact_layers"] = {"cropland": "impact/cropland.webp", "population": "impact/
 m["class_scale"] = 32  # ev3 blue channel = class code × 32
 
 # ---- model card -----------------------------------------------------------------------------------------
-card = json.loads(Path("outputs/eval/" + ("lgbm_final_rel02.json" if AOI == "assam" else "lgbm_adapt_th.json")).read_text())
+card = json.loads(Path("outputs/eval/" + {"assam": "lgbm_final_rel02.json", "chennai": "lgbm_chennai_C_adapt.json"}
+                       .get(AOI, "lgbm_adapt_th.json")).read_text())
 FEATURES = {
     "hh_rel_p50": "HH backscatter relative to the scene median (dB): dark compared with this scene's typical land",
     "hh_rel_p10": "HH backscatter relative to the scene's darkest 10% (dB): how water-like, scene-normalised",
@@ -164,6 +136,8 @@ m["model"] = {
 # ---- timeline events and rainfall -----------------------------------------------------------------------
 m["event"]["timeline"] = ev.get("timeline", [])
 w0, w1 = ev["window"]
+# The archive cannot be asked about the future (live events run to the end of the season); recent days come back null.
+w1 = min(w1, (__import__("datetime").date.today() - __import__("datetime").timedelta(days=1)).isoformat())
 lon0, lat0, lon1, lat1 = ev["bounds"]
 lats = np.linspace(lat0 + 0.1, lat1 - 0.1, 3); lons = np.linspace(lon0 + 0.1, lon1 - 0.1, 3)
 r = requests.get("https://archive-api.open-meteo.com/v1/archive", timeout=120, headers={"User-Agent": "JalDrishti/0.1"},

@@ -11,7 +11,8 @@ import numpy as np
 import rasterio
 from rasterio.warp import Resampling, transform_bounds
 from PIL import Image
-from nisarflood.webgrid import WebGrid, enc, save_sar
+from nisarflood.webgrid import WebGrid, save_sar
+from nisarflood.webexport import COLORS, pass_images
 from nisarflood.stack import scenes, load
 from nisarflood.detect import CLASSES
 from nisarflood.events import EVENTS
@@ -21,11 +22,6 @@ src_dir = Path(sys.argv[2] if len(sys.argv) > 2 else f"data/processed/flood/{AOI
 web = Path(f"web/public/data/{AOI}")
 for sub in ("cls", "prob", "sar", "ev"):
     (web / sub).mkdir(parents=True, exist_ok=True)
-
-# Confident classes are near-opaque; "possible"/"uncertain" stay visible but recede, so the map reads
-# confident flood first without hiding uncertainty.
-COLORS = {0: (0, 0, 0, 0), 1: (0, 0, 0, 0), 2: (30, 64, 175, 170), 3: (34, 211, 238, 240),
-          4: (245, 158, 11, 105), 5: (167, 139, 250, 240), 6: (217, 70, 239, 95), 7: (148, 163, 184, 70)}
 
 G = WebGrid(AOI)
 warp = G.warp
@@ -40,7 +36,7 @@ summary = json.loads((src_dir / "summary.json").read_text())
 ev = EVENTS[AOI]
 EVENT = {"title": ev["title"], "subtitle": ev["subtitle"], "country": ev["country"], "context": ev["context"],
          "caveat": ev.get("caveat"),
-         "window": list(ev["window"]), "marker": ev["marker"],
+         "window": list(ev["window"]), "marker": ev["marker"], "live": bool(ev.get("live")),
          "phases": [{"name": n, "from": a, "to": b, "color": c} for n, a, b, c in ev["phases"]]}
 manifest = {"aoi": {"id": AOI, "corners": corners, "bounds": [lon0, lat0, lon1, lat1]}, "event": EVENT,
             "classes": {str(k): {"name": v, "color": "#%02x%02x%02x" % COLORS[k][:3]} for k, v in CLASSES.items()},
@@ -51,34 +47,11 @@ for rec in summary:
     name = f"T{rec['track']:03d}_{rec['date']}" + ("_nullTest" if rec["kind"] == "null_test" else "")
     with rasterio.open(src_dir / f"{name}.tif") as r:
         L = {d: r.read(i + 1) for i, d in enumerate(r.descriptions)}
-    cls = warp(L["class"].astype(np.uint8), Resampling.nearest, nodata=0)
-    rgba = np.zeros(cls.shape + (4,), np.uint8)
-    for k, c in COLORS.items():
-        rgba[cls == k] = c
-    Image.fromarray(rgba, "RGBA").save(web / "cls" / f"{name}.webp", "WEBP", lossless=True, method=6)
-
-    p = warp(L["p_flood"], Resampling.average, factor=2)
-    pr = np.zeros(p.shape + (4,), np.uint8)
-    pv = np.nan_to_num(p)
-    pr[..., 0] = enc(pv, 0, 1); pr[..., 1] = (80 + 120 * pv).astype(np.uint8); pr[..., 2] = 255
-    pr[..., 3] = (np.clip((pv - 0.15) / 0.85, 0, 1) * 230).astype(np.uint8)
-    Image.fromarray(pr, "RGBA").save(web / "prob" / f"{name}.webp", "WEBP", quality=70, alpha_quality=60, method=6)
-
-    f = 4  # evidence at 100 m is plenty for a click-to-explain card (and it only loads on click)
-    ev1 = np.stack([enc(warp(L["l_now"], Resampling.average, factor=f), -8, 8),
-                    enc(warp(L["l_before"], Resampling.average, factor=f), -8, 8),
-                    enc(warp(L["l_hand"] + L["l_slope"], Resampling.average, factor=f), -12, 4)], -1)
-    ev2 = np.stack([enc(warp(L["p_open"], Resampling.average, factor=f), 0, 1),
-                    enc(warp(L["p_veg"], Resampling.average, factor=f), 0, 1),
-                    enc(warp(L["d_hh"], Resampling.average, factor=f), -15, 15)], -1)
-    Image.fromarray(ev1, "RGB").save(web / "ev" / f"{name}_1.png", optimize=True)
-    Image.fromarray(ev2, "RGB").save(web / "ev" / f"{name}_2.png", optimize=True)
+    imgs = pass_images(G, web, name, L)
     manifest["scenes"].append({"id": name, **{k: rec[k] for k in ("track", "date", "kind", "refs")},
                                "mode": rec.get("mode"), "areas_km2": rec["areas_km2"], "exposure": rec.get("exposure"),
                                "method": rec.get("method"),
-                               "cls": f"cls/{name}.webp", "prob": f"prob/{name}.webp",
-                               "sar": f"sar/T{rec['track']:03d}_{rec['date']}.webp",
-                               "ev": [f"ev/{name}_1.png", f"ev/{name}_2.png"]})
+                               **imgs, "sar": f"sar/T{rec['track']:03d}_{rec['date']}.webp"})
     print("exported", name)
 
 # SAR backdrops: every scene's HH, plus each track's pre-event reference median.
@@ -142,6 +115,21 @@ elif AOI == "thailand" and Path("outputs/eval/lgbm_adapt_th.json").exists():
            "rules": {"JalDrishti hybrid (adapted)": {f: pick(a["hybrid"])}, "ML, adapted with 1 local scene": {f: pick(a["lgbm"])},
                      "ML, Assam-only (no adaptation)": {f: pick(t["lgbm"])}, "Fixed threshold −15 dB": {f: pick(a["HH < -15 dB"])}},
            "selected": "JalDrishti hybrid (adapted)"}
+elif AOI == "chennai" and Path("outputs/eval/lgbm_chennai_C_adapt.json").exists():
+    ev_ = lambda tag: json.loads(Path(f"outputs/eval/lgbm_{tag}.json").read_text())["test"]
+    C, A, B = ev_("chennai_C_adapt"), ev_("chennai_A_assam"), ev_("chennai_B_thailand")
+    monsoon = {"chennai@84:2026-10-30:2026-10-31": "30 Oct T84", "chennai@156:2026-11-04:2026-11-05": "4 Nov T156",
+               "chennai@84:2026-11-11:2026-11-10": "11 Nov T84 (UR)"}
+    val = {"protocol": "Model trained in Assam plus ONE automatically labelled Chennai dry-season scene (14 Jul, T84), fixed "
+                       "before any Chennai result was seen; scored on northeast-monsoon passes it never saw, including the other "
+                       "track (T156). Reference: Sentinel-2 cloud-free open water within a day; open sea excluded. "
+                       "Dry-season dates (small tanks) score IoU 0.13-0.25 for every method.",
+           "rules": {"JalDrishti hybrid (adapted)": {f: pick(C[k]["hybrid"]) for k, f in monsoon.items()},
+                     "Hybrid, Thailand-adapted model": {f: pick(B[k]["hybrid"]) for k, f in monsoon.items()},
+                     "Hybrid, Assam-only model": {f: pick(A[k]["hybrid"]) for k, f in monsoon.items()},
+                     "Fixed threshold −15 dB": {f: pick(C[k]["HH < -15 dB"]) for k, f in monsoon.items()},
+                     "Otsu threshold": {f: pick(C[k]["Otsu(HH)"]) for k, f in monsoon.items()}},
+           "selected": "JalDrishti hybrid (adapted)"}
 if val:
     val["null_tests"] = [{"track": r["track"], "date": r["date"], "refs": r["refs"],
                           "false_flood_km2": round(r["areas_km2"]["flood (open water)"] + r["areas_km2"]["flooded vegetation"], 1),
@@ -155,7 +143,7 @@ idx = json.loads(idx_path.read_text()) if idx_path.exists() else []
 peak = max((sc for sc in manifest["scenes"] if sc["kind"] == "post"), key=lambda sc: sc["areas_km2"]["flood (open water)"], default=None)
 entry = {"id": AOI, "title": EVENT["title"], "subtitle": EVENT["subtitle"], "country": EVENT["country"],
          "center": [(lon0 + lon1) / 2, (lat0 + lat1) / 2],
-         "peak_km2": peak and round(peak["areas_km2"]["flood (open water)"] + peak["areas_km2"]["flooded vegetation"])}
+         "live": bool(ev.get("live")), "peak_km2": peak and round(peak["areas_km2"]["flood (open water)"] + peak["areas_km2"]["flooded vegetation"])}
 idx = [e for e in idx if e["id"] != AOI] + [entry]
 order = list(EVENTS)
 idx_path.write_text(json.dumps(sorted(idx, key=lambda e: order.index(e["id"])), indent=1))

@@ -1,0 +1,73 @@
+name: Live NISAR flood monitor
+
+# Every 3 hours: look for new NISAR passes over live events, map them, publish the site.
+# The site is rebuilt on every check so "last checked" and the map's age stay honest even
+# when NISAR has not passed over; new maps are also committed so the history persists.
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: live-monitor
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-live.txt
+      - run: pip install -r requirements-live.txt
+      - name: Reference packs (pre-flood medians, terrain, model) from the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/pack data/live
+          gh release download livepack --pattern 'chennai.zip' --dir /tmp/pack
+          unzip -q /tmp/pack/chennai.zip -d data/live/
+      - id: live
+        name: Check NISAR and map new passes
+        env:
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
+          PYTHONIOENCODING: utf-8
+        run: python scripts/live_update.py chennai
+      - name: Commit new maps
+        if: steps.live.outputs.new != '' && steps.live.outputs.new != '0'
+        run: |
+          git config user.name "jaldrishti-live[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data/chennai
+          git commit -m "Live: ${{ steps.live.outputs.new }} new NISAR pass(es) mapped over Chennai"
+          git pull --rebase && git push
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci && npm run build
+        working-directory: web
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: watch
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

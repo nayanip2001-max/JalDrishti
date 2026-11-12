@@ -1,0 +1,14 @@
+# Live monitor (GitHub Actions) and "map any region" tool: versions pinned to the tested environment.
+asf_search==14.1.0
+earthaccess==0.19.0
+fsspec==2026.9.0
+geopandas==1.2.0
+h5py==3.16.0
+lightgbm==4.7.0
+numpy==2.5.4
+pillow==13.0.0
+pyproj==3.8.0
+rasterio==1.5.2
+requests==2.34.2
+scipy==1.18.1
+shapely==2.2.0

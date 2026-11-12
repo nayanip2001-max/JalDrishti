@@ -1,0 +1,145 @@
+{
+ "event": "chennai",
+ "passes": [
+  {
+   "granule": "NISAR_L2_PR_GCOV_033_084_A_008_4005_DHDH_A_20261018T001627_20261018T001701_P05023_N_F_J_001",
+   "track": 84,
+   "date": "2026-10-18",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-10-18T00:16:27Z",
+   "available": "2026-10-20T02:23:15Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-10-20T02:23:15Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 50.11,
+    "acquired_to_first_product": 50.11
+   }
+  },
+  {
+   "granule": "NISAR_L2_PR_GCOV_033_149_D_082_4005_DHDH_A_20261022T131102_20261022T131134_P05036_N_F_J_001",
+   "track": 149,
+   "date": "2026-10-22",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-10-22T13:11:02Z",
+   "available": "2026-11-07T05:14:05Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-11-07T05:14:05Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 376.05,
+    "acquired_to_first_product": 376.05
+   }
+  },
+  {
+   "granule": "NISAR_L2_PR_GCOV_033_156_A_008_4005_DHDH_A_20261023T000826_20261023T000842_P05036_N_P_J_001",
+   "track": 156,
+   "date": "2026-10-23",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-10-23T00:08:26Z",
+   "available": "2026-11-07T17:05:05Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-11-07T17:05:05Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 376.94,
+    "acquired_to_first_product": 376.94
+   }
+  },
+  {
+   "granule": "NISAR_L2_PR_GCOV_034_084_A_008_4005_DHDH_A_20261030T001627_20261030T001701_P05036_N_F_J_001",
+   "track": 84,
+   "date": "2026-10-30",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-10-30T00:16:27Z",
+   "available": "2026-11-09T07:15:49Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-10-30T17:57:38Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 246.99,
+    "acquired_to_first_product": 17.69
+   }
+  },
+  {
+   "granule": "NISAR_L2_PR_GCOV_034_149_D_082_4005_DHDH_A_20261103T131102_20261103T131134_P05036_N_F_J_001",
+   "track": 149,
+   "date": "2026-11-03",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-11-03T13:11:02Z",
+   "available": "2026-11-07T16:09:51Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-11-03T22:42:48Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 98.98,
+    "acquired_to_first_product": 9.53
+   }
+  },
+  {
+   "granule": "NISAR_L2_PR_GCOV_034_156_A_008_4005_DHDH_A_20261104T000827_20261104T000842_P05036_N_P_J_001",
+   "track": 156,
+   "date": "2026-11-04",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-11-04T00:08:27Z",
+   "available": "2026-11-07T18:34:05Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-11-04T08:50:56Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 90.43,
+    "acquired_to_first_product": 8.71
+   }
+  },
+  {
+   "granule": "NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001",
+   "track": 84,
+   "date": "2026-11-11",
+   "product": "UR",
+   "mode": "DHDH",
+   "acquired": "2026-11-11T00:16:27Z",
+   "available": "2026-11-11T10:37:09Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-11-11T10:37:09Z",
+   "detected": "2026-11-12T16:01:43Z",
+   "status": "Flood map generated",
+   "backfill": true,
+   "latency_h": {
+    "acquired_to_available": 10.35,
+    "acquired_to_first_product": 10.35
+   }
+  }
+ ],
+ "checked_at": "2026-11-12T16:01:43Z",
+ "tracks": [
+  84,
+  149,
+  156
+ ],
+ "latest_observation": {
+  "granule": "NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001",
+  "track": 84,
+  "acquired": "2026-11-11T00:16:27Z",
+  "product": "UR"
+ },
+ "new_this_check": 0,
+ "status": "No new observation"
+}

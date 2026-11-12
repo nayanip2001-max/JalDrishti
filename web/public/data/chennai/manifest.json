@@ -1,0 +1,2689 @@
+{
+ "aoi": {
+  "id": "chennai",
+  "corners": [
+   [
+    79.94729844659707,
+    13.351504568356853
+   ],
+   [
+    80.35176490327189,
+    13.351504568356853
+   ],
+   [
+    80.35176490327189,
+    12.748334551146284
+   ],
+   [
+    79.94729844659707,
+    12.748334551146284
+   ]
+  ],
+  "bounds": [
+   79.94729844659707,
+   12.748334551146284,
+   80.35176490327189,
+   13.351504568356853
+  ]
+ },
+ "event": {
+  "title": "Chennai northeast monsoon \u00b7 Oct\u2013Nov 2026",
+  "subtitle": "Chennai \u00b7 Tiruvallur \u00b7 Kancheepuram \u00b7 Chengalpattu",
+  "country": "India",
+  "context": "Chennai gets most of its rain from the northeast monsoon (Oct\u2013Dec). Heavy rain from 17 Oct 2026 brought flash-flood warnings (The Week, 18 Oct 2026); on 2 Nov the city averaged 76 mm in 24 h (NewsBytes). IMD/IANS flagged a Bay of Bengal system that could bring more heavy rain around 15\u201320 Nov. Then vs now: during Cyclone Michaung (3\u20138 Dec 2023) no Sentinel-1 radar pass covered central Chennai between 30 Nov and 25 Dec 2023 (ASF archive search), so free radar missed the city's worst recent flood; ISRO mapped it with RISAT-1A on 7 Dec. In 2026 NISAR images the whole city on two tracks (149, 156) on back-to-back days every 12 days, and the western suburbs on a third (84).",
+  "caveat": "Most of Chennai is dense city, where street flooding is hard to see with radar backscatter alone; the map is most reliable over open land, lake beds, marshes (Pallikaranai) and river floodplains. Many tanks fill every monsoon: water that is new since the dry season is shown as flood even where it is seasonal.",
+  "window": [
+   "2026-06-15",
+   "2026-11-30"
+  ],
+  "marker": {
+   "date": "2026-10-17",
+   "label": "Northeast monsoon onset rains"
+  },
+  "live": true,
+  "phases": [
+   {
+    "name": "Before (dry season)",
+    "from": "2026-06-15",
+    "to": "2026-10-13",
+    "color": "#94a3b8"
+   },
+   {
+    "name": "Northeast monsoon",
+    "from": "2026-10-13",
+    "to": "2026-11-30",
+    "color": "#22d3ee"
+   }
+  ],
+  "timeline": [
+   {
+    "date": "2026-10-17",
+    "kind": "rain",
+    "label": "Heavy rain from Saturday evening; flash-flood warnings for Chennai",
+    "source": "The Week, 18 Oct 2026"
+   },
+   {
+    "date": "2026-11-02",
+    "kind": "rain",
+    "label": "Chennai averages 76 mm in 24 h; 149 mm at Parrys (Royapuram)",
+    "source": "NewsBytes"
+   },
+   {
+    "date": "2026-11-10",
+    "kind": "official",
+    "label": "Forecast: Bay of Bengal system may bring heavy rain 15\u201320 Nov",
+    "source": "IANS via MENAFN, 10 Nov 2026"
+   }
+  ]
+ },
+ "classes": {
+  "0": {
+   "name": "no data",
+   "color": "#000000"
+  },
+  "1": {
+   "name": "dry",
+   "color": "#000000"
+  },
+  "2": {
+   "name": "permanent / pre-existing water",
+   "color": "#1e40af"
+  },
+  "3": {
+   "name": "flood (open water)",
+   "color": "#22d3ee"
+  },
+  "4": {
+   "name": "possible flood (open water)",
+   "color": "#f59e0b"
+  },
+  "5": {
+   "name": "flooded vegetation",
+   "color": "#a78bfa"
+  },
+  "6": {
+   "name": "possible flooded vegetation",
+   "color": "#d946ef"
+  },
+  "7": {
+   "name": "uncertain",
+   "color": "#94a3b8"
+  }
+ },
+ "evidence_scale": {
+  "l_now": [
+   -8,
+   8
+  ],
+  "l_before": [
+   -8,
+   8
+  ],
+  "l_terrain": [
+   -12,
+   4
+  ],
+  "d_hh": [
+   -15,
+   15
+  ]
+ },
+ "scenes": [
+  {
+   "id": "T084_2026-10-06_nullTest",
+   "track": 84,
+   "date": "2026-10-06",
+   "kind": "null_test",
+   "refs": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24"
+   ],
+   "mode": null,
+   "areas_km2": {
+    "dry": 1046.7,
+    "permanent / pre-existing water": 51.7,
+    "flood (open water)": 0.1,
+    "possible flood (open water)": 53.8,
+    "flooded vegetation": 1.0,
+    "possible flooded vegetation": 5.0,
+    "uncertain": 21.8
+   },
+   "exposure": null,
+   "method": "v2-lgbm",
+   "cls": "cls/T084_2026-10-06_nullTest.webp",
+   "prob": "prob/T084_2026-10-06_nullTest.webp",
+   "ev": [
+    "ev/T084_2026-10-06_nullTest_1.png",
+    "ev/T084_2026-10-06_nullTest_2.png"
+   ],
+   "sar": "sar/T084_2026-10-06.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_032_084_A_008_4005_DHDH_A_20261006T001626_20261006T001701_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "\u2014",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_032_084_A_008_4005_DHDH_A_20261006T001626_20261006T001701_P05023_N_F_J_001"
+   }
+  },
+  {
+   "id": "T084_2026-10-18",
+   "track": 84,
+   "date": "2026-10-18",
+   "kind": "post",
+   "refs": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 1094.3,
+    "permanent / pre-existing water": 39.6,
+    "flood (open water)": 1.0,
+    "possible flood (open water)": 34.5,
+    "flooded vegetation": 0.2,
+    "possible flooded vegetation": 1.7,
+    "uncertain": 9.8
+   },
+   "exposure": {
+    "low": {
+     "people": 446,
+     "cropland_km2": 0.7,
+     "builtup_km2": 0.0,
+     "roads_km": 0.2,
+     "rail_km": 0.0
+    },
+    "high": {
+     "people": 12194,
+     "cropland_km2": 30.7,
+     "builtup_km2": 0.03,
+     "roads_km": 2.8,
+     "rail_km": 0.1
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 155,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2603,
+       "cropland_km2": 4.9,
+       "builtup_km2": 0.01,
+       "roads_km": 1.0,
+       "rail_km": 0.0
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 116,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 2409,
+       "cropland_km2": 2.3,
+       "builtup_km2": 0.02,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 175,
+       "cropland_km2": 0.6,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7183,
+       "cropland_km2": 23.5,
+       "builtup_km2": 0.0,
+       "roads_km": 1.3,
+       "rail_km": 0.1
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T084_2026-10-18.webp",
+   "prob": "prob/T084_2026-10-18.webp",
+   "ev": [
+    "ev/T084_2026-10-18_1.png",
+    "ev/T084_2026-10-18_2.png"
+   ],
+   "sar": "sar/T084_2026-10-18.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_033_084_A_008_4005_DHDH_A_20261018T001627_20261018T001701_P05023_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_033_084_A_008_4005_DHDH_A_20261018T001627_20261018T001701_P05023_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     950.0,
+     93.3,
+     36.2,
+     17.2,
+     16.9,
+     15.8,
+     4.4,
+     3.3,
+     2.7,
+     3.8,
+     33.3,
+     0.8,
+     0.7,
+     0.6,
+     0.5,
+     0.4,
+     0.4,
+     0.3,
+     0.3,
+     0.1
+    ],
+    "confident_share": 0.032
+   },
+   "ev3": "ev/T084_2026-10-18_3.png"
+  },
+  {
+   "id": "T084_2026-10-30",
+   "track": 84,
+   "date": "2026-10-30",
+   "kind": "post",
+   "refs": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 1063.6,
+    "permanent / pre-existing water": 52.1,
+    "flood (open water)": 1.5,
+    "possible flood (open water)": 44.1,
+    "flooded vegetation": 0.5,
+    "possible flooded vegetation": 3.5,
+    "uncertain": 15.6
+   },
+   "exposure": {
+    "low": {
+     "people": 1006,
+     "cropland_km2": 0.3,
+     "builtup_km2": 0.0,
+     "roads_km": 0.7,
+     "rail_km": 0.0
+    },
+    "high": {
+     "people": 23379,
+     "cropland_km2": 29.9,
+     "builtup_km2": 0.32,
+     "roads_km": 12.0,
+     "rail_km": 0.1
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 399,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6295,
+       "cropland_km2": 4.3,
+       "builtup_km2": 0.08,
+       "roads_km": 4.4,
+       "rail_km": 0.0
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 274,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6132,
+       "cropland_km2": 2.3,
+       "builtup_km2": 0.21,
+       "roads_km": 1.9,
+       "rail_km": 0.0
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 333,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 10952,
+       "cropland_km2": 23.3,
+       "builtup_km2": 0.03,
+       "roads_km": 5.7,
+       "rail_km": 0.1
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T084_2026-10-30.webp",
+   "prob": "prob/T084_2026-10-30.webp",
+   "ev": [
+    "ev/T084_2026-10-30_1.png",
+    "ev/T084_2026-10-30_2.png"
+   ],
+   "sar": "sar/T084_2026-10-30.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_034_084_A_008_4005_DHDH_A_20261030T001627_20261030T001701_P05036_N_F_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_034_084_A_008_4005_DHDH_A_20261030T001627_20261030T001701_P05036_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     947.5,
+     71.7,
+     29.1,
+     15.4,
+     22.0,
+     23.7,
+     6.1,
+     4.3,
+     4.0,
+     7.3,
+     44.1,
+     1.1,
+     0.9,
+     0.7,
+     0.6,
+     0.5,
+     0.5,
+     0.5,
+     0.5,
+     0.5
+    ],
+    "confident_share": 0.041
+   },
+   "ev3": "ev/T084_2026-10-30_3.png"
+  },
+  {
+   "id": "T084_2026-11-11",
+   "track": 84,
+   "date": "2026-11-11",
+   "kind": "post",
+   "refs": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 1083.4,
+    "permanent / pre-existing water": 44.1,
+    "flood (open water)": 2.1,
+    "possible flood (open water)": 33.3,
+    "flooded vegetation": 0.4,
+    "possible flooded vegetation": 1.8,
+    "uncertain": 13.2
+   },
+   "exposure": {
+    "low": {
+     "people": 1219,
+     "cropland_km2": 0.4,
+     "builtup_km2": 0.0,
+     "roads_km": 0.6,
+     "rail_km": 0.0
+    },
+    "high": {
+     "people": 21343,
+     "cropland_km2": 17.5,
+     "builtup_km2": 0.35,
+     "roads_km": 11.7,
+     "rail_km": 0.1
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 445,
+       "cropland_km2": 0.3,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 6440,
+       "cropland_km2": 3.9,
+       "builtup_km2": 0.1,
+       "roads_km": 3.8,
+       "rail_km": 0.0
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 337,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7266,
+       "cropland_km2": 2.7,
+       "builtup_km2": 0.22,
+       "roads_km": 2.3,
+       "rail_km": 0.0
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 437,
+       "cropland_km2": 0.1,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7638,
+       "cropland_km2": 10.9,
+       "builtup_km2": 0.03,
+       "roads_km": 5.5,
+       "rail_km": 0.1
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T084_2026-11-11.webp",
+   "prob": "prob/T084_2026-11-11.webp",
+   "ev": [
+    "ev/T084_2026-11-11_1.png",
+    "ev/T084_2026-11-11_2.png"
+   ],
+   "sar": "sar/T084_2026-11-11.webp",
+   "obs": {
+    "granule": "NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV Urgent Response (low-latency), frequency A",
+    "product_type": "UR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     985.8,
+     67.1,
+     25.8,
+     12.3,
+     15.3,
+     17.5,
+     3.6,
+     2.8,
+     3.1,
+     7.3,
+     32.4,
+     0.7,
+     0.6,
+     0.6,
+     0.5,
+     0.5,
+     0.5,
+     0.6,
+     0.7,
+     0.8
+    ],
+    "confident_share": 0.068
+   },
+   "ev3": "ev/T084_2026-11-11_3.png"
+  },
+  {
+   "id": "T149_2026-10-10_nullTest",
+   "track": 149,
+   "date": "2026-10-10",
+   "kind": "null_test",
+   "refs": [
+    "2026-06-24",
+    "2026-07-06",
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28"
+   ],
+   "mode": null,
+   "areas_km2": {
+    "dry": 2279.4,
+    "permanent / pre-existing water": 516.0,
+    "flood (open water)": 3.3,
+    "possible flood (open water)": 36.7,
+    "flooded vegetation": 2.2,
+    "possible flooded vegetation": 8.1,
+    "uncertain": 56.7
+   },
+   "exposure": null,
+   "method": "v2-lgbm",
+   "cls": "cls/T149_2026-10-10_nullTest.webp",
+   "prob": "prob/T149_2026-10-10_nullTest.webp",
+   "ev": [
+    "ev/T149_2026-10-10_nullTest_1.png",
+    "ev/T149_2026-10-10_nullTest_2.png"
+   ],
+   "sar": "sar/T149_2026-10-10.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_032_149_D_082_4005_DHDH_A_20261010T131102_20261010T131134_P05023_N_F_J_001",
+    "direction": "Descending",
+    "frame": 82,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "\u2014",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_032_149_D_082_4005_DHDH_A_20261010T131102_20261010T131134_P05023_N_F_J_001"
+   }
+  },
+  {
+   "id": "T149_2026-10-22",
+   "track": 149,
+   "date": "2026-10-22",
+   "kind": "post",
+   "refs": [
+    "2026-06-24",
+    "2026-07-06",
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28",
+    "2026-10-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 2261.4,
+    "permanent / pre-existing water": 515.4,
+    "flood (open water)": 7.4,
+    "possible flood (open water)": 49.3,
+    "flooded vegetation": 2.0,
+    "possible flooded vegetation": 10.1,
+    "uncertain": 56.9
+   },
+   "exposure": {
+    "low": {
+     "people": 7787,
+     "cropland_km2": 6.8,
+     "builtup_km2": 0.0,
+     "roads_km": 3.1,
+     "rail_km": 0.3
+    },
+    "high": {
+     "people": 46112,
+     "cropland_km2": 51.3,
+     "builtup_km2": 0.02,
+     "roads_km": 17.1,
+     "rail_km": 1.0
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 939,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5779,
+       "cropland_km2": 0.9,
+       "builtup_km2": 0.0,
+       "roads_km": 2.6,
+       "rail_km": 0.0
+      }
+     },
+     "Chennai": {
+      "low": {
+       "people": 482,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.2
+      },
+      "high": {
+       "people": 2048,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.9,
+       "rail_km": 0.5
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 1503,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7893,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 2.6,
+       "rail_km": 0.1
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 4856,
+       "cropland_km2": 6.8,
+       "builtup_km2": 0.0,
+       "roads_km": 1.9,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 30375,
+       "cropland_km2": 50.0,
+       "builtup_km2": 0.01,
+       "roads_km": 11.0,
+       "rail_km": 0.4
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T149_2026-10-22.webp",
+   "prob": "prob/T149_2026-10-22.webp",
+   "ev": [
+    "ev/T149_2026-10-22_1.png",
+    "ev/T149_2026-10-22_2.png"
+   ],
+   "sar": "sar/T149_2026-10-22.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_033_149_D_082_4005_DHDH_A_20261022T131102_20261022T131134_P05036_N_F_J_001",
+    "direction": "Descending",
+    "frame": 82,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_033_149_D_082_4005_DHDH_A_20261022T131102_20261022T131134_P05036_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2192.8,
+     266.8,
+     125.0,
+     72.6,
+     54.0,
+     39.6,
+     25.4,
+     19.2,
+     15.8,
+     21.8,
+     23.1,
+     10.0,
+     8.5,
+     7.1,
+     6.2,
+     5.0,
+     3.9,
+     2.9,
+     1.8,
+     0.8
+    ],
+    "confident_share": 0.137
+   },
+   "ev3": "ev/T149_2026-10-22_3.png"
+  },
+  {
+   "id": "T149_2026-11-03",
+   "track": 149,
+   "date": "2026-11-03",
+   "kind": "post",
+   "refs": [
+    "2026-06-24",
+    "2026-07-06",
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28",
+    "2026-10-10"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 2303.7,
+    "permanent / pre-existing water": 516.2,
+    "flood (open water)": 2.3,
+    "possible flood (open water)": 26.0,
+    "flooded vegetation": 2.0,
+    "possible flooded vegetation": 9.8,
+    "uncertain": 42.6
+   },
+   "exposure": {
+    "low": {
+     "people": 6246,
+     "cropland_km2": 1.9,
+     "builtup_km2": 0.0,
+     "roads_km": 2.8,
+     "rail_km": 0.1
+    },
+    "high": {
+     "people": 34811,
+     "cropland_km2": 23.6,
+     "builtup_km2": 0.02,
+     "roads_km": 15.7,
+     "rail_km": 0.8
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 781,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 4478,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.01,
+       "roads_km": 2.5,
+       "rail_km": 0.0
+      }
+     },
+     "Chennai": {
+      "low": {
+       "people": 457,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.1,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 1831,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.4
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 1207,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.4,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5931,
+       "cropland_km2": 0.2,
+       "builtup_km2": 0.0,
+       "roads_km": 2.3,
+       "rail_km": 0.1
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 3800,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.0,
+       "roads_km": 1.8,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 22571,
+       "cropland_km2": 23.0,
+       "builtup_km2": 0.01,
+       "roads_km": 10.2,
+       "rail_km": 0.3
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T149_2026-11-03.webp",
+   "prob": "prob/T149_2026-11-03.webp",
+   "ev": [
+    "ev/T149_2026-11-03_1.png",
+    "ev/T149_2026-11-03_2.png"
+   ],
+   "sar": "sar/T149_2026-11-03.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_034_149_D_082_4005_DHDH_A_20261103T131102_20261103T131134_P05036_N_F_J_001",
+    "direction": "Descending",
+    "frame": 82,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_034_149_D_082_4005_DHDH_A_20261103T131102_20261103T131134_P05036_N_F_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2320.4,
+     237.9,
+     105.9,
+     58.8,
+     44.9,
+     32.8,
+     18.9,
+     13.5,
+     11.1,
+     17.9,
+     17.2,
+     5.6,
+     4.5,
+     3.6,
+     2.9,
+     2.3,
+     1.8,
+     1.3,
+     0.8,
+     0.4
+    ],
+    "confident_share": 0.108
+   },
+   "ev3": "ev/T149_2026-11-03_3.png"
+  },
+  {
+   "id": "T156_2026-10-11_nullTest",
+   "track": 156,
+   "date": "2026-10-11",
+   "kind": "null_test",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07",
+    "2026-07-19",
+    "2026-08-12",
+    "2026-08-24",
+    "2026-09-05",
+    "2026-09-17",
+    "2026-09-29"
+   ],
+   "mode": null,
+   "areas_km2": {
+    "dry": 2159.0,
+    "permanent / pre-existing water": 558.6,
+    "flood (open water)": 0.5,
+    "possible flood (open water)": 125.6,
+    "flooded vegetation": 4.9,
+    "possible flooded vegetation": 13.7,
+    "uncertain": 38.8
+   },
+   "exposure": null,
+   "method": "v2-lgbm",
+   "cls": "cls/T156_2026-10-11_nullTest.webp",
+   "prob": "prob/T156_2026-10-11_nullTest.webp",
+   "ev": [
+    "ev/T156_2026-10-11_nullTest_1.png",
+    "ev/T156_2026-10-11_nullTest_2.png"
+   ],
+   "sar": "sar/T156_2026-10-11.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_032_156_A_008_4005_DHDH_A_20261011T000826_20261011T000842_P05023_N_P_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "\u2014",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_032_156_A_008_4005_DHDH_A_20261011T000826_20261011T000842_P05023_N_P_J_001"
+   }
+  },
+  {
+   "id": "T156_2026-10-23",
+   "track": 156,
+   "date": "2026-10-23",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07",
+    "2026-07-19",
+    "2026-08-12",
+    "2026-08-24",
+    "2026-09-05",
+    "2026-09-17",
+    "2026-09-29",
+    "2026-10-11"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 2222.6,
+    "permanent / pre-existing water": 546.3,
+    "flood (open water)": 4.3,
+    "possible flood (open water)": 84.7,
+    "flooded vegetation": 1.6,
+    "possible flooded vegetation": 11.7,
+    "uncertain": 30.0
+   },
+   "exposure": {
+    "low": {
+     "people": 4678,
+     "cropland_km2": 3.6,
+     "builtup_km2": 0.0,
+     "roads_km": 2.3,
+     "rail_km": 0.4
+    },
+    "high": {
+     "people": 51381,
+     "cropland_km2": 76.9,
+     "builtup_km2": 0.08,
+     "roads_km": 16.7,
+     "rail_km": 1.6
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 527,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.5,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 5273,
+       "cropland_km2": 2.8,
+       "builtup_km2": 0.01,
+       "roads_km": 2.5,
+       "rail_km": 0.0
+      }
+     },
+     "Chennai": {
+      "low": {
+       "people": 467,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.2,
+       "rail_km": 0.1
+      },
+      "high": {
+       "people": 2203,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.9,
+       "rail_km": 0.6
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 961,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 9006,
+       "cropland_km2": 1.6,
+       "builtup_km2": 0.04,
+       "roads_km": 3.8,
+       "rail_km": 0.1
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 2720,
+       "cropland_km2": 3.6,
+       "builtup_km2": 0.0,
+       "roads_km": 1.0,
+       "rail_km": 0.2
+      },
+      "high": {
+       "people": 34882,
+       "cropland_km2": 72.4,
+       "builtup_km2": 0.03,
+       "roads_km": 9.6,
+       "rail_km": 0.8
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T156_2026-10-23.webp",
+   "prob": "prob/T156_2026-10-23.webp",
+   "ev": [
+    "ev/T156_2026-10-23_1.png",
+    "ev/T156_2026-10-23_2.png"
+   ],
+   "sar": "sar/T156_2026-10-23.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_033_156_A_008_4005_DHDH_A_20261023T000826_20261023T000842_P05036_N_P_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_033_156_A_008_4005_DHDH_A_20261023T000826_20261023T000842_P05036_N_P_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2334.2,
+     187.4,
+     84.8,
+     48.3,
+     53.8,
+     43.4,
+     16.7,
+     12.3,
+     9.2,
+     8.6,
+     77.4,
+     5.4,
+     4.5,
+     3.7,
+     3.1,
+     2.5,
+     2.1,
+     1.7,
+     1.3,
+     0.8
+    ],
+    "confident_share": 0.058
+   },
+   "ev3": "ev/T156_2026-10-23_3.png"
+  },
+  {
+   "id": "T156_2026-11-04",
+   "track": 156,
+   "date": "2026-11-04",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07",
+    "2026-07-19",
+    "2026-08-12",
+    "2026-08-24",
+    "2026-09-05",
+    "2026-09-17",
+    "2026-09-29",
+    "2026-10-11"
+   ],
+   "mode": "DHDH",
+   "areas_km2": {
+    "dry": 2218.1,
+    "permanent / pre-existing water": 553.4,
+    "flood (open water)": 1.9,
+    "possible flood (open water)": 68.9,
+    "flooded vegetation": 3.8,
+    "possible flooded vegetation": 20.5,
+    "uncertain": 34.7
+   },
+   "exposure": {
+    "low": {
+     "people": 8736,
+     "cropland_km2": 1.3,
+     "builtup_km2": 0.0,
+     "roads_km": 5.4,
+     "rail_km": 0.9
+    },
+    "high": {
+     "people": 66201,
+     "cropland_km2": 55.6,
+     "builtup_km2": 0.21,
+     "roads_km": 26.7,
+     "rail_km": 2.8
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 1148,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.8,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 7921,
+       "cropland_km2": 1.6,
+       "builtup_km2": 0.02,
+       "roads_km": 3.8,
+       "rail_km": 0.0
+      }
+     },
+     "Chennai": {
+      "low": {
+       "people": 900,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.3,
+       "rail_km": 0.4
+      },
+      "high": {
+       "people": 3756,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.3,
+       "rail_km": 1.0
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 1772,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 12427,
+       "cropland_km2": 1.8,
+       "builtup_km2": 0.14,
+       "roads_km": 3.9,
+       "rail_km": 0.1
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 4899,
+       "cropland_km2": 1.3,
+       "builtup_km2": 0.0,
+       "roads_km": 3.2,
+       "rail_km": 0.5
+      },
+      "high": {
+       "people": 42048,
+       "cropland_km2": 52.2,
+       "builtup_km2": 0.05,
+       "roads_km": 17.7,
+       "rail_km": 1.7
+      }
+     }
+    }
+   },
+   "method": "v2-lgbm",
+   "cls": "cls/T156_2026-11-04.webp",
+   "prob": "prob/T156_2026-11-04.webp",
+   "ev": [
+    "ev/T156_2026-11-04_1.png",
+    "ev/T156_2026-11-04_2.png"
+   ],
+   "sar": "sar/T156_2026-11-04.webp",
+   "obs": {
+    "granule": "NISAR_L2_PR_GCOV_034_156_A_008_4005_DHDH_A_20261104T000827_20261104T000842_P05036_N_P_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_034_156_A_008_4005_DHDH_A_20261104T000827_20261104T000842_P05036_N_P_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2393.5,
+     151.4,
+     69.3,
+     40.4,
+     54.1,
+     45.3,
+     17.2,
+     13.0,
+     10.4,
+     11.3,
+     70.4,
+     5.6,
+     4.6,
+     3.7,
+     3.0,
+     2.5,
+     1.9,
+     1.6,
+     1.2,
+     1.0
+    ],
+    "confident_share": 0.06
+   },
+   "ev3": "ev/T156_2026-11-04_3.png"
+  }
+ ],
+ "refs": {
+  "84": {
+   "sar": "sar/T084_ref.webp",
+   "dates": [
+    "2026-06-20",
+    "2026-07-02",
+    "2026-07-14",
+    "2026-07-26",
+    "2026-08-19",
+    "2026-08-31",
+    "2026-09-12",
+    "2026-09-24",
+    "2026-10-06"
+   ]
+  },
+  "149": {
+   "sar": "sar/T149_ref.webp",
+   "dates": [
+    "2026-06-24",
+    "2026-07-06",
+    "2026-07-18",
+    "2026-08-11",
+    "2026-08-23",
+    "2026-09-04",
+    "2026-09-16",
+    "2026-09-28",
+    "2026-10-10"
+   ]
+  },
+  "156": {
+   "sar": "sar/T156_ref.webp",
+   "dates": [
+    "2026-06-25",
+    "2026-07-07",
+    "2026-07-19",
+    "2026-08-12",
+    "2026-08-24",
+    "2026-09-05",
+    "2026-09-17",
+    "2026-09-29",
+    "2026-10-11"
+   ]
+  }
+ },
+ "validation": {
+  "protocol": "Model trained in Assam plus ONE automatically labelled Chennai dry-season scene (14 Jul, T84), fixed before any Chennai result was seen; scored on northeast-monsoon passes it never saw, including the other track (T156). Reference: Sentinel-2 cloud-free open water within a day; open sea excluded. Dry-season dates (small tanks) score IoU 0.13-0.25 for every method.",
+  "rules": {
+   "JalDrishti hybrid (adapted)": {
+    "30 Oct T84": {
+     "IoU": 0.578,
+     "precision": 0.6408,
+     "recall": 0.8551,
+     "kappa": 0.717,
+     "ci": [
+      0.4645,
+      0.6489
+     ]
+    },
+    "4 Nov T156": {
+     "IoU": 0.5567,
+     "precision": 0.8046,
+     "recall": 0.6438,
+     "kappa": 0.6994,
+     "ci": [
+      0.4609,
+      0.6561
+     ]
+    },
+    "11 Nov T84 (UR)": {
+     "IoU": 0.604,
+     "precision": 0.7925,
+     "recall": 0.7174,
+     "kappa": 0.7325,
+     "ci": [
+      0.5231,
+      0.6718
+     ]
+    }
+   },
+   "Hybrid, Thailand-adapted model": {
+    "30 Oct T84": {
+     "IoU": 0.5559,
+     "precision": 0.5684,
+     "recall": 0.9617,
+     "kappa": 0.6961,
+     "ci": [
+      0.4028,
+      0.6698
+     ]
+    },
+    "4 Nov T156": {
+     "IoU": 0.6825,
+     "precision": 0.7997,
+     "recall": 0.8231,
+     "kappa": 0.7992,
+     "ci": [
+      0.6034,
+      0.7502
+     ]
+    },
+    "11 Nov T84 (UR)": {
+     "IoU": 0.5541,
+     "precision": 0.6384,
+     "recall": 0.8076,
+     "kappa": 0.6845,
+     "ci": [
+      0.4686,
+      0.6399
+     ]
+    }
+   },
+   "Hybrid, Assam-only model": {
+    "30 Oct T84": {
+     "IoU": 0.44,
+     "precision": 0.5708,
+     "recall": 0.6576,
+     "kappa": 0.59,
+     "ci": [
+      0.3428,
+      0.5526
+     ]
+    },
+    "4 Nov T156": {
+     "IoU": 0.5474,
+     "precision": 0.7974,
+     "recall": 0.6358,
+     "kappa": 0.6913,
+     "ci": [
+      0.4497,
+      0.6505
+     ]
+    },
+    "11 Nov T84 (UR)": {
+     "IoU": 0.5081,
+     "precision": 0.7479,
+     "recall": 0.613,
+     "kappa": 0.6481,
+     "ci": [
+      0.4549,
+      0.5665
+     ]
+    }
+   },
+   "Fixed threshold \u221215 dB": {
+    "30 Oct T84": {
+     "IoU": 0.44,
+     "precision": 0.5754,
+     "recall": 0.6515,
+     "kappa": 0.5901,
+     "ci": [
+      0.3418,
+      0.5529
+     ]
+    },
+    "4 Nov T156": {
+     "IoU": 0.5424,
+     "precision": 0.8024,
+     "recall": 0.626,
+     "kappa": 0.6871,
+     "ci": [
+      0.4431,
+      0.6466
+     ]
+    },
+    "11 Nov T84 (UR)": {
+     "IoU": 0.4984,
+     "precision": 0.759,
+     "recall": 0.5921,
+     "kappa": 0.6396,
+     "ci": [
+      0.4449,
+      0.5557
+     ]
+    }
+   },
+   "Otsu threshold": {
+    "30 Oct T84": {
+     "IoU": 0.1232,
+     "precision": 0.1235,
+     "recall": 0.9809,
+     "kappa": 0.1463,
+     "ci": [
+      0.0689,
+      0.1869
+     ]
+    },
+    "4 Nov T156": {
+     "IoU": 0.2171,
+     "precision": 0.2194,
+     "recall": 0.9545,
+     "kappa": 0.2881,
+     "ci": [
+      0.1703,
+      0.2793
+     ]
+    },
+    "11 Nov T84 (UR)": {
+     "IoU": 0.1838,
+     "precision": 0.188,
+     "recall": 0.8936,
+     "kappa": 0.2039,
+     "ci": [
+      0.1395,
+      0.2418
+     ]
+    }
+   }
+  },
+  "selected": "JalDrishti hybrid (adapted)",
+  "null_tests": [
+   {
+    "track": 84,
+    "date": "2026-10-06",
+    "refs": [
+     "2026-06-20",
+     "2026-07-02",
+     "2026-07-14",
+     "2026-07-26",
+     "2026-08-19",
+     "2026-08-31",
+     "2026-09-12",
+     "2026-09-24"
+    ],
+    "false_flood_km2": 1.1,
+    "mapped_km2": 1180
+   },
+   {
+    "track": 149,
+    "date": "2026-10-10",
+    "refs": [
+     "2026-06-24",
+     "2026-07-06",
+     "2026-07-18",
+     "2026-08-11",
+     "2026-08-23",
+     "2026-09-04",
+     "2026-09-16",
+     "2026-09-28"
+    ],
+    "false_flood_km2": 5.5,
+    "mapped_km2": 2902
+   },
+   {
+    "track": 156,
+    "date": "2026-10-11",
+    "refs": [
+     "2026-06-25",
+     "2026-07-07",
+     "2026-07-19",
+     "2026-08-12",
+     "2026-08-24",
+     "2026-09-05",
+     "2026-09-17",
+     "2026-09-29"
+    ],
+    "false_flood_km2": 5.4,
+    "mapped_km2": 2901
+   }
+  ]
+ },
+ "anc": {
+  "files": [
+   "anc/anc_1.png",
+   "anc/anc_2.png"
+  ],
+  "scale": {
+   "hh_db": [
+    -30,
+    5
+   ],
+   "hv_db": [
+    -35,
+    0
+   ],
+   "hand_m": [
+    0,
+    60
+   ],
+   "slope_deg": [
+    0,
+    45
+   ],
+   "jrc_pct": [
+    0,
+    100
+   ],
+   "pop_log10_per_km2": [
+    0,
+    4.5
+   ]
+  },
+  "worldcover": {
+   "10": "Tree cover",
+   "20": "Shrubland",
+   "30": "Grassland",
+   "40": "Cropland",
+   "50": "Built-up",
+   "60": "Bare / sparse",
+   "70": "Snow and ice",
+   "80": "Permanent water",
+   "90": "Herbaceous wetland",
+   "95": "Mangroves",
+   "100": "Moss and lichen"
+  },
+  "districts": [
+   {
+    "id": 1,
+    "name": "Thiruvallur",
+    "bbox": [
+     79.2862,
+     12.9475,
+     80.3466,
+     13.5633
+    ],
+    "center": [
+     79.9446,
+     13.2396
+    ]
+   },
+   {
+    "id": 2,
+    "name": "Chennai",
+    "bbox": [
+     80.1834,
+     12.967,
+     80.3101,
+     13.1489
+    ],
+    "center": [
+     80.2439,
+     13.0634
+    ]
+   },
+   {
+    "id": 3,
+    "name": "Kancheepuram",
+    "bbox": [
+     79.645,
+     12.2299,
+     80.2667,
+     13.0297
+    ],
+    "center": [
+     80.0058,
+     12.5846
+    ]
+   },
+   {
+    "id": 4,
+    "name": "Chengalputtu",
+    "bbox": [
+     79.5601,
+     12.5311,
+     80.1977,
+     13.0584
+    ],
+    "center": [
+     79.8456,
+     12.8368
+    ]
+   }
+  ]
+ },
+ "impact_layers": {
+  "cropland": "impact/cropland.webp",
+  "population": "impact/population.webp",
+  "districts": "districts.geojson",
+  "roads": "roads.geojson"
+ },
+ "class_scale": 32,
+ "model": {
+  "name": "JalDrishti hybrid",
+  "learner": "LightGBM gradient-boosted trees (binary: open water vs not)",
+  "trees": 578,
+  "params": {
+   "learning_rate": 0.2,
+   "num_leaves": 63,
+   "min_data_in_leaf": 200,
+   "feature_fraction": 0.8,
+   "bagging_fraction": 0.8,
+   "lambda_l2": 1.0
+  },
+  "trained_on": [
+   "40:2026-07-22:2026-07-21",
+   "163:2026-08-12:2026-08-10",
+   "40:2026-08-15:2026-08-15",
+   "chennai@84:2026-07-14:2026-07-15"
+  ],
+  "spatial_cv_iou": [
+   0.836
+  ],
+  "features": [
+   {
+    "name": "hh_minus_hv",
+    "gain": 373196.0,
+    "description": "HH \u2212 HV (dB): polarisation ratio; separates smooth water, vegetation and urban scattering"
+   },
+   {
+    "name": "hh_rel_p10",
+    "gain": 361443.0,
+    "description": "HH backscatter relative to the scene's darkest 10% (dB): how water-like, scene-normalised"
+   },
+   {
+    "name": "hh_rel_p50",
+    "gain": 3957451.0,
+    "description": "HH backscatter relative to the scene median (dB): dark compared with this scene's typical land"
+   },
+   {
+    "name": "hv_rel_p50",
+    "gain": 3779962.0,
+    "description": "HV cross-pol backscatter relative to the scene median (dB): vegetation volume vs smooth water"
+   },
+   {
+    "name": "d_hh",
+    "gain": 64908.0,
+    "description": "HH change from the pre-flood reference median (dB): strong drop = new open water"
+   },
+   {
+    "name": "d_hv",
+    "gain": 68176.0,
+    "description": "HV change from the pre-flood reference median (dB)"
+   },
+   {
+    "name": "hh_s7",
+    "gain": 411028.0,
+    "description": "HH texture: standard deviation in a 7\u00d77 window (water is smooth, land is rough)"
+   },
+   {
+    "name": "d_hh_m7",
+    "gain": 210558.0,
+    "description": "HH change averaged over 7\u00d77 pixels (140 m): spatially coherent change, not speckle"
+   },
+   {
+    "name": "d_hh_m15",
+    "gain": 215461.0,
+    "description": "HH change averaged over 15\u00d715 pixels (300 m): neighbourhood context"
+   },
+   {
+    "name": "hand",
+    "gain": 100827.0,
+    "description": "Height Above Nearest Drainage (m), ASF GLO-30 HAND: low ground floods first"
+   },
+   {
+    "name": "slope",
+    "gain": 50006.0,
+    "description": "Terrain slope (\u00b0) from Copernicus GLO-30"
+   },
+   {
+    "name": "jrc",
+    "gain": 99424.0,
+    "description": "JRC Global Surface Water occurrence 1984\u20132021 (%): how often this place was water historically"
+   },
+   {
+    "name": "worldcover",
+    "gain": 200875.0,
+    "description": "ESA WorldCover 2021 land-cover class (categorical)"
+   }
+  ],
+  "rule": "flood water = P(water now) > 0.5, OR (HH < \u221215 dB and HAND < 10 m) as a physics rescue (rescued pixels get p \u2265 0.51); new flood = water now \u00d7 (1 \u2212 water in the pre-flood reference passes), outside JRC permanent water",
+  "veg_rule": "flooded vegetation = HH rises > 3\u03c3 above no-change and more than HV, HV stable, under trees/grass/wetland (not cropland)",
+  "tiers": {
+   "confident": "p > 0.8",
+   "possible": "0.5 < p \u2264 0.8",
+   "uncertain": "0.35 < p \u2264 0.5"
+  },
+  "physics_terms": "Per-pixel log-odds from the scene-adaptive water/land Gaussian mixture (water-like now, dry before) and terrain priors (HAND bands after Nobre et al. 2011, slope); shown in the pixel panel."
+ },
+ "rainfall": {
+  "days": [
+   "2026-06-15",
+   "2026-06-16",
+   "2026-06-17",
+   "2026-06-18",
+   "2026-06-19",
+   "2026-06-20",
+   "2026-06-21",
+   "2026-06-22",
+   "2026-06-23",
+   "2026-06-24",
+   "2026-06-25",
+   "2026-06-26",
+   "2026-06-27",
+   "2026-06-28",
+   "2026-06-29",
+   "2026-06-30",
+   "2026-07-01",
+   "2026-07-02",
+   "2026-07-03",
+   "2026-07-04",
+   "2026-07-05",
+   "2026-07-06",
+   "2026-07-07",
+   "2026-07-08",
+   "2026-07-09",
+   "2026-07-10",
+   "2026-07-11",
+   "2026-07-12",
+   "2026-07-13",
+   "2026-07-14",
+   "2026-07-15",
+   "2026-07-16",
+   "2026-07-17",
+   "2026-07-18",
+   "2026-07-19",
+   "2026-07-20",
+   "2026-07-21",
+   "2026-07-22",
+   "2026-07-23",
+   "2026-07-24",
+   "2026-07-25",
+   "2026-07-26",
+   "2026-07-27",
+   "2026-07-28",
+   "2026-07-29",
+   "2026-07-30",
+   "2026-07-31",
+   "2026-08-01",
+   "2026-08-02",
+   "2026-08-03",
+   "2026-08-04",
+   "2026-08-05",
+   "2026-08-06",
+   "2026-08-07",
+   "2026-08-08",
+   "2026-08-09",
+   "2026-08-10",
+   "2026-08-11",
+   "2026-08-12",
+   "2026-08-13",
+   "2026-08-14",
+   "2026-08-15",
+   "2026-08-16",
+   "2026-08-17",
+   "2026-08-18",
+   "2026-08-19",
+   "2026-08-20",
+   "2026-08-21",
+   "2026-08-22",
+   "2026-08-23",
+   "2026-08-24",
+   "2026-08-25",
+   "2026-08-26",
+   "2026-08-27",
+   "2026-08-28",
+   "2026-08-29",
+   "2026-08-30",
+   "2026-08-31",
+   "2026-09-01",
+   "2026-09-02",
+   "2026-09-03",
+   "2026-09-04",
+   "2026-09-05",
+   "2026-09-06",
+   "2026-09-07",
+   "2026-09-08",
+   "2026-09-09",
+   "2026-09-10",
+   "2026-09-11",
+   "2026-09-12",
+   "2026-09-13",
+   "2026-09-14",
+   "2026-09-15",
+   "2026-09-16",
+   "2026-09-17",
+   "2026-09-18",
+   "2026-09-19",
+   "2026-09-20",
+   "2026-09-21",
+   "2026-09-22",
+   "2026-09-23",
+   "2026-09-24",
+   "2026-09-25",
+   "2026-09-26",
+   "2026-09-27",
+   "2026-09-28",
+   "2026-09-29",
+   "2026-09-30",
+   "2026-10-01",
+   "2026-10-02",
+   "2026-10-03",
+   "2026-10-04",
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-10",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20",
+   "2026-10-21",
+   "2026-10-22",
+   "2026-10-23",
+   "2026-10-24",
+   "2026-10-25",
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-28",
+   "2026-10-29",
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-03",
+   "2026-11-04",
+   "2026-11-05",
+   "2026-11-06",
+   "2026-11-07",
+   "2026-11-08",
+   "2026-11-09",
+   "2026-11-10",
+   "2026-11-11"
+  ],
+  "mm": [
+   0.9,
+   1.1,
+   1.1,
+   6.9,
+   2.7,
+   0.8,
+   4.0,
+   3.0,
+   2.2,
+   0.6,
+   2.0,
+   3.4,
+   3.2,
+   15.3,
+   3.0,
+   2.3,
+   0.6,
+   0.8,
+   1.7,
+   3.7,
+   0.0,
+   0.0,
+   0.3,
+   0.3,
+   3.9,
+   0.1,
+   0.2,
+   0.0,
+   0.0,
+   0.0,
+   0.1,
+   0.2,
+   5.4,
+   6.4,
+   7.2,
+   1.1,
+   1.0,
+   7.4,
+   6.8,
+   3.8,
+   0.7,
+   1.6,
+   2.0,
+   0.7,
+   3.4,
+   1.2,
+   1.6,
+   14.4,
+   6.0,
+   4.1,
+   8.5,
+   7.8,
+   5.7,
+   7.5,
+   4.8,
+   4.4,
+   5.3,
+   2.6,
+   0.5,
+   0.8,
+   1.0,
+   0.2,
+   0.6,
+   1.1,
+   3.9,
+   5.3,
+   1.7,
+   4.5,
+   0.3,
+   10.9,
+   12.4,
+   3.6,
+   0.5,
+   1.4,
+   2.9,
+   1.1,
+   1.4,
+   0.0,
+   1.4,
+   2.0,
+   4.6,
+   3.1,
+   1.9,
+   2.9,
+   6.7,
+   0.5,
+   1.9,
+   7.0,
+   1.8,
+   3.2,
+   18.2,
+   1.2,
+   0.7,
+   1.0,
+   3.8,
+   3.5,
+   8.0,
+   7.8,
+   6.4,
+   0.3,
+   4.8,
+   0.0,
+   1.4,
+   0.5,
+   1.9,
+   5.6,
+   1.2,
+   0.6,
+   0.2,
+   0.6,
+   1.4,
+   0.9,
+   4.6,
+   2.2,
+   1.4,
+   0.6,
+   0.7,
+   0.1,
+   0.1,
+   0.4,
+   0.6,
+   12.8,
+   18.7,
+   23.7,
+   71.7,
+   7.6,
+   6.2,
+   23.3,
+   35.8,
+   27.5,
+   7.3,
+   8.0,
+   20.7,
+   0.7,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   4.3,
+   8.7,
+   19.3,
+   2.9,
+   9.3,
+   4.6,
+   3.3,
+   6.2,
+   5.3,
+   0.5,
+   0.0,
+   0.0
+  ],
+  "source": "ERA5 reanalysis (Copernicus/ECMWF) via Open-Meteo archive, mean of a 3\u00d73 point grid over the area",
+  "note": "NASA GPM IMERG will replace this once the GES DISC archive is authorised for the project's Earthdata account"
+ },
+ "tracker": {
+  "label": "Modelled",
+  "days": [
+   "2026-06-15",
+   "2026-06-16",
+   "2026-06-17",
+   "2026-06-18",
+   "2026-06-19",
+   "2026-06-20",
+   "2026-06-21",
+   "2026-06-22",
+   "2026-06-23",
+   "2026-06-24",
+   "2026-06-25",
+   "2026-06-26",
+   "2026-06-27",
+   "2026-06-28",
+   "2026-06-29",
+   "2026-06-30",
+   "2026-07-01",
+   "2026-07-02",
+   "2026-07-03",
+   "2026-07-04",
+   "2026-07-05",
+   "2026-07-06",
+   "2026-07-07",
+   "2026-07-08",
+   "2026-07-09",
+   "2026-07-10",
+   "2026-07-11",
+   "2026-07-12",
+   "2026-07-13",
+   "2026-07-14",
+   "2026-07-15",
+   "2026-07-16",
+   "2026-07-17",
+   "2026-07-18",
+   "2026-07-19",
+   "2026-07-20",
+   "2026-07-21",
+   "2026-07-22",
+   "2026-07-23",
+   "2026-07-24",
+   "2026-07-25",
+   "2026-07-26",
+   "2026-07-27",
+   "2026-07-28",
+   "2026-07-29",
+   "2026-07-30",
+   "2026-07-31",
+   "2026-08-01",
+   "2026-08-02",
+   "2026-08-03",
+   "2026-08-04",
+   "2026-08-05",
+   "2026-08-06",
+   "2026-08-07",
+   "2026-08-08",
+   "2026-08-09",
+   "2026-08-10",
+   "2026-08-11",
+   "2026-08-12",
+   "2026-08-13",
+   "2026-08-14",
+   "2026-08-15",
+   "2026-08-16",
+   "2026-08-17",
+   "2026-08-18",
+   "2026-08-19",
+   "2026-08-20",
+   "2026-08-21",
+   "2026-08-22",
+   "2026-08-23",
+   "2026-08-24",
+   "2026-08-25",
+   "2026-08-26",
+   "2026-08-27",
+   "2026-08-28",
+   "2026-08-29",
+   "2026-08-30",
+   "2026-08-31",
+   "2026-09-01",
+   "2026-09-02",
+   "2026-09-03",
+   "2026-09-04",
+   "2026-09-05",
+   "2026-09-06",
+   "2026-09-07",
+   "2026-09-08",
+   "2026-09-09",
+   "2026-09-10",
+   "2026-09-11",
+   "2026-09-12",
+   "2026-09-13",
+   "2026-09-14",
+   "2026-09-15",
+   "2026-09-16",
+   "2026-09-17",
+   "2026-09-18",
+   "2026-09-19",
+   "2026-09-20",
+   "2026-09-21",
+   "2026-09-22",
+   "2026-09-23",
+   "2026-09-24",
+   "2026-09-25",
+   "2026-09-26",
+   "2026-09-27",
+   "2026-09-28",
+   "2026-09-29",
+   "2026-09-30",
+   "2026-10-01",
+   "2026-10-02",
+   "2026-10-03",
+   "2026-10-04",
+   "2026-10-05",
+   "2026-10-06",
+   "2026-10-07",
+   "2026-10-08",
+   "2026-10-09",
+   "2026-10-10",
+   "2026-10-11",
+   "2026-10-12",
+   "2026-10-13",
+   "2026-10-14",
+   "2026-10-15",
+   "2026-10-16",
+   "2026-10-17",
+   "2026-10-18",
+   "2026-10-19",
+   "2026-10-20",
+   "2026-10-21",
+   "2026-10-22",
+   "2026-10-23",
+   "2026-10-24",
+   "2026-10-25",
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-28",
+   "2026-10-29",
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-03",
+   "2026-11-04",
+   "2026-11-05",
+   "2026-11-06",
+   "2026-11-07",
+   "2026-11-08",
+   "2026-11-09",
+   "2026-11-10",
+   "2026-11-11",
+   "2026-11-12",
+   "2026-11-13",
+   "2026-11-14",
+   "2026-11-15",
+   "2026-11-16",
+   "2026-11-17",
+   "2026-11-18",
+   "2026-11-19",
+   "2026-11-20",
+   "2026-11-21",
+   "2026-11-22",
+   "2026-11-23",
+   "2026-11-24",
+   "2026-11-25",
+   "2026-11-26",
+   "2026-11-27",
+   "2026-11-28",
+   "2026-11-29",
+   "2026-11-30"
+  ],
+  "image": "model/day_{date}.webp",
+  "expected_km2": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   70.4,
+   70.4,
+   70.4,
+   70.4,
+   121.3,
+   121.3,
+   121.3,
+   121.3,
+   121.3,
+   121.3,
+   121.3,
+   121.3,
+   121.3,
+   118.8,
+   116.2,
+   113.7,
+   111.1,
+   147.6,
+   145.3,
+   142.9,
+   140.5,
+   138.2,
+   135.8,
+   133.4,
+   131.0,
+   139.3,
+   147.6,
+   155.9,
+   164.2,
+   145.6,
+   143.6,
+   141.5,
+   139.4,
+   137.4,
+   135.3,
+   133.2,
+   131.2,
+   130.0,
+   128.9,
+   127.7,
+   126.5,
+   137.7,
+   135.8,
+   134.0,
+   132.1,
+   130.2,
+   128.4,
+   126.5,
+   124.6,
+   124.6,
+   124.6,
+   124.6,
+   124.6,
+   124.6,
+   52.3,
+   52.3,
+   52.3,
+   52.3,
+   52.3,
+   52.3,
+   52.3,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "likely_km2": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.1,
+   0.1,
+   0.1,
+   0.1,
+   4.9,
+   4.9,
+   4.9,
+   4.9,
+   4.9,
+   4.9,
+   4.9,
+   4.9,
+   4.9,
+   5.2,
+   5.9,
+   6.9,
+   8.3,
+   1.7,
+   1.2,
+   1.2,
+   1.3,
+   1.9,
+   2.6,
+   3.6,
+   5.2,
+   7.0,
+   9.8,
+   14.7,
+   21.8,
+   9.5,
+   7.7,
+   5.8,
+   4.6,
+   3.9,
+   3.8,
+   3.7,
+   4.7,
+   3.9,
+   4.3,
+   5.1,
+   6.5,
+   3.8,
+   3.7,
+   3.7,
+   4.1,
+   4.4,
+   4.8,
+   5.4,
+   6.6,
+   6.6,
+   6.6,
+   6.6,
+   6.6,
+   6.6,
+   3.6,
+   3.6,
+   3.6,
+   3.6,
+   3.6,
+   3.6,
+   3.6,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "cell_m": 160,
+  "obs": [
+   {
+    "date": "2026-10-18",
+    "track": 84,
+    "km2": 1.4
+   },
+   {
+    "date": "2026-10-30",
+    "track": 84,
+    "km2": 2.2
+   },
+   {
+    "date": "2026-11-11",
+    "track": 84,
+    "km2": 3.6
+   },
+   {
+    "date": "2026-10-22",
+    "track": 149,
+    "km2": 21.8
+   },
+   {
+    "date": "2026-11-03",
+    "track": 149,
+    "km2": 6.5
+   },
+   {
+    "date": "2026-10-23",
+    "track": 156,
+    "km2": 9.5
+   },
+   {
+    "date": "2026-11-04",
+    "track": 156,
+    "km2": 3.8
+   }
+  ],
+  "method": "Cross-track linear interpolation: each pixel blends the nearest earlier and later NISAR passes (any track) by time.",
+  "validation": {
+   "protocol": "Each NISAR pass hidden in turn and predicted from the other passes (any track); scored against that pass's own map (confident flood vs dry, 200 m cells). Assam and Thailand.",
+   "passes": 22,
+   "interp_mean_iou": 0.472,
+   "nearest_mean_iou": 0.423,
+   "interp_wins": 17,
+   "ties": 2,
+   "sign_p": 0.0013
+  },
+  "note": "Estimate between passes from the passes before and after. Not an observation."
+ }
+}

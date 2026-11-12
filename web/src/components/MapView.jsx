@@ -76,7 +76,7 @@ function setVectors(map, base, il, layers) {
   map.setLayoutProperty('districts-label', 'visibility', vis(layers.districts))
 }
 
-export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera }) {
+export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera, modelDay }) {
   const mainEl = useRef(null)
   const beforeEl = useRef(null)
   const maps = useRef({})
@@ -119,8 +119,11 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
     const { main, before } = maps.current
     if (!ready || !scene) return
     setImage(main, 'sar', base + scene.sar, corners, opacity.sar, layers.sar)
-    setImage(main, 'prob', base + scene.prob, corners, opacity.overlay, layers.prob)
-    setImage(main, 'cls', base + scene.cls, corners, opacity.overlay, layers.flood)
+    // A modelled day replaces the observed flood layers, never overlays them.
+    const tr = manifest.tracker
+    setImage(main, 'model', modelDay && tr && base + tr.image.replace('{date}', modelDay), corners, opacity.overlay, !!modelDay)
+    setImage(main, 'prob', base + scene.prob, corners, opacity.overlay, layers.prob && !modelDay)
+    setImage(main, 'cls', base + scene.cls, corners, opacity.overlay, layers.flood && !modelDay)
     const cmp = manifest.sensor_compare
     setImage(main, 'cmp', cmp && base + cmp.image, corners, opacity.overlay, !!(cmp && layers.compare && scene.date === cmp.date))
     const ref = manifest.refs[String(scene.track)]
@@ -131,7 +134,7 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
       setImage(main, 'population', base + il.population, corners, 0.8, layers.population, 'prob')
       setVectors(main, base, il, layers)
     }
-  }, [ready, scene, layers, opacity, base, corners, manifest])
+  }, [ready, scene, layers, opacity, base, corners, manifest, modelDay])
 
   useEffect(() => {
     const { main } = maps.current

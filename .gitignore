@@ -12,8 +12,11 @@ scripts_probe.py
 models/*
 !models/lgbm_final_rel02.txt
 !models/lgbm_adapt_th.txt
+!models/lgbm_chennai_C_adapt.txt
 
 # Web
 web/node_modules/
 web/dist/
 .DS_Store
+outputs/regions/
+data/live/
