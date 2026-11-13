@@ -126,20 +126,44 @@
     "acquired_to_available": 10.35,
     "acquired_to_first_product": 10.35
    }
+  },
+  {
+   "granule": "NISAR_L2_PR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_N_F_J_001",
+   "track": 84,
+   "date": "2026-11-11",
+   "product": "PR",
+   "mode": "DHDH",
+   "acquired": "2026-11-11T00:16:27Z",
+   "available": "2026-11-13T11:49:03Z",
+   "available_source": "NASA CMR insert time",
+   "first_available": "2026-11-11T10:37:09Z",
+   "detected": "2026-11-13T17:16:12Z",
+   "status": "Flood map generated",
+   "attempts": 1,
+   "processing_start": "2026-11-13T17:16:15Z",
+   "processing_end": "2026-11-13T17:18:10Z",
+   "flood_km2": 2.5,
+   "latency_h": {
+    "acquired_to_available": 59.54,
+    "acquired_to_first_product": 10.35,
+    "available_to_detected": 5.45,
+    "processing": 0.03,
+    "acquired_to_map": 65.03
+   }
   }
  ],
- "checked_at": "2026-11-12T16:01:43Z",
+ "checked_at": "2026-11-13T17:16:12Z",
  "tracks": [
   84,
   149,
   156
  ],
  "latest_observation": {
-  "granule": "NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001",
+  "granule": "NISAR_L2_PR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_N_F_J_001",
   "track": 84,
   "acquired": "2026-11-11T00:16:27Z",
-  "product": "UR"
+  "product": "PR"
  },
- "new_this_check": 0,
- "status": "No new observation"
+ "new_this_check": 1,
+ "status": "Flood map generated"
 }

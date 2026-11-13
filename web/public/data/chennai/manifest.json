@@ -482,82 +482,82 @@
     "2026-10-06"
    ],
    "mode": "DHDH",
+   "method": "v2-lgbm",
    "areas_km2": {
-    "dry": 1083.4,
-    "permanent / pre-existing water": 44.1,
+    "dry": 1084.0,
+    "permanent / pre-existing water": 46.5,
     "flood (open water)": 2.1,
-    "possible flood (open water)": 33.3,
+    "possible flood (open water)": 27.9,
     "flooded vegetation": 0.4,
-    "possible flooded vegetation": 1.8,
-    "uncertain": 13.2
+    "possible flooded vegetation": 2.5,
+    "uncertain": 15.8
    },
    "exposure": {
     "low": {
-     "people": 1219,
+     "people": 864,
      "cropland_km2": 0.4,
      "builtup_km2": 0.0,
      "roads_km": 0.6,
      "rail_km": 0.0
     },
     "high": {
-     "people": 21343,
-     "cropland_km2": 17.5,
-     "builtup_km2": 0.35,
-     "roads_km": 11.7,
+     "people": 16660,
+     "cropland_km2": 15.8,
+     "builtup_km2": 0.23,
+     "roads_km": 8.3,
      "rail_km": 0.1
     },
     "districts": {
      "Chengalputtu": {
       "low": {
-       "people": 445,
+       "people": 391,
        "cropland_km2": 0.3,
        "builtup_km2": 0.0,
        "roads_km": 0.2,
        "rail_km": 0.0
       },
       "high": {
-       "people": 6440,
-       "cropland_km2": 3.9,
-       "builtup_km2": 0.1,
-       "roads_km": 3.8,
+       "people": 5051,
+       "cropland_km2": 3.3,
+       "builtup_km2": 0.07,
+       "roads_km": 3.4,
        "rail_km": 0.0
       }
      },
      "Kancheepuram": {
       "low": {
-       "people": 337,
-       "cropland_km2": 0.0,
+       "people": 192,
+       "cropland_km2": 0.1,
        "builtup_km2": 0.0,
        "roads_km": 0.1,
        "rail_km": 0.0
       },
       "high": {
-       "people": 7266,
-       "cropland_km2": 2.7,
-       "builtup_km2": 0.22,
-       "roads_km": 2.3,
-       "rail_km": 0.0
+       "people": 5314,
+       "cropland_km2": 2.2,
+       "builtup_km2": 0.15,
+       "roads_km": 2.0,
+       "rail_km": 0.1
       }
      },
      "Thiruvallur": {
       "low": {
-       "people": 437,
+       "people": 282,
        "cropland_km2": 0.1,
        "builtup_km2": 0.0,
        "roads_km": 0.3,
        "rail_km": 0.0
       },
       "high": {
-       "people": 7638,
-       "cropland_km2": 10.9,
-       "builtup_km2": 0.03,
-       "roads_km": 5.5,
+       "people": 6296,
+       "cropland_km2": 10.2,
+       "builtup_km2": 0.02,
+       "roads_km": 2.9,
        "rail_km": 0.1
       }
      }
     }
    },
-   "method": "v2-lgbm",
    "cls": "cls/T084_2026-11-11.webp",
    "prob": "prob/T084_2026-11-11.webp",
    "ev": [
@@ -566,7 +566,7 @@
    ],
    "sar": "sar/T084_2026-11-11.webp",
    "obs": {
-    "granule": "NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001",
+    "granule": "NISAR_L2_PR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_N_F_J_001",
     "direction": "Ascending",
     "frame": 8,
     "polarisations": [
@@ -574,39 +574,52 @@
      "HV"
     ],
     "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
-    "product": "NISAR L2 GCOV Urgent Response (low-latency), frequency A",
-    "product_type": "UR",
+    "product": "NISAR L2 GCOV (provisional v1), frequency A",
+    "product_type": "PR",
     "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
     "processing": "20 m grid, 5\u00d75 Lee filter",
-    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_UR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_F_F_J_001"
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_PR_GCOV_035_084_A_008_4005_DHDH_A_20261111T001627_20261111T001702_P05036_N_F_J_001"
    },
    "prob_hist": {
     "bins": 20,
     "km2": [
-     985.8,
-     67.1,
-     25.8,
-     12.3,
-     15.3,
-     17.5,
-     3.6,
-     2.8,
-     3.1,
-     7.3,
-     32.4,
+     966.3,
+     73.6,
+     29.6,
+     15.9,
+     19.1,
+     20.7,
+     5.1,
+     3.9,
+     3.8,
+     8.1,
+     27.3,
+     0.9,
      0.7,
      0.6,
      0.6,
      0.5,
      0.5,
-     0.5,
      0.6,
-     0.7,
+     0.6,
      0.8
     ],
-    "confident_share": 0.068
+    "confident_share": 0.075
    },
-   "ev3": "ev/T084_2026-11-11_3.png"
+   "ev3": "ev/T084_2026-11-11_3.png",
+   "live": {
+    "acquired": "2026-11-11T00:16:27Z",
+    "available": "2026-11-13T11:49:03Z",
+    "processing_end": "2026-11-13T17:18:10Z",
+    "latency_h": {
+     "acquired_to_available": 59.54,
+     "acquired_to_first_product": 10.35,
+     "available_to_detected": 5.45,
+     "processing": 0.03,
+     "acquired_to_map": 65.03
+    },
+    "product": "PR"
+   }
   },
   {
    "id": "T149_2026-10-10_nullTest",
