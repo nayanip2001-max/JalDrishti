@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import MapView from './components/MapView.jsx'
 import Timeline from './components/Timeline.jsx'
 import Header from './components/Header.jsx'
@@ -9,22 +9,32 @@ import { ObservationsView, FeaturesView, ModelView, ValidationView, DataView } f
 import { DETAILS } from './components/Details.jsx'
 import { LiveView, LiveBanner } from './components/Live.jsx'
 import { RegionView } from './components/Region.jsx'
-import { Icon } from './components/ui.jsx'
+import BeginnerApp from './beginner/BeginnerApp.jsx'
+import { Icon, Boundary } from './components/ui.jsx'
 import { readPixel } from './lib/evidence.js'
 import { MODES, LENS_LAYERS, resolveSection, navFor } from './lib/modes.js'
 import { peakOf, posts as postsOf } from './lib/format.js'
+
+// "How do we know?" science panel (beginner view): its own chunk, loaded when first opened.
+const SciencePanel = lazy(() => import('./science/SciencePanel.jsx'))
+// Intermediate: "How We Know" tab (topic list + data sources). Advanced: a visual-explainer link atop matching tabs.
+const ScienceTab = lazy(() => import('./science/ScienceTab.jsx'))
+const SciBanner = lazy(() => import('./science/ScienceTab.jsx').then((m) => ({ default: m.SciBanner })))
+const BANNER = { observations: 'prep', features: 'features', model: 'model', validation: 'accuracy', impact: 'impact' }
+// Beginner map: flood classes on a satellite basemap, nothing else.
+const BEGINNER_LAYERS = { ...LENS_LAYERS.science, sar: false }
 
 const latestOf = (m) => { const ps = postsOf(m); return ps[ps.length - 1] }
 
 const DATA = `${import.meta.env.BASE_URL}data/`
 const SECTIONS = { overview: Overview, event: EventView, flood: FloodView, temporal: TemporalView, impact: ImpactView, how: HowItWorks,
-  observations: ObservationsView, features: FeaturesView, model: ModelView, validation: ValidationView, data: DataView, live: LiveView, region: RegionView }
+  observations: ObservationsView, features: FeaturesView, model: ModelView, validation: ValidationView, data: DataView, live: LiveView, region: RegionView, science: ScienceTab }
 const store = {
   get: (k, d) => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* storage blocked */ } },
 }
 
-export default function App() {
+export default function App({ onHome }) {
   const [events, setEvents] = useState([])
   const [eventId, setEventId] = useState(() => window.location.hash.slice(1) || 'assam')
   const [manifest, setManifest] = useState(null)
@@ -46,6 +56,7 @@ export default function App() {
   const [story, setStory] = useState(null)
   const [camera, setCamera] = useState(null)
   const [loadError, setLoadError] = useState(null)
+  const [science, setScience] = useState(null)        // null = closed, 'index' = all topics, or a topic id
   const base = `${DATA}${eventId}/`
   const shown = manifest ? `${DATA}${manifest.aoi.id}/` : base      // data folder of the event on screen (lags `base` while switching)
 
@@ -65,12 +76,6 @@ export default function App() {
       setManifest(m); setScene(m.event.live ? latestOf(m) : peakOf(m))
       setSection((sec) => resolveSection(store.get('jd-mode', 'beginner'), sec, !!m.event.live))
       if (m.event.live) fetch(base + 'live.json', { cache: 'no-store' }).then((r) => r.json()).then((l) => live && setLive(l)).catch(() => {})
-      let seen = true
-      try { seen = !!sessionStorage.getItem('jd-story-seen') } catch { /* storage blocked */ }
-      if (store.get('jd-mode', 'beginner') === 'beginner' && !seen) {          // guided tour once, on a beginner's first visit
-        setStory(0)
-        try { sessionStorage.setItem('jd-story-seen', '1') } catch { /* storage blocked */ }
-      }
     }).catch(() => live && setLoadError(eventId))
     window.location.hash = eventId
     return () => { live = false }
@@ -92,7 +97,7 @@ export default function App() {
   const isLive = !!manifest?.event.live
   const pickScene = (s) => { setModelDay(null); setScene(s) }   // choosing an observed pass leaves the modelled view
   const nav = navFor(mode, isLive)
-  const setMode = (m) => { setModeState(m); store.set('jd-mode', m); setSection((s) => resolveSection(m, s, isLive)) }
+  const setMode = (m) => { setModeState(m); store.set('jd-mode', m); setSection((s) => resolveSection(m, s, isLive)); if (m !== 'beginner') setScience(null) }
   const switchLens = (l) => {
     setLens(l); setLayers((cur) => ({ ...LENS_LAYERS[l], compare: false, prob: l === 'science' && cur.prob }))
     setCompare(false); setDetails([]); setSection(l === 'impact' ? 'impact' : nav[0].id); setDrawerOpen(true)
@@ -138,7 +143,8 @@ export default function App() {
   const switching = manifest.aoi.id !== eventId
 
   const ctx = { manifest, scene, setScene: pickScene, modelDay, setModelDay, mode, lens, layers, setLayers, setLayersCompare, opacity, setOpacity, basemap, setBasemap,
-    compare, setCompare, open, go, flyTo, pick, pixel, country: manifest.event.country, startTour: () => setStory(0), base: shown, live, region, setRegion }
+    compare, setCompare, open, go, flyTo, pick, pixel, country: manifest.event.country, startTour: () => setStory(0), base: shown, live, region, setRegion,
+    openScience: mode !== 'beginner' ? (id = 'index') => setScience(id) : undefined, pickAt: onPick }
   const top = details[details.length - 1]
   const navItem = nav.find((n) => n.id === section)
   const D = top && DETAILS[top.type]
@@ -146,11 +152,21 @@ export default function App() {
   const title = D ? (typeof D.title === 'function' ? D.title(top.props) : D.title) : navItem?.label
   const crumb = D ? navItem?.label : MODES.find((m) => m.id === mode)?.label + ' view'
 
+  // Beginner: its own bright, picture-first house around the same map, scene and event.
+  if (mode === 'beginner') {
+    return (
+      <BeginnerApp ctx={ctx} events={events} eventId={eventId} onMode={setMode} onHome={onHome} switching={switching} loadError={loadError}
+        onEvent={(id) => { setLoadError(null); setEventId(id) }} onStay={() => setEventId(manifest.aoi.id)}
+        map={<MapView key={manifest.aoi.id} base={shown} manifest={manifest} scene={scene} layers={BEGINNER_LAYERS} opacity={opacity}
+          basemap="satellite" compare={false} onPick={onPick} pick={pick} camera={camera} modelDay={null} region={{}} />} />
+    )
+  }
+
   return (
     <div className={`app mode-${mode} lens-${lens} ${drawerOpen ? '' : 'drawer-closed'}`}>
       <Header events={events} eventId={eventId} onEvent={(id) => { setStory(null); setLoadError(null); setEventId(id) }} manifest={manifest} scene={scene}
         mode={mode} onMode={setMode} lens={lens} onLens={switchLens} onSearchPick={onSearchPick}
-        onHelp={() => open('help')} onSeeing={() => open('seeing')} />
+        onHelp={() => open('help')} onSeeing={() => open('seeing')} onHome={onHome} />
       <NavRail items={nav} section={section} onSection={go} />
       <main className="stage">
         <MapView key={manifest.aoi.id} base={shown} manifest={manifest} scene={scene} layers={layers} opacity={opacity}
@@ -163,7 +179,6 @@ export default function App() {
         {modelDay && <div className="live-banner modelled" role="status"><b>MODELLED</b> · {modelDay}: estimate between passes, not an observation. <button onClick={() => setModelDay(null)}>Show observed</button></div>}
         {isLive && story === null && !modelDay && <LiveBanner manifest={manifest} live={live} scene={scene} onLatest={() => setScene(latestOf(manifest))} />}
         {region.drawing && <div className="live-banner modelled" role="status">Click two opposite corners on the map to draw your box. <button onClick={() => setRegion((r) => ({ ...r, drawing: false }))}>Cancel</button></div>}
-        {mode === 'beginner' && <button className="seeing-fab" onClick={() => open('seeing')}><Icon name="eye" size={16} />What am I seeing?</button>}
         {!drawerOpen && <button className="drawer-tab" onClick={() => setDrawerOpen(true)}><Icon name="drawer" size={16} />{navItem?.label}</button>}
         {switching && <div className="map-loading" role="status">{loadError
           ? <>Could not load this event. <button className="btn-ghost small" onClick={() => setEventId(manifest.aoi.id)}>Stay on the current event</button></>
@@ -171,9 +186,18 @@ export default function App() {
         {story !== null && <Story steps={steps} index={story} onIndex={setStory} onClose={closeStory} />}
       </main>
       <Drawer open={drawerOpen} title={title} crumb={crumb} onBack={top ? back : null} onClose={() => setDrawerOpen(false)}>
-        {D ? <D.C ctx={ctx} {...top.props} /> : <Section ctx={ctx} />}
+        <Suspense fallback={<div className="loading"><span className="spinner" /></div>}>
+          {!D && mode === 'advanced' && BANNER[section] && <Boundary><SciBanner topic={BANNER[section]} ctx={ctx} /></Boundary>}
+          {D ? <D.C ctx={ctx} {...top.props} /> : <Section ctx={ctx} />}
+        </Suspense>
       </Drawer>
       <Timeline manifest={manifest} scene={scene} onSelect={pickScene} mode={mode} />
+      {science && mode !== 'beginner' && (
+        <Boundary><Suspense fallback={null}>
+          <SciencePanel topic={science} onTopic={setScience} onClose={() => setScience(null)} ctx={ctx} events={events}
+            onDeeper={({ mode: dm, section: sec }) => { const m = dm ?? mode; setScience(null); if (m !== mode) setMode(m); go(resolveSection(m, sec, isLive)) }} />
+        </Suspense></Boundary>
+      )}
     </div>
   )
 }

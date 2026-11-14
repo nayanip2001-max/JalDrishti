@@ -21,7 +21,12 @@ function useSearch(manifest, mode, query) {
   }, [manifest, mode, query])
 }
 
-export default function Header({ events, eventId, onEvent, manifest, scene, mode, onMode, lens, onLens, onSearchPick, onHelp, onSeeing }) {
+// With onHome (the globe landing exists), the brand is a button back to the globe; otherwise unchanged.
+const Brand = ({ onHome, children }) => (onHome
+  ? <button type="button" className="brand brand-home" onClick={onHome} title="Back to the globe" aria-label="JalDrishti: back to the globe">{children}</button>
+  : <div className="brand">{children}</div>)
+
+export default function Header({ events, eventId, onEvent, manifest, scene, mode, onMode, lens, onLens, onSearchPick, onHelp, onSeeing, onHome }) {
   const [query, setQuery] = useState('')
   const [focus, setFocus] = useState(false)
   const [hi, setHi] = useState(0)
@@ -38,12 +43,12 @@ export default function Header({ events, eventId, onEvent, manifest, scene, mode
   const ev = manifest?.event
   return (
     <header className="hdr">
-      <div className="brand">
+      <Brand onHome={onHome}>
         <span className="brand-logo" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24"><path d="M2 14c3-3 5 3 10 0s7 3 10 0" stroke="#22d3ee" strokeWidth="2.5" fill="none" strokeLinecap="round" /><path d="M2 19c3-3 5 3 10 0s7 3 10 0" stroke="#a78bfa" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity=".8" /></svg>
         </span>
         <span className="brand-t"><b>JalDrishti</b><small>NISAR flood intelligence</small></span>
-      </div>
+      </Brand>
 
       <div className="hdr-event">
         <select value={eventId} onChange={(e) => onEvent(e.target.value)} aria-label="Flood event">

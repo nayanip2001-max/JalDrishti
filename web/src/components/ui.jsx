@@ -1,5 +1,14 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Component } from 'react'
+
+// Keeps an optional panel's failure from blanking the whole dashboard.
+export class Boundary extends Component {
+  state = { failed: false }
+  static getDerivedStateFromError() { return { failed: true } }
+  componentDidCatch(e) { console.warn('Panel failed:', e) }
+  render() { return this.state.failed ? (this.props.fallback ?? null) : this.props.children }
+}
 import { GLOSSARY, glossaryText } from '../lib/glossary.js'
 
 const PATHS = {

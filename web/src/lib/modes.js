@@ -25,8 +25,7 @@ export const NAV = {
     { id: 'flood', label: 'Flood Analysis', icon: 'map' },
     { id: 'temporal', label: 'Temporal Analysis', icon: 'clock' },
     { id: 'impact', label: 'Impact Assessment', icon: 'people' },
-    { id: 'validation', label: 'Model Performance', icon: 'check' },
-    { id: 'data', label: 'Data & Sources', icon: 'database' },
+    { id: 'science', label: 'How We Know', icon: 'bulb' },
   ],
   advanced: [
     { id: 'event', label: 'Event', icon: 'home' },
@@ -47,7 +46,7 @@ export const navFor = (mode, live) => [...(live ? [NAV[mode][0], LIVE_ITEM, ...N
 
 // Where a section lives when the mode changes and it has no exact twin.
 export const SECTION_FALLBACK = { event: 'overview', overview: 'event', how: 'overview', observations: 'flood', features: 'flood',
-  model: 'validation', flood: 'observations', temporal: 'observations' }
+  model: 'validation', flood: 'observations', temporal: 'observations', validation: 'science', data: 'science', science: 'validation' }
 export const resolveSection = (mode, id, live = false) => {
   const ids = navFor(mode, live).map((n) => n.id)
   if (ids.includes(id)) return id

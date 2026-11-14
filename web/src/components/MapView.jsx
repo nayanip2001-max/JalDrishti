@@ -46,8 +46,9 @@ function setImage(map, id, url, corners, opacity, visible, beforeId = 'labels') 
     map.addSource(id, { type: 'image', url, coordinates: corners })
     map.addLayer({ id, type: 'raster', source: id, paint: { 'raster-opacity': opacity, 'raster-fade-duration': 0, 'raster-resampling': id === 'sar' ? 'linear' : 'nearest' } }, map.getLayer(beforeId) ? beforeId : 'labels')
   } else if (src.url !== url) {
-    src.updateImage({ url, coordinates: corners })
-    src.url = url
+    // Only fetch for a visible layer whose picture changed: hidden layers catch up when shown, and fast day-stepping
+    // no longer starts (and then aborts) downloads nobody sees.
+    if (visible && src.url !== url) { src.updateImage({ url, coordinates: corners }); src.url = url }
   }
   map.setPaintProperty(id, 'raster-opacity', opacity)
   map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none')
