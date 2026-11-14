@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { GLOSSARY, glossaryText } from '../lib/glossary.js'
 
 const PATHS = {
@@ -87,14 +88,36 @@ export function Note({ kind = 'info', children }) {
 }
 
 // "Explain this": a small ? chip that opens a plain-language (or technical) explanation.
+// The popup is drawn on document.body (a portal) with fixed positioning, so the drawer's overflow can't clip it,
+// and it is placed next to its chip: below if there is room, otherwise above; always kept inside the window.
+const GAP = 6, EDGE = 8
 export function Explain({ term, mode, label }) {
   const [open, setOpen] = useState(false)
+  const [pos, setPos] = useState(null)
   const ref = useRef(null)
+  const pop = useRef(null)
+  const place = () => {
+    const b = ref.current?.getBoundingClientRect(), p = pop.current
+    if (!b || !p) return
+    const w = p.offsetWidth, h = p.offsetHeight, vw = window.innerWidth, vh = window.innerHeight
+    const left = Math.min(Math.max(b.right - w, EDGE), vw - w - EDGE)          // right-aligned to the chip, as before
+    const below = b.bottom + GAP, above = b.top - GAP - h
+    const top = below + h <= vh - EDGE || above < EDGE ? Math.max(EDGE, Math.min(below, vh - h - EDGE)) : above
+    setPos({ left, top })
+  }
+  useLayoutEffect(() => { if (open) place(); else setPos(null) }, [open, mode])
   useEffect(() => {
     if (!open) return
-    const close = (e) => { if (!ref.current?.contains(e.target)) setOpen(false) }
+    const close = (e) => { if (!ref.current?.contains(e.target) && !pop.current?.contains(e.target)) setOpen(false) }
+    const key = (e) => { if (e.key === 'Escape') setOpen(false) }
     document.addEventListener('pointerdown', close)
-    return () => document.removeEventListener('pointerdown', close)
+    document.addEventListener('keydown', key)
+    window.addEventListener('resize', place)
+    window.addEventListener('scroll', place, true)           // the drawer or page scrolled: follow the chip
+    return () => {
+      document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', key)
+      window.removeEventListener('resize', place); window.removeEventListener('scroll', place, true)
+    }
   }, [open])
   const g = GLOSSARY[term]
   if (!g) return null
@@ -102,12 +125,12 @@ export function Explain({ term, mode, label }) {
     <span className="explain" ref={ref}>
       <button className="explain-btn" onClick={(e) => { e.stopPropagation(); setOpen(!open) }} aria-expanded={open}
         aria-label={`Explain ${g.term}`}>{label ?? '?'}</button>
-      {open && (
-        <span className="explain-pop" role="dialog">
+      {open && createPortal(
+        <span className="explain-pop" role="dialog" ref={pop} onClick={(e) => e.stopPropagation()}
+          style={pos ? { left: pos.left, top: pos.top } : { left: 0, top: 0, visibility: 'hidden' }}>
           <b>{g.term}</b>
           <span>{glossaryText(term, mode)}</span>
-        </span>
-      )}
+        </span>, document.body)}
     </span>
   )
 }

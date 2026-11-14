@@ -197,7 +197,7 @@ h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.01em; }
 .explain { position: relative; display: inline-block; vertical-align: middle; }
 .explain-btn { border: 1px solid #22d3ee55; background: #22d3ee14; color: var(--accent); border-radius: 999px; min-width: 18px; height: 18px; padding: 0 6px; font: 600 10.5px/16px var(--sans); }
 .explain-btn:hover { background: #22d3ee29; }
-.explain-pop { position: absolute; z-index: 40; right: 0; top: 24px; width: 260px; display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: var(--r-sm);
+.explain-pop { position: fixed; z-index: 40; width: min(260px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow-y: auto; display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: var(--r-sm);
   background: #16223c; border: 1px solid var(--border-strong); box-shadow: var(--shadow); font-size: 12.5px; line-height: 1.5; color: #d6deea; text-align: left; text-transform: none; letter-spacing: 0; font-weight: 400; }
 .explain-pop b { font-family: var(--display); color: var(--text); }
 
