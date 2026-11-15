@@ -130,7 +130,7 @@ export function LiveView({ ctx }) {
           </ol>
           {atLeast(mode, 'advanced') && live.latest_observation && <KV rows={[['Latest granule', <code key="g">{live.latest_observation.granule}</code>],
             ['Last checked', fmtTime(live.checked_at)], ['Passes mapped', mapped.length]]} />}
-          <LinkButton onClick={() => open('help')}>Questions about the data?</LinkButton>
+          <LinkButton onClick={() => open('seeing')}>Questions about the data?</LinkButton>
         </Card>
       )}
     </div>

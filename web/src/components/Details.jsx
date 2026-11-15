@@ -297,31 +297,21 @@ function SeeingDetail({ ctx }) {
       <p className="body">On this day about <b>{num(floodKm2(scene))} km²</b> was flooded{e ? <>, and <b>{people(e.low.people, country)}–{people(e.high.people, country)}</b> people lived inside the flooded area</> : null}.</p>
       <Card title="On the map now"><KV rows={items} /></Card>
       <Note>Click any spot to see why it was or wasn't marked as flood. Use the timeline to move through the days. <Explain term="radar" mode={mode} label="How does radar see?" /></Note>
-    </div>
-  )
-}
-
-function HelpDetail({ ctx }) {
-  const { mode, open } = ctx
-  return (
-    <div className="stack">
-      <Card title="Getting around">
+      <details className="fold">
+        <summary>Getting around</summary>
         <ul className="plain">
-          <li><b>Modes</b>: Beginner gives the answers, Intermediate shows the evidence, Advanced shows the science. Same data in every mode.</li>
-          <li><b>Science | Impact</b>: radar and model, or people, farms and roads.</li>
+          <li><b>Levels</b>: Beginner gives the answers, Intermediate shows the evidence, Advanced shows the science. Same data in every level.</li>
+          <li><b>Guided tours</b> (top bar): short walkthroughs that move the map for you. Pause one to explore, then resume.</li>
           <li><b>Click</b> any number, chart row or map spot to drill down; use ← to go back.</li>
           <li><b>Timeline</b>: each dot is a real NISAR pass. Click one, or press ▶ to replay.</li>
           <li><b>Search</b>: districts, dates ("22 Jul"), tracks ("T40") or terms ("HAND").</li>
+          <li><b>Keyboard</b>: ← → previous/next pass · / search · Esc close panel.</li>
         </ul>
-      </Card>
-      <div className="row-btns">
-        <button className="chip on" onClick={() => open('seeing')}>What am I seeing?</button>
-        <button className="chip" onClick={() => ctx.startTour()}>Guided tour</button>
-      </div>
-      <Card title="Glossary">
+      </details>
+      <details className="fold">
+        <summary>Glossary</summary>
         <dl className="feats">{Object.entries(GLOSSARY).map(([k, g]) => <div key={k}><dt>{g.term}</dt><dd>{glossaryText(k, mode)}</dd></div>)}</dl>
-      </Card>
-      <p className="muted small">Keyboard: ← → previous/next pass · / search · Esc close panel.</p>
+      </details>
     </div>
   )
 }
@@ -343,6 +333,6 @@ export const DETAILS = {
   sensor: { title: 'L-band vs C-band', C: SensorView },
   pixel: { title: 'Why this pixel?', C: PixelDetail },
   seeing: { title: 'What am I seeing?', C: SeeingDetail },
-  help: { title: 'Help', C: HelpDetail },
+  help: { title: 'What am I seeing?', C: SeeingDetail },     // old links: Help now lives here
   term: { title: (p) => GLOSSARY[p.term]?.term ?? 'Explain', C: TermDetail },
 }

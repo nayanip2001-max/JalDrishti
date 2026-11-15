@@ -1,4 +1,4 @@
-// Guided walkthrough. Each step selects a pass, sets layers and moves the camera;
+// "The flood in 60 seconds" tour (see lib/tours.js). Each step selects a pass, sets layers and moves the camera;
 // every number in the text comes from the manifest, so the story can't drift from the data.
 
 const fmt = (d) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
@@ -59,26 +59,4 @@ export function buildSteps(m) {
     })
   }
   return steps
-}
-
-export default function Story({ steps, index, onIndex, onClose }) {
-  const s = steps[index]
-  if (!s) return null
-  return (
-    <div className="story">
-      <div className="story-top">
-        <span className="story-count">{index + 1} / {steps.length}</span>
-        <div className="story-dots">{steps.map((_, i) => <span key={i} className={i === index ? 'on' : ''} onClick={() => onIndex(i)} />)}</div>
-        <button className="story-x" onClick={onClose} aria-label="Close story">✕</button>
-      </div>
-      <h2>{s.title}</h2>
-      <p>{s.body}</p>
-      <div className="story-nav">
-        <button onClick={() => onIndex(index - 1)} disabled={index === 0}>← Back</button>
-        {index < steps.length - 1
-          ? <button className="primary" onClick={() => onIndex(index + 1)}>Next →</button>
-          : <button className="primary" onClick={onClose}>Explore the map</button>}
-      </div>
-    </div>
-  )
 }

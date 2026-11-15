@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Icon, Seg } from './ui.jsx'
+import { Icon } from './ui.jsx'
 import { MODES, NAV } from '../lib/modes.js'
 import { GLOSSARY } from '../lib/glossary.js'
 import { fmtDate, posts } from '../lib/format.js'
@@ -26,7 +26,7 @@ const Brand = ({ onHome, children }) => (onHome
   ? <button type="button" className="brand brand-home" onClick={onHome} title="Back to the globe" aria-label="JalDrishti: back to the globe">{children}</button>
   : <div className="brand">{children}</div>)
 
-export default function Header({ events, eventId, onEvent, manifest, scene, mode, onMode, lens, onLens, onSearchPick, onHelp, onSeeing, onHome }) {
+export default function Header({ events, eventId, onEvent, manifest, mode, onMode, onSearchPick, onSeeing, onHome, tours }) {
   const [query, setQuery] = useState('')
   const [focus, setFocus] = useState(false)
   const [hi, setHi] = useState(0)
@@ -56,11 +56,6 @@ export default function Header({ events, eventId, onEvent, manifest, scene, mode
             <option key={e.id} value={e.id}>{e.title} · {e.country}</option>
           ))}
         </select>
-        {scene && (
-          <span className="hdr-obs" title="Date of the NISAR pass shown on the map">
-            <i className="live" />{fmtDate(scene.date, { day: 'numeric', month: 'short', year: 'numeric' })} · T{scene.track}
-          </span>
-        )}
       </div>
 
       <div className={`search ${focus ? 'focus' : ''}`}>
@@ -85,9 +80,8 @@ export default function Header({ events, eventId, onEvent, manifest, scene, mode
       </div>
 
       <div className="hdr-r">
-        <button className="btn-ghost seeing" onClick={onSeeing}><Icon name="eye" size={16} />What am I seeing?</button>
-        <button className="btn-icon" onClick={onHelp} aria-label="Help" title="Help"><Icon name="help" /></button>
-        <Seg value={lens} onChange={onLens} size="sm" options={[{ id: 'science', label: 'Science' }, { id: 'impact', label: 'Impact' }]} />
+        {tours}
+        <button className="btn-ghost seeing" onClick={onSeeing}><Icon name="eye" size={16} /><span>What am I seeing?</span></button>
         <div className="modes" role="radiogroup" aria-label="Detail level">
           {MODES.map((m) => (
             <button key={m.id} role="radio" aria-checked={mode === m.id} className={mode === m.id ? 'on' : ''} onClick={() => onMode(m.id)} title={m.who}>
