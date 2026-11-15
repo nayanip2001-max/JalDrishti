@@ -45,7 +45,7 @@ export default function Timeline({ manifest, scene, onSelect, mode }) {
 
   const t0 = t(ev.window[0]), t1 = t(ev.window[1]), padL = 44, padR = 10
   const x = (d) => padL + ((t(d) - t0) / (t1 - t0)) * (w - padL - padR)
-  const RAIN = [6, 30], AREA = [36, 72], rowY = (tr) => 84 + tracks.indexOf(tr) * (tracks.length > 2 ? 10 : 13)
+  const RAIN = [6, 34], AREA = [40, 88], rowY = (tr) => 102 + tracks.indexOf(tr) * (tracks.length > 2 ? 11 : 14)
   const H = rowY(tracks[tracks.length - 1]) + 32   // room for phase labels, then month labels
   const maxA = Math.max(1, ...posts.map(floodKm2))
   const ya = (s) => AREA[1] - (floodKm2(s) / maxA) * (AREA[1] - AREA[0])

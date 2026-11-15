@@ -4,7 +4,9 @@ import { useRef, useState } from 'react'
 import { Card, Badge, Note, Metric, Icon, KV } from './ui.jsx'
 import { atLeast } from '../lib/modes.js'
 import { fmtDate, num } from '../lib/format.js'
-import { geocode, boxKm2, boxProblem, nisarPasses, settingsLine, cliCommand, readResult, slug, COLAB_URL, BEFORE_DAYS } from '../lib/region.js'
+import { geocode, boxKm2, boxProblem, nisarPasses, settingsLine, cliCommand, readResult, slug, COLAB_URL, BEFORE_DAYS, estimateMinutes } from '../lib/region.js'
+import { ScarsCard, RecoveryCurve } from './Recovery.jsx'
+import { ChartFrame } from './Charts.jsx'
 
 const today = () => new Date().toISOString().slice(0, 10)
 const fmtBox = (b) => b.map((v) => v.toFixed(3)).join(', ')
@@ -116,12 +118,24 @@ function CheckStep({ region, upd }) {
   )
 }
 
-function MakeStep({ region, mode }) {
+const addDays = (d, k) => { const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + k); return t.toISOString().slice(0, 10) }
+function MakeStep({ region, upd, mode }) {
   const ready = region.check?.verdict.ok && region.box
   const date = region.check?.best?.date ?? region.date ?? today()
-  const line = region.box ? settingsLine(region.name || 'my_region', region.box, date) : null
+  const until = region.until && region.until > date ? region.until : null
+  const line = region.box ? settingsLine(region.name || 'my_region', region.box, date, until) : null
+  const nRefs = Math.min(3, region.check?.best?.refs?.length ?? 3)
+  const nPost = 1 + (until ? Math.floor((new Date(until) - new Date(date)) / (12 * 864e5)) : 0)
+  const est = region.box ? estimateMinutes(boxKm2(region.box), nRefs, nPost) : null
   return (
-    <Card title="3 · Make the flood map" tag={<Badge kind="observed">Free · ~5 min</Badge>}>
+    <Card title="3 · Make the flood map" tag={<Badge kind="observed">{est ? `Free · about ${est[0]}–${est[1]} min` : 'Free'}</Badge>}>
+      <label className="rg-until">
+        <span><b>Also track recovery</b> (optional): map every later pass up to
+          <input type="date" value={until ?? ''} min={addDays(date, 12)} max={today()} onChange={(e) => upd({ until: e.target.value || null })} aria-label="Track recovery until" />
+          {until && <button className="linkbtn" onClick={() => upd({ until: null })}>clear</button>}</span>
+        <small>Adds days under water, when the land dried, where water came back, and river-bank change. Needs passes after your date (one about every 12 days).</small>
+      </label>
+      {est && <p className="rg-est">⏱ Estimated time: <b>{est[0]}–{est[1]} minutes</b> ({nRefs + nPost} passes to download, 4 at a time{until ? `, about ${nPost} to map` : ''}). The notebook prints its own estimate when it starts.</p>}
       <ol className="steps">
         <li>Open the notebook: <a className="rg-colab" href={COLAB_URL} target="_blank" rel="noreferrer"><Icon name="external" size={14} />Open in Google Colab</a></li>
         <li>Paste this line into the <b>Region and date</b> box{line ? '' : ' (choose an area first)'}:
@@ -131,7 +145,7 @@ function MakeStep({ region, mode }) {
       </ol>
       {!ready && region.check && <Note kind="warn">The NISAR check did not pass for this box and date, so the notebook would stop with the same message. Pick one of the pass dates above.</Note>}
       <p className="muted small">Have your own radar images instead (HH + HV GeoTIFFs: one after, two or more before)? Use section 3B of the same notebook; the files are checked before use.</p>
-      {atLeast(mode, 'advanced') && line && <div className="rg-code"><code>{cliCommand(region.name, region.box, date)}</code><Copy text={cliCommand(region.name, region.box, date)} /></div>}
+      {atLeast(mode, 'advanced') && line && <div className="rg-code"><code>{cliCommand(region.name, region.box, date, until)}</code><Copy text={cliCommand(region.name, region.box, date, until)} /></div>}
     </Card>
   )
 }
@@ -181,6 +195,8 @@ function ResultStep({ region, upd, ctx }) {
             ['Compared with', (s.reference_dates ?? []).map((d) => fmtDate(d)).join(', ')], ['Source', s.source],
             s.exposure?.population && ['People inside the flood', num(s.exposure.population)],
           ]} />}
+          {r.recovery && <SeasonResult rec={r.recovery} region={region} upd={upd} ctx={ctx} />}
+          {s?.season?.note && <Note kind="warn">{s.season.note}</Note>}
           {r.image && <img className="rg-quick" src={r.image} alt="Quicklook: NISAR HH with the flood map on top" />}
           <Note kind="warn">{s?.caveat ?? 'Not validated for this region.'} The map shows confident flood only; the GeoTIFF in the zip also has possible flood and probability.</Note>
           {r.problems.length > 0 && <Note kind="warn">{r.problems.join('; ')}</Note>}
@@ -194,6 +210,33 @@ function ResultStep({ region, upd, ctx }) {
   )
 }
 
+function SeasonResult({ rec, region, upd, ctx }) {
+  const j = rec.json, t = j.totals
+  const show = region.showRec ?? { dur: true, scar: false }
+  const set = (k) => upd({ showRec: { ...show, [k]: !show[k] } })
+  if (!t) return <Note>No confident flood in this area during the season, so there is no recovery to measure.</Note>
+  return (
+    <>
+      <h4 className="rg-h">Season: recovery and river banks</h4>
+      {!t.recovering && <Note kind="warn">The water was still at its highest on the last pass: recovery cannot be measured yet.</Note>}
+      <div className="metrics">
+        <Metric value={num(t.flooded_km2)} unit="km²" label="Flooded at any pass" color="#22d3ee" />
+        {t.half_dry_days != null && <Metric value={t.half_dry_days} unit="days" label="Half dry again after the peak" />}
+        <Metric value={num(t.longer_than_4_weeks_km2)} unit="km²" label="Under water ~4 weeks or more" color="#7c3aed" />
+        <Metric value={num(t.reflooded_km2)} unit="km²" label="Water came back" color="#f59e0b" />
+      </div>
+      <div className="row-btns">
+        {rec.dur && <button className={`chip ${show.dur ? 'on' : ''}`} onClick={() => set('dur')}>Days under water</button>}
+        {rec.scar && <button className={`chip ${show.scar ? 'on' : ''}`} onClick={() => set('scar')}>River-bank change</button>}
+      </div>
+      {j.curves && <ChartFrame title="How fast the land dried" sub="share of the flooded land still under water, each pass" source="NISAR L2 GCOV, JalDrishti confident flood; ESA WorldCover">
+        {(wide) => <RecoveryCurve cur={j.curves} wide={wide} />}
+      </ChartFrame>}
+      {j.scars && <ScarsCard s={j.scars} adv onFly={(c) => { ctx.flyTo(c); if (!show.scar) set('scar') }} />}
+    </>
+  )
+}
+
 export function RegionView({ ctx }) {
   const { region, setRegion, mode } = ctx
   const upd = (p) => setRegion((r) => ({ ...r, ...p }))
@@ -204,7 +247,7 @@ export function RegionView({ ctx }) {
         : 'Map any area with the same JalDrishti pipeline. The dashboard checks NISAR coverage live from NASA; the mapping itself needs a NASA login and a few minutes of computing, so it runs in a free Colab notebook (or the command line). The result loads back here.'}</p>
       <AreaStep region={region} upd={upd} ctx={ctx} />
       <CheckStep region={region} upd={upd} />
-      <MakeStep region={region} mode={mode} />
+      <MakeStep region={region} upd={upd} mode={mode} />
       <ResultStep region={region} upd={upd} ctx={ctx} />
     </>
   )

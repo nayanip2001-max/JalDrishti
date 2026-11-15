@@ -31,6 +31,29 @@ function imageXY(lngLat, corners) {
 
 const dec = (v, [lo, hi]) => lo + (v / 255) * (hi - lo)
 
+// The class exactly as the map draws it at one spot: read ONE pixel of the (lossless) class image, so the verdict
+// always matches the colour under the cursor. (The 100 m lookups below average 25 pixels and can straddle an edge.)
+const imgCache = new Map()
+const loadImage = (url) => {
+  if (!imgCache.has(url)) imgCache.set(url, new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url }))
+  return imgCache.get(url)
+}
+async function mapClass(url, fx, fy, classes) {
+  const img = await loadImage(url)
+  const c = document.createElement('canvas'); c.width = 1; c.height = 1
+  const g = c.getContext('2d', { willReadFrequently: true }); g.imageSmoothingEnabled = false
+  g.drawImage(img, Math.floor(fx * img.width), Math.floor(fy * img.height), 1, 1, 0, 0, 1, 1)
+  const [r, gr, b, a] = g.getImageData(0, 0, 1, 1).data
+  if (a < 20) return 1                                                  // transparent = dry (no data is caught earlier)
+  let best = null, bd = Infinity
+  for (const [k, v] of Object.entries(classes)) {
+    if (+k < 2) continue
+    const h = v.color, d = Math.abs(parseInt(h.slice(1, 3), 16) - r) + Math.abs(parseInt(h.slice(3, 5), 16) - gr) + Math.abs(parseInt(h.slice(5, 7), 16) - b)
+    if (d < bd) { bd = d; best = +k }
+  }
+  return bd < 60 ? best : null
+}
+
 // Everything the pixel panel shows, read from the event's lookup images. Missing layers stay null.
 export async function readPixel(base, scene, manifest, lngLat) {
   const [fx, fy] = imageXY(lngLat, manifest.aoi.corners)
@@ -51,6 +74,7 @@ export async function readPixel(base, scene, manifest, lngLat) {
     hh: null, hv: null, cls: null, hand: null, slope: null, jrc: null, wc: null, district: null, density: null,
   }
   out.pFlood = 1 - (1 - out.pOpen) * (1 - out.pVeg)
+  out.mapCls = scene.cls ? await mapClass(base + scene.cls, fx, fy, manifest.classes).catch(() => null) : null
   if (e3) {
     out.hh = e3[0] ? dec(e3[0], k.hh_db) : null
     out.hv = e3[1] ? dec(e3[1], k.hv_db) : null

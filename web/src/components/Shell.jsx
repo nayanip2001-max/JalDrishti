@@ -54,6 +54,8 @@ export function MapLegend({ manifest, layers, mode, scene, modelDay }) {
       {layers.population && <span><i style={{ background: 'linear-gradient(90deg,#312e81,#db2777,#fef08a)' }} />People/km² (low → high)</span>}
       {layers.roads && <><span><i className="line" style={{ background: '#fde68a' }} />Road</span><span><i className="line" style={{ background: '#f87171' }} />Railway</span></>}
       {layers.districts && <span><i className="line dash" />District</span>}
+      {layers.dur && <><span><i style={{ background: '#bae6fd' }} />&lt; 2 wk</span><span><i style={{ background: '#60a5fa' }} />2–4 wk</span><span><i style={{ background: '#6366f1' }} />4–8 wk</span><span><i style={{ background: '#7c3aed' }} />&gt; 8 wk</span><span><i style={{ background: '#f43f5e' }} />Not dry again</span></>}
+      {layers.scar && <><span><i style={{ background: '#f97316' }} />Land → river</span><span><i style={{ background: '#facc15' }} />River → land</span><span><i style={{ background: '#1e40af' }} />River before</span></>}
     </div>
   )
 }

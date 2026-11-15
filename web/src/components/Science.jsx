@@ -1,16 +1,33 @@
 // Science sections: observations, features, model, validation, data.
-import { Card, Metric, Badge, Explain, Note, KV, LinkButton, Icon } from './ui.jsx'
-import { RangeBars, DotCI, ChartLegend } from './Charts.jsx'
+import { Card, Metric, Badge, Explain, Note, KV, LinkButton, Icon, LayerToggle, Seg } from './ui.jsx'
+import { RangeBars, DotCI, ChartLegend, ChartFrame, RiseRecession } from './Charts.jsx'
 import { atLeast } from '../lib/modes.js'
 import { fmtDate, floodKm2, num, posts, f1, trackColor, meanSelected } from '../lib/format.js'
 
 export function ObservationsView({ ctx }) {
-  const { manifest: m, scene, setScene, open, mode } = ctx
+  const { manifest: m, scene, setScene, open, mode, layers, setLayers, compare, setCompare, basemap, setBasemap } = ctx
   const ps = posts(m)
   const tracks = [...new Set(ps.map((s) => s.track))].sort((a, b) => a - b)
+  const flip = (k) => setLayers({ ...layers, [k]: !layers[k] })
   return (
     <div className="stack">
       <p className="lead">{ps.length} NISAR L-band passes after the event, on {tracks.length} orbit tracks. <Explain term="nisar" mode={mode} /></p>
+      <Card title="Map layers">
+        <div className="layers">
+          <LayerToggle on={layers.flood} onClick={() => flip('flood')} swatch="linear-gradient(90deg,var(--flood) 0 40%,var(--veg) 40% 60%,var(--possible) 60%)" name="Flood classes" sub="Change detection" />
+          <LayerToggle on={layers.sar} onClick={() => flip('sar')} swatch="linear-gradient(90deg,#000,#fff)" name="Radar image" sub="HH γ⁰ (dB)" />
+          <LayerToggle on={layers.prob} onClick={() => flip('prob')} swatch="linear-gradient(90deg,#0b1220,#3b82f6,#e0f2fe)" name="Flood probability" sub="p_flood" />
+          {m.sensor_compare && <LayerToggle on={layers.compare} onClick={() => ctx.setLayersCompare(!layers.compare)} swatch="linear-gradient(90deg,var(--flood) 0 33%,#d946ef 33% 66%,#fb923c 66%)" name="L- vs C-band" sub={fmtDate(m.sensor_compare.date)} />}
+        </div>
+        <div className="row-btns">
+          <button className={`chip ${compare ? 'on' : ''}`} onClick={() => setCompare(!compare)}>⟷ Before / after slider</button>
+          <Seg value={basemap} onChange={setBasemap} size="sm" options={[{ id: 'dark', label: 'Dark' }, { id: 'satellite', label: 'Satellite' }]} />
+        </div>
+      </Card>
+      <ChartFrame title="Rise and recession" sub="km² per day between passes, per track" source="NISAR L2 GCOV passes, JalDrishti flood classes"
+        caption="Average change in mapped flood per day between consecutive same-track passes (pre-flood no-flood passes included). The true peak can fall between passes.">
+        {(wide) => <RiseRecession manifest={m} scene={scene} onSelect={setScene} wide={wide} />}
+      </ChartFrame>
       <Card title="Acquisitions" tag={<Badge>Observed</Badge>}>
         <table className="tbl clickable">
           <thead><tr><th>Date</th><th>Track</th><th>Orbit</th><th>Mode</th><th>Flood km²</th></tr></thead>
@@ -39,7 +56,7 @@ export function ObservationsView({ ctx }) {
 }
 
 export function FeaturesView({ ctx }) {
-  const { manifest: m, pixel, mode } = ctx
+  const { manifest: m } = ctx
   const feats = m.model?.features ?? []
   const total = feats.reduce((a, f) => a + f.gain, 0) || 1
   return (
@@ -51,19 +68,7 @@ export function FeaturesView({ ctx }) {
       <Card title="What each feature measures">
         <dl className="feats">{feats.map((f) => <div key={f.name}><dt>{f.name}</dt><dd>{f.description}</dd></div>)}</dl>
       </Card>
-      <Card title="Values at the selected pixel">
-        {pixel ? (
-          <KV rows={[
-            ['HH γ⁰', pixel.hh != null ? `${pixel.hh.toFixed(1)} dB` : '—'], ['HV γ⁰', pixel.hv != null ? `${pixel.hv.toFixed(1)} dB` : '—'],
-            ['HH − HV', pixel.hh != null && pixel.hv != null ? `${(pixel.hh - pixel.hv).toFixed(1)} dB` : '—'],
-            ['ΔHH vs reference', `${pixel.dHH.toFixed(1)} dB`], ['HAND', pixel.hand != null ? `${pixel.hand.toFixed(1)} m` : '—'],
-            ['Slope', pixel.slope != null ? `${pixel.slope.toFixed(1)}°` : '—'], ['JRC occurrence', pixel.jrc != null ? `${pixel.jrc.toFixed(0)}%` : '—'],
-            ['Land cover', pixel.wc ? m.anc?.worldcover?.[pixel.wc] ?? pixel.wc : '—'],
-          ]} />
-        ) : <p className="muted small"><Icon name="target" size={14} /> Click the map to read feature values at a pixel (sampled at 100 m).</p>}
-        <p className="muted small">Scene-normalised features (hh_rel_*) and windowed statistics are computed at 20 m and are not shipped to the browser; the values above are their physical inputs.</p>
-      </Card>
-      {mode !== 'advanced' && <Note>Switch to Advanced mode for the full model card.</Note>}
+      <p className="hint-click"><Icon name="target" size={14} /> Click the map: "Why this pixel?" shows the physical inputs (HH, HV, ΔHH, HAND, slope, JRC, land cover) at that spot.</p>
     </div>
   )
 }
@@ -118,16 +123,30 @@ export function ValidationView({ ctx, inDrawer = false }) {
   if (!v) return <Note>No validation for this event.</Note>
   const folds = Object.keys(v.rules[v.selected])
   const adv = mode === 'advanced'
+  // Why the reported method is the one it is (and how much to trust its score): stated from the numbers themselves.
+  const mean = (n) => folds.reduce((a, f) => a + v.rules[n][f].IoU, 0) / folds.length
+  const best = Object.keys(v.rules).reduce((a, n) => (mean(n) > mean(a) ? n : a), v.selected)
+  const overlap = folds.every((f) => v.rules[best][f].ci[0] <= v.rules[v.selected][f].ci[1] && v.rules[v.selected][f].ci[0] <= v.rules[best][f].ci[1])
+  const lodo = /^leave-one-date-out/i.test(v.protocol)
+  const why = best !== v.selected
+    ? `${best} scored a higher mean IoU here (${mean(best).toFixed(3)} vs ${mean(v.selected).toFixed(3)}${overlap ? ', with overlapping 95% CIs' : ''}). The reported method was fixed before these dates were scored, so it is kept unchanged rather than picking the best score after the fact.`
+    : lodo ? `The rule was chosen as the best of five pre-registered combinations on these same held-out dates, so this score is slightly optimistic; the other events test the fixed rule cleanly.` : null
+  const nt = v.null_tests ?? []
+  const ntLo = Math.min(...nt.map((n) => n.false_flood_km2)), ntHi = Math.max(...nt.map((n) => n.false_flood_km2))
   return (
     <div className="stack">
       <div className="metrics">
         <Metric big value={meanSelected(v).toFixed(3)} label={`${folds.length > 1 ? 'Mean IoU' : 'IoU'} on unseen dates`} color="var(--flood)" sub={v.selected} />
-        {v.null_tests?.[0] && <Metric value={`${v.null_tests[0].false_flood_km2}`} unit="km²" label="False alarms (no-flood test)" sub={`of ${v.null_tests[0].mapped_km2.toLocaleString('en-US')} km² · T${v.null_tests[0].track}`} />}
+        {nt.length > 0 && <Metric value={ntLo === ntHi ? `${ntLo}` : `${ntLo}–${ntHi}`} unit="km²" label="False alarms on no-flood passes" sub={`${nt.length} test${nt.length > 1 ? 's' : ''}, each over ${Math.min(...nt.map((n) => n.mapped_km2)).toLocaleString('en-US')}+ km² mapped`} />}
       </div>
       <Card title="Held-out accuracy" action={<Explain term="iou" mode={mode} />}>
-        <DotCI rules={v.rules} selected={v.selected} />
-        <ChartLegend items={Object.keys(v.rules).map((n) => ({ label: n, color: n === v.selected ? 'var(--flood)' : n.startsWith('Fixed') ? '#94a3b8' : '#475569' }))} />
+        <ChartFrame title="IoU on unseen dates" sub="dot = estimate · line = 95% block-bootstrap CI" source="Sentinel-2 L2A cloud-free open water (MNDWI), same day">
+          {(wide) => <DotCI rules={v.rules} selected={v.selected} wide={wide} />}
+        </ChartFrame>
+        <ChartLegend items={Object.keys(v.rules).map((n) => ({ label: n, color: n === v.selected ? 'var(--flood)' : n.startsWith('Fixed') ? '#cbd5e1' : '#7c8aa5' }))} />
         <p className="muted small">{v.protocol}</p>
+        {why && <Note>{why}</Note>}
+        <p className="muted small">Sentinel-2 sees open water only, so flooded vegetation (purple classes) is not scored here.</p>
       </Card>
       {atLeast(mode, 'intermediate') && (
         <Card title={adv ? 'All metrics (95% CI on IoU)' : 'Scores'}>
@@ -211,8 +230,7 @@ export function DataView({ ctx }) {
         <div className="badges"><Badge>Observed</Badge><Badge kind="modelled">Modelled</Badge><Badge kind="predicted">Predicted</Badge><Badge kind="exposed">Exposed</Badge><Badge kind="damaged">Damaged</Badge></div>
         <p className="muted small">Radar observations are never mixed with model estimates or forecasts. Exposure is not damage.</p>
       </Card>
-      <a className="linkbtn" href="https://github.com/nayanip2001-max/JalDrishti#readme" target="_blank" rel="noreferrer">Method, validation &amp; code on GitHub <Icon name="external" size={13} /></a>
-      <p className="muted small">Team JalWar · Thrinayani P · Thrijagathi P · Minhaj Parveen H · Nilani S · Haseena F · NASA Space Apps 2026</p>
+      <p className="muted small">Team TERRAVANCE · Thrinayani P · Thrijagathi P · Minhaj Parveen H · Nilani S · Haseena F · NASA Space Apps 2026</p>
     </div>
   )
 }

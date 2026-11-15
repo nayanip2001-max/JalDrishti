@@ -26,6 +26,9 @@ ap.add_argument("--name", required=True, help="short name for the region (letter
 ap.add_argument("--bbox", nargs=4, type=float, metavar=("W", "S", "E", "N"))
 ap.add_argument("--date", help="flood date YYYY-MM-DD (mode A)")
 ap.add_argument("--before-days", type=int, default=75, help="how far back to look for reference passes (mode A)")
+ap.add_argument("--until", help="season mode (A): also map every later pass of the same track up to this date, then measure "
+                                "recovery (days under water, drying, re-flooding) and river-bank change")
+ap.add_argument("--refs-max", type=int, default=3, help="use at most this many (most recent) reference passes (speed)")
 ap.add_argument("--upload", help="your post-event GeoTIFF (mode B)")
 ap.add_argument("--refs", nargs="*", default=[], help="your pre-event GeoTIFFs (mode B), at least 2")
 ap.add_argument("--model", default=str(ROOT / "models/lgbm_final_rel02.txt"))
@@ -59,14 +62,25 @@ def check_bbox(w, s, e, n):
     return km2
 
 
-def write_region(bounds, tracks, refs, post, source):
+def estimate(km2, n_refs, n_post, workers=4):
+    """Minutes, as a range. Measured: one scene ~2–3 min to stream; a 768 km² season run (7 passes) took 12.9 min.
+    Downloads run `workers` at a time; Colab's 2 CPUs classify ~1.5x slower than the laptop."""
+    f = max(0.35, km2 / 760)
+    fetch = 3.0 * math.ceil((n_refs + n_post) / workers) * max(0.5, f ** 0.7)
+    terrain = 1.0 + 0.6 * f
+    detect = 0.8 * f * (0.6 * n_refs + 0.9 * (n_post + 1)) + (0.2 * n_post * f if n_post > 1 else 0)   # calibrated: Majuli season run, 768 km², 7 passes = 12.9 min
+    t = fetch + terrain + detect + 0.5
+    return max(3, round(t * 0.8)), round(t * 1.3) + 1
+
+
+def write_region(bounds, tracks, refs, post, source, until=None):
     w, s, e, n = bounds
     first = min(refs)
     region = {"title": f"{NAME} · {post}", "subtitle": f"User region ({source})", "country": "", "iso3": a.iso3,
               "bounds": list(bounds), "epsg": utm_epsg((w + e) / 2, (s + n) / 2), "tracks": list(tracks),
-              "fetch": [first, (dt.date.fromisoformat(post) + dt.timedelta(days=1)).isoformat()],
-              "last_pre": max(refs), "window": [first, post], "marker": {"date": post, "label": "Requested date"},
-              "phases": [["Before", first, max(refs), "#94a3b8"], ["After", max(refs), post, "#22d3ee"]],
+              "fetch": [first, (dt.date.fromisoformat(until or post) + dt.timedelta(days=1)).isoformat()],
+              "last_pre": max(refs), "window": [first, until or post], "marker": {"date": post, "label": "Requested date"},
+              "phases": [["Before", first, max(refs), "#94a3b8"], ["After", max(refs), until or post, "#22d3ee"]],
               "context": f"User-requested map ({source}).", "source": source}
     (REG / f"{NAME}.json").write_text(json.dumps(region, indent=1), encoding="utf-8")
     return region
@@ -104,7 +118,19 @@ def from_nisar():
     print(f"[map_region] {km2:,.0f} km²; pass {pdate} track {track} covers {cover(post):.0%} of the box; references {refs}")
     if len(refs) < 2:
         fail(f"track {track} has {len(refs)} earlier pass(es) within {a.before_days} days; need 2. Try --before-days 150")
-    write_region(a.bbox, [track], refs, pdate, "NISAR GCOV via ASF")
+    refs = refs[-a.refs_max:]
+    later = []
+    if a.until:
+        u = dt.date.fromisoformat(a.until)
+        res2 = asf.search(dataset=asf.DATASET.NISAR, processingLevel="GCOV", intersectsWith=aoi.wkt, start=pdate,
+                          end=(u + dt.timedelta(days=1)).isoformat(), maxResults=1000)
+        later = sorted({g.properties["startTime"][:10] for g in res2 if g.properties["pathNumber"] == track
+                        and g.properties["sceneName"].split("_")[2] in ("PR", "UR") and g.properties["startTime"][:10] > pdate})
+        print(f"[map_region] season mode: {len(later)} later pass(es) of track {track} up to {a.until}: {later}")
+    est = estimate(km2, len(refs), 1 + len(later))
+    print(f"[map_region] estimated time: about {est[0]}–{est[1]} minutes (download {len(refs) + 1 + len(later)} passes, terrain, detection"
+          f"{', recovery' if later else ''})", flush=True)
+    write_region(a.bbox, [track], refs, pdate, "NISAR GCOV via ASF", until=later[-1] if later else None)
     run("fetch_gcov.py", NAME)
     return pdate
 
@@ -245,14 +271,29 @@ try:
 except Exception as exc:
     print("[map_region] quicklook skipped:", exc)
 
+recovery_note = None
+if a.until:
+    n_post = sum(1 for r in summary if r["kind"] == "post")
+    if n_post >= 2:
+        run("export_recovery.py", NAME, res_dir, OUT / "recovery")
+        for f in ("recovery.json", "duration.webp", "scars.webp", "lookup.png"):
+            if (OUT / "recovery" / f).exists():
+                (OUT / ("recovery_" + f if f != "recovery.json" else f)).write_bytes((OUT / "recovery" / f).read_bytes())
+        import shutil; shutil.rmtree(OUT / "recovery", ignore_errors=True)
+    else:
+        recovery_note = "Season mode needs at least 2 passes after the flood date; only one was found."
+
 out = {"region": NAME, "date": pdate, "track": rec["track"], "reference_dates": rec["refs"], "areas_km2": rec["areas_km2"],
        "exposure": rec.get("exposure"), "method": rec.get("method"), "source": json.loads((REG / f"{NAME}.json").read_text())["source"],
        "bbox": json.loads((REG / f"{NAME}.json").read_text())["bounds"],
        "files": sorted(p.name for p in OUT.iterdir() if p.suffix != ".zip"),
+       "season": {"until": a.until, "passes": [r["date"] for r in summary if r["kind"] == "post"], "note": recovery_note} if a.until else None,
        "caveat": "Not validated for this region: accuracy was measured in Assam, Thailand and Chennai. Exposure is not damage."}
 (OUT / "summary.json").write_text(json.dumps(out, indent=1))
 # One zip for the dashboard's "Map a Region" step 4 (drop it on the page to see the map).
 import zipfile
+for old in OUT.glob("*.zip"):
+    old.unlink()
 with zipfile.ZipFile(OUT / f"jaldrishti_{NAME}.zip", "w", zipfile.ZIP_DEFLATED) as z:
     for f in sorted(OUT.iterdir()):
         if f.suffix != ".zip":

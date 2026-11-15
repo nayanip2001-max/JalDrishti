@@ -24,6 +24,13 @@ const EN = {
   next: 'Next', back: 'Back', close: 'Close', listen: 'Listen', start: 'Start',
   loading: 'Loading…', loadingEvent: (t) => `Loading ${t}…`, home: 'Back to the globe', level_: 'Level', lang: 'Language',
   modelledNote: 'Pictures come every few days.',
+  game: 'Raise the river', gameHello: 'What if the river rises? Slide and watch which land goes under first.',
+  gameTag: 'What if? A game, not a satellite picture', riseBy: (m) => `River up by ${m} m`, gameLand: 'Land under water in this game',
+  showReal: (d) => `Show the real flood (${d})`, gameAsk: 'Does the real flood (cyan) sit on the low land? Look and see!',
+  gameKey: 'Game water', gameLow: 'Low', gameHigh: 'High',
+  season: 'The whole season here', underFor: (a, b) => (b == null ? `Under water at least ${a} days` : a === b ? `Under water about ${a} days` : `Under water for ${a}–${b} days`),
+  dryBy: (d) => `Dry again by ${d}`, notDryYet: (d) => `Still wet on ${d}`, cameBack: 'The water came back once it had dried', neverWet: 'Not flooded at any time this season',
+  wetFrom: (a, b) => (a === b ? `Seen flooded on ${a}` : `Seen flooded ${a} → ${b}`),
 }
 
 const TA = {
@@ -48,6 +55,13 @@ const TA = {
   next: 'அடுத்து', back: 'பின்செல்', close: 'மூடு', listen: 'கேளுங்கள்', start: 'தொடங்கு',
   loading: 'ஏற்றுகிறது…', loadingEvent: (t) => `${t} ஏற்றுகிறது…`, home: 'உலக உருண்டைக்குத் திரும்பு', level_: 'நிலை', lang: 'மொழி',
   modelledNote: 'சில நாட்களுக்கு ஒருமுறை படம் வரும்.',
+  game: 'ஆற்றை உயர்த்து', gameHello: 'ஆறு உயர்ந்தால் என்ன ஆகும்? நகர்த்திப் பாருங்கள்: எந்த நிலம் முதலில் மூழ்கும்?',
+  gameTag: '"என்ன ஆகும்?" விளையாட்டு, செயற்கைக்கோள் படம் அல்ல', riseBy: (m) => `ஆறு ${m} மீ உயர்ந்தது`, gameLand: 'இந்த விளையாட்டில் மூழ்கிய நிலம்',
+  showReal: (d) => `உண்மையான வெள்ளத்தைக் காட்டு (${d})`, gameAsk: 'உண்மையான வெள்ளம் (நீலப்பச்சை) தாழ்வான நிலத்தில்தான் உள்ளதா? பார்த்துச் சொல்லுங்கள்!',
+  gameKey: 'விளையாட்டு நீர்', gameLow: 'குறைவு', gameHigh: 'அதிகம்',
+  season: 'இந்தப் பருவம் முழுவதும் இங்கே', underFor: (a, b) => (b == null ? `குறைந்தது ${a} நாட்கள் நீரில்` : a === b ? `சுமார் ${a} நாட்கள் நீரில்` : `${a}–${b} நாட்கள் நீரில்`),
+  dryBy: (d) => `${d} அன்று மீண்டும் உலர்ந்தது`, notDryYet: (d) => `${d} அன்றும் நீர் உள்ளது`, cameBack: 'உலர்ந்த பிறகு மீண்டும் நீர் வந்தது', neverWet: 'இந்தப் பருவத்தில் வெள்ளம் வரவில்லை',
+  wetFrom: (a, b) => (a === b ? `${a} அன்று வெள்ளம்` : `${a} → ${b} வெள்ளம்`),
 }
 
 export const STRINGS = { en: EN, ta: TA }

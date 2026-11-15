@@ -95,3 +95,21 @@ def best_products(props, tracks):
         if key not in best or rank > (best[key]["sceneName"].split("_")[2] == "PR", best[key]["sceneName"]):
             best[key] = p
     return best, every
+
+
+_logged_in = False
+
+
+def subset_job(url, bounds, dst):
+    """One scene, in a worker process (h5py serialises threads, so parallel fetches need processes)."""
+    global _logged_in
+    import time
+    from pathlib import Path
+    if not _logged_in:
+        earthaccess.login(strategy="netrc"); _logged_in = True
+    t = time.time()
+    dst = Path(dst)
+    part = dst.with_suffix(".part.tif")
+    _, names = subset(url, bounds, part)
+    part.replace(dst)  # atomic: a scene file only exists once it is complete
+    return str(dst), names, time.time() - t

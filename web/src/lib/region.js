@@ -103,8 +103,17 @@ export async function nisarPasses(box, date) {
 
 // The one line pasted into the Colab notebook's form (name | W S E N | date).
 export const slug = (s) => (s || 'my_region').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '').slice(0, 40) || 'my_region'
-export const settingsLine = (name, box, date) => `${slug(name)} | ${box.map((v) => v.toFixed(4)).join(' ')} | ${date}`
-export const cliCommand = (name, box, date) => `python scripts/map_region.py --name ${slug(name)} --bbox ${box.map((v) => v.toFixed(4)).join(' ')} --date ${date}`
+export const settingsLine = (name, box, date, until) => `${slug(name)} | ${box.map((v) => v.toFixed(4)).join(' ')} | ${date}${until ? ` | ${until}` : ''}`
+export const cliCommand = (name, box, date, until) => `python scripts/map_region.py --name ${slug(name)} --bbox ${box.map((v) => v.toFixed(4)).join(' ')} --date ${date}${until ? ` --until ${until}` : ''}`
+
+// Minutes, as a range: the same model map_region.py prints (calibrated on a real 768 km², 7-pass run: 12.9 min).
+export function estimateMinutes(km2, nRefs = 3, nPost = 1, workers = 4) {
+  const f = Math.max(0.35, km2 / 760)
+  const fetch = 3 * Math.ceil((nRefs + nPost) / workers) * Math.max(0.5, f ** 0.7)
+  const detect = 0.8 * f * (0.6 * nRefs + 0.9 * (nPost + 1)) + (nPost > 1 ? 0.2 * nPost * f : 0)
+  const t = fetch + 1 + 0.6 * f + detect + 0.5
+  return [Math.max(3, Math.round(t * 0.8)), Math.round(t * 1.3) + 1]
+}
 
 // ---- result files -----------------------------------------------------------------------------------------
 function bboxOf(fc) {
@@ -125,7 +134,18 @@ export async function readResult(fileList) {
     } else entries.push({ name: f.name, data: buf })
   }
   const out = { files: entries.map((e) => e.name), problems: [] }
+  // season mode: recovery.json + its images (handled first: they are not the flood GeoJSON or the quicklook)
+  const rec = {}
   for (const e of entries) {
+    if (e.name === 'recovery.json') { try { rec.json = JSON.parse(strFromU8(e.data)) } catch { out.problems.push('recovery.json: not valid JSON') } }
+    else if (/^recovery_(duration|scars|lookup)\.(webp|png)$/.test(e.name)) {
+      const k = e.name.includes('duration') ? 'dur' : e.name.includes('scars') ? 'scar' : 'lookupUrl'
+      rec[k] = URL.createObjectURL(new Blob([e.data], { type: e.name.endsWith('png') ? 'image/png' : 'image/webp' }))
+    }
+  }
+  if (rec.json) out.recovery = { ...rec, corners: rec.json.corners }
+  for (const e of entries) {
+    if (e.name === 'recovery.json' || e.name.startsWith('recovery_')) continue
     if (/\.geojson$/i.test(e.name) || (/\.json$/i.test(e.name) && !/summary/i.test(e.name))) {
       try {
         const g = JSON.parse(strFromU8(e.data))

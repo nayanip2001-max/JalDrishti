@@ -1,11 +1,12 @@
 // Drawer sections for the main navigation. Each section answers more, or less, depending on the mode:
 // Beginner = the answer, Intermediate = the evidence, Advanced = the scientific detail.
 import { Card, Metric, Badge, Explain, Note, KV, LayerToggle, Seg, LinkButton, Icon } from './ui.jsx'
-import { RangeBars, ProbHistogram, TrackLines, ChartLegend } from './Charts.jsx'
+import { RangeBars, ChartFrame, RiseRecession } from './Charts.jsx'
 import { atLeast } from '../lib/modes.js'
 import { ModelledCard } from './Modelled.jsx'
-import { fmtDate, fmtDateLong, floodKm2, possibleKm2, num, range, people, pct, posts, peakOf, prevSameTrack, phaseOf, trackColor, meanSelected } from '../lib/format.js'
+import { fmtDate, fmtDateLong, floodKm2, possibleKm2, num, range, people, peopleRange, pct, posts, peakOf, prevSameTrack, phaseOf, trackColor, meanSelected } from '../lib/format.js'
 
+const RR_CAPTION = 'Bars: average change in mapped flood per day between consecutive passes on the same track (up = water rising, down = draining). The true peak can fall between passes. Click a bar to show that pass.'
 const CLASS_COLORS = { flood: 'var(--flood)', veg: 'var(--veg)', possible: 'var(--possible)', perm: 'var(--perm)' }
 
 function Delta({ now, before }) {
@@ -65,7 +66,7 @@ export function Overview({ ctx }) {
     <Metric key="ob" value={fmtDate(scene.date)} label={`NISAR track ${scene.track}`} sub={scene.obs?.direction ?? 'L-band HH/HV'} onOpen={() => open('observation', { scene })} />,
   ]
   const impact = e ? [
-    <Metric key="pp" big value={range(e.low.people, e.high.people, (v) => people(v, country))} label="People in flooded area" color="#f472b6" onOpen={() => open('people')} />,
+    <Metric key="pp" big value={peopleRange(e.low.people, e.high.people, country)} label="People in flooded area" color="#f472b6" onOpen={() => open('people')} />,
     <Metric key="cr" value={range(e.low.cropland_km2, e.high.cropland_km2)} unit="km²" label="Cropland under water" color="#84cc16" onOpen={() => open('cropland')} />,
     <Metric key="rd" value={range(e.low.roads_km, e.high.roads_km)} unit="km" label="Major roads" sub={`${range(e.low.rail_km, e.high.rail_km)} km railway`} onOpen={() => open('roads')} />,
   ] : []
@@ -74,13 +75,8 @@ export function Overview({ ctx }) {
     <div className="stack">
       <p className="lead">{m.event.title} · <span className="muted">{phaseOf(m, scene.date).name} phase</span></p>
       <div className="metrics">{order.filter(Boolean)}</div>
-      <Card title="Flood area over time" tag={<Badge>Observed</Badge>}>
-        <TrackLines manifest={m} scene={scene} onSelect={ctx.setScene} height={130} showRain />
-        <ChartLegend items={[...new Set(ps.map((s) => s.track))].sort((a, b) => a - b).map((tr, i, a) => ({ label: `Track ${tr}`, color: trackColor(a, tr) }))
-          .concat(m.rainfall ? [{ label: 'Daily rain', color: '#64748b' }] : [])} />
-      </Card>
       {m.event.caveat && <Note kind="warn">{m.event.caveat}</Note>}
-      <p className="muted small">{first && `${ps.length} NISAR passes, ${fmtDate(first.date)} – ${fmtDate(last.date)}.`}</p>
+      <p className="muted small">{first && `${ps.length} NISAR passes, ${fmtDate(first.date)} – ${fmtDate(last.date)}: flood area per pass and rain are on the timeline below.`}</p>
     </div>
   )
 }
@@ -108,9 +104,6 @@ export function EventView({ ctx }) {
               <b>{fmtDate(x.date)}</b><span>{x.label}{x.source && <em> · {x.source}</em>}</span></li>
           ))}
         </ul>
-      </Card>
-      <Card title="Reference (before) passes">
-        <KV rows={Object.entries(m.refs).map(([tr, r]) => [`Track ${tr}`, r.dates.map((d) => fmtDate(d)).join(', ')])} />
       </Card>
       {m.event.caveat && <Note kind="warn">{m.event.caveat}</Note>}
     </div>
@@ -154,22 +147,10 @@ export function FloodView({ ctx }) {
         )}
       </Card>
 
-      {atLeast(mode, 'intermediate') && scene.prob_hist && (
-        <Card title="How confident is this pass?" action={<Explain term="probability" mode={mode} />}>
-          <ProbHistogram hist={scene.prob_hist} />
-          <ChartLegend items={[{ label: 'Confident > 0.8', color: 'var(--flood)' }, { label: 'Possible 0.5–0.8', color: 'var(--possible)' }, { label: 'Uncertain', color: 'var(--uncertain)' }]} />
-          <LinkButton onClick={() => open('probability')}>Probability details</LinkButton>
-        </Card>
-      )}
-
-      {simple ? (
-        <Note>Cyan means new flood water. Orange means "maybe": the radar isn't sure. Dark blue rivers and lakes are normal water and not counted. <Explain term="change" mode={mode} label="Why?" /></Note>
-      ) : (
-        <Card title="Method in one line" action={<Explain term="hybrid" mode={mode} />}>
-          <p className="body small">{m.model?.rule ?? 'Hybrid LightGBM + physics rule; flood = water now and not water before.'}</p>
-          {m.sensor_compare && <LinkButton onClick={() => open('sensor')}>Why L-band? Same-day comparison with Sentinel-1</LinkButton>}
-        </Card>
-      )}
+      <div className="row-btns">
+        {scene.prob_hist && <LinkButton onClick={() => open('probability')}>How confident is this pass?</LinkButton>}
+        {m.sensor_compare && <LinkButton onClick={() => open('sensor')}>Why L-band? Same-day test vs Sentinel-1</LinkButton>}
+      </div>
       <p className="hint-click"><Icon name="target" size={14} /> Click anywhere on the map to see why that spot was classified.</p>
     </div>
   )
@@ -192,11 +173,10 @@ export function TemporalView({ ctx }) {
       ) : (
         <p className="lead">Peak {num(floodKm2(peak))} km² on {fmtDate(peak.date)} (track {peak.track}) → {num(floodKm2(last))} km² by {fmtDate(last.date)}.</p>
       )}
-      <Card title="Flood area per pass" action={<Explain term="revisit" mode={mode} />}>
-        <TrackLines manifest={m} scene={scene} onSelect={setScene} height={160} showRain={atLeast(mode, 'intermediate')} />
-        <ChartLegend items={tracks.map((tr) => ({ label: `Track ${tr}`, color: trackColor(tracks, tr) })).concat(m.rainfall && atLeast(mode, 'intermediate') ? [{ label: 'Daily rain', color: '#64748b' }] : [])} />
-        {mode !== 'beginner' && <p className="muted small">Each orbit track sees a different footprint, so compare points along the same line.</p>}
-      </Card>
+      <ChartFrame title="How fast the water rose and drained" sub="km² per day between passes, per track" caption={RR_CAPTION}
+        source="NISAR L2 GCOV passes, JalDrishti flood classes (confident open water + flooded vegetation)">
+        {(wide) => <RiseRecession manifest={m} scene={scene} onSelect={setScene} wide={wide} />}
+      </ChartFrame>
       <ModelledCard ctx={ctx} />
       <Card title={mode === 'beginner' ? 'Pick a day' : 'All passes'}>
         <table className="tbl clickable">
@@ -227,17 +207,17 @@ export function ImpactView({ ctx }) {
   return (
     <div className="stack">
       <div className="metrics">
-        <Metric big value={range(e.low.people, e.high.people, (v) => people(v, country))} label="People living in flooded area" color="#f472b6" onOpen={() => open('people')} />
+        <Metric big value={peopleRange(e.low.people, e.high.people, country)} label="People living in flooded area" color="#f472b6" onOpen={() => open('people')} />
         <Metric value={range(e.low.cropland_km2, e.high.cropland_km2)} unit="km²" label="Cropland under water" color="#84cc16" onOpen={() => open('cropland')} />
         <Metric value={range(e.low.roads_km, e.high.roads_km)} unit="km" label="Major roads" onOpen={() => open('roads')} />
         <Metric value={range(e.low.rail_km, e.high.rail_km)} unit="km" label="Railway" onOpen={() => open('roads')} />
       </div>
       <Note kind="exposed"><Badge kind="exposed">Exposed</Badge> means inside the mapped flood, not confirmed damage. <Explain term="exposure" mode={mode} label="Explain" /></Note>
-      <Card title={mode === 'beginner' ? 'Most affected districts' : 'Districts (people in flooded area)'}>
+      {mode !== 'advanced' && <Card title={mode === 'beginner' ? 'Most affected districts' : 'Districts (people in flooded area)'}>
         <RangeBars rows={rows.slice(0, mode === 'beginner' ? 5 : 20).map((r) => ({ label: r.name, lo: r.low.people, hi: r.high.people }))}
-          fmt={(v) => people(v, country)} color="#f472b6" onPick={(r) => open('district', { name: r.label })} />
+          fmt={(v) => people(v, country)} fmtRange={(a, b) => peopleRange(a, b, country)} color="#f472b6" onPick={(r) => open('district', { name: r.label })} />
         {mode !== 'beginner' && <p className="muted small">Solid = confident flood only · faint = including "possible". Click a district for details.</p>}
-      </Card>
+      </Card>}
       {atLeast(mode, 'intermediate') && m.impact_layers && (
         <Card title="Impact layers on the map">
           <div className="layers">
@@ -254,7 +234,7 @@ export function ImpactView({ ctx }) {
             <thead><tr><th>District</th><th>People</th><th>Crop km²</th><th>Built-up km²</th><th>Roads km</th><th>Rail km</th></tr></thead>
             <tbody>{rows.map((r) => (
               <tr key={r.name} onClick={() => open('district', { name: r.name })}>
-                <td>{r.name}</td><td>{range(r.low.people, r.high.people, (v) => people(v, country))}</td><td>{range(r.low.cropland_km2, r.high.cropland_km2)}</td>
+                <td>{r.name}</td><td>{peopleRange(r.low.people, r.high.people, country)}</td><td>{range(r.low.cropland_km2, r.high.cropland_km2)}</td>
                 <td>{range(r.low.builtup_km2, r.high.builtup_km2)}</td><td>{range(r.low.roads_km, r.high.roads_km)}</td><td>{range(r.low.rail_km, r.high.rail_km)}</td>
               </tr>
             ))}</tbody>
@@ -262,7 +242,6 @@ export function ImpactView({ ctx }) {
           <p className="muted small">People: WorldPop 2025 constrained (100 m), weighted by the flooded fraction of each cell. Cropland/built-up: ESA WorldCover 2021. Roads (trunk–tertiary) and rail: OpenStreetMap, length of flooded 20 m pixels. Districts: geoBoundaries ADM2.</p>
         </Card>
       )}
-      {m.event.caveat && atLeast(mode, 'intermediate') && <Note kind="warn">{m.event.caveat}</Note>}
     </div>
   )
 }

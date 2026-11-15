@@ -1,0 +1,316 @@
+{
+ "method": "Per-pixel merge of every NISAR pass (all tracks): wet = confident flood (classes 3, 5), dry = class 1. Days under water is a range: min = last wet look - first wet look; max = first dry look after - last dry look before.",
+ "looks": [
+  {
+   "date": "2026-10-06",
+   "track": 84,
+   "kind": "null_test"
+  },
+  {
+   "date": "2026-10-10",
+   "track": 149,
+   "kind": "null_test"
+  },
+  {
+   "date": "2026-10-11",
+   "track": 156,
+   "kind": "null_test"
+  },
+  {
+   "date": "2026-10-18",
+   "track": 84,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-22",
+   "track": 149,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-23",
+   "track": 156,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-30",
+   "track": 84,
+   "kind": "post"
+  },
+  {
+   "date": "2026-11-03",
+   "track": 149,
+   "kind": "post"
+  },
+  {
+   "date": "2026-11-04",
+   "track": 156,
+   "kind": "post"
+  },
+  {
+   "date": "2026-11-11",
+   "track": 84,
+   "kind": "post"
+  }
+ ],
+ "days": [
+  0,
+  4,
+  5,
+  12,
+  16,
+  17,
+  24,
+  28,
+  29,
+  36
+ ],
+ "corners": [
+  [
+   79.94729844659707,
+   13.351504568356853
+  ],
+  [
+   80.35176490327189,
+   13.351504568356853
+  ],
+  [
+   80.35176490327189,
+   12.748334551146284
+  ],
+  [
+   79.94729844659707,
+   12.748334551146284
+  ]
+ ],
+ "totals": {
+  "flooded_km2": 25.4,
+  "days_min_median": 0,
+  "days_max_median": 12,
+  "still_wet_km2": 9.8,
+  "reflooded_km2": 2.5,
+  "longer_than_4_weeks_km2": 0.0,
+  "recovery_index": 54.1,
+  "half_dry_days": 12,
+  "recovering": true
+ },
+ "covers": {
+  "Cropland": {
+   "flooded_km2": 12.0,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 3.9,
+   "reflooded_km2": 1.1,
+   "longer_than_4_weeks_km2": 0.0,
+   "recovery_index": 72.8,
+   "half_dry_days": 12
+  },
+  "Trees": {
+   "flooded_km2": 5.7,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 2.0,
+   "reflooded_km2": 0.6,
+   "longer_than_4_weeks_km2": 0.0,
+   "recovery_index": null,
+   "half_dry_days": null
+  },
+  "Grass / wetland": {
+   "flooded_km2": 5.8,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 2.8,
+   "reflooded_km2": 0.6,
+   "longer_than_4_weeks_km2": 0.0,
+   "recovery_index": 7.3,
+   "half_dry_days": null
+  }
+ },
+ "curves": {
+  "dates": [
+   "2026-10-22\u00b7T149",
+   "2026-11-03\u00b7T149"
+  ],
+  "all": [
+   0.3705,
+   0.1699
+  ],
+  "Cropland": [
+   0.5676,
+   0.1544
+  ],
+  "Trees": [
+   0.2258,
+   0.2283
+  ],
+  "Built-up": [
+   null,
+   null
+  ],
+  "Grass / wetland": [
+   0.1804,
+   0.1672
+  ]
+ },
+ "curves_by_track": {
+  "84": {
+   "dates": [
+    "2026-10-18\u00b7T84",
+    "2026-10-30\u00b7T84",
+    "2026-11-11\u00b7T84"
+   ],
+   "all": [
+    0.0877,
+    0.149,
+    0.1898
+   ],
+   "Cropland": [
+    0.1178,
+    0.0545,
+    0.0597
+   ],
+   "Trees": [
+    0.0435,
+    0.1225,
+    0.129
+   ],
+   "Built-up": [
+    null,
+    null,
+    null
+   ],
+   "Grass / wetland": [
+    0.0546,
+    0.2768,
+    0.3391
+   ]
+  },
+  "156": {
+   "dates": [
+    "2026-10-23\u00b7T156",
+    "2026-11-04\u00b7T156"
+   ],
+   "all": [
+    0.2319,
+    0.2254
+   ],
+   "Cropland": [
+    0.302,
+    0.1059
+   ],
+   "Trees": [
+    0.1578,
+    0.3896
+   ],
+   "Built-up": [
+    null,
+    null
+   ],
+   "Grass / wetland": [
+    0.17,
+    0.3104
+   ]
+  },
+  "149": {
+   "dates": [
+    "2026-10-22\u00b7T149",
+    "2026-11-03\u00b7T149"
+   ],
+   "all": [
+    0.3705,
+    0.1699
+   ],
+   "Cropland": [
+    0.5676,
+    0.1544
+   ],
+   "Trees": [
+    0.2258,
+    0.2283
+   ],
+   "Built-up": [
+    null,
+    null
+   ],
+   "Grass / wetland": [
+    0.1804,
+    0.1672
+   ]
+  }
+ },
+ "main_track": 149,
+ "districts": {
+  "Thiruvallur": {
+   "flooded_km2": 18.7,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 7.3,
+   "reflooded_km2": 1.7,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Kancheepuram": {
+   "flooded_km2": 3.0,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 1.0,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Chengalputtu": {
+   "flooded_km2": 3.3,
+   "days_min_median": 0,
+   "days_max_median": 8,
+   "still_wet_km2": 1.4,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  }
+ },
+ "scars": {
+  "track": 84,
+  "pre": "2026-10-06",
+  "post": [
+   {
+    "date": "2026-11-11",
+    "stage_diff": 0.001
+   }
+  ],
+  "erosion_km2": 0.35,
+  "accretion_km2": 0.24,
+  "bank_km": 245.6,
+  "mean_retreat_m": 1.4,
+  "mean_advance_m": 1.0,
+  "min_detectable_m": 7.0,
+  "after_peak": false,
+  "stage_ok": true,
+  "noise": {
+   "looks": [
+    "2026-10-06\u00b7T84",
+    "2026-10-10\u00b7T149"
+   ],
+   "erosion_km2": 0.08,
+   "accretion_km2": 3.61,
+   "retreat_m": 0.3,
+   "advance_m": 14.7,
+   "cross_track": true
+  },
+  "hotspot_min_km2": 0.372,
+  "hotspots": [],
+  "hotspot_count": 0,
+  "hotspot_km2": 0,
+  "erosion_significant": false,
+  "accretion_significant": false
+ },
+ "duration_classes": {
+  "1": "< 2 weeks",
+  "2": "2\u20134 weeks",
+  "3": "4\u20138 weeks",
+  "4": "> 8 weeks",
+  "5": "not seen dry again"
+ },
+ "duration_colors": {
+  "1": "#bae6fd",
+  "2": "#60a5fa",
+  "3": "#6366f1",
+  "4": "#7c3aed",
+  "5": "#f43f5e"
+ }
+}

@@ -13,6 +13,13 @@ export const range = (lo, hi, f = num) => (Math.round(lo) === Math.round(hi) ? f
 // Lakh for the Indian event (as local reporting uses); thousands/millions elsewhere.
 export const people = (v, country = 'India') => (country === 'India' && v >= 1e5 ? `${(v / 1e5).toFixed(1)} lakh`
   : v >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(Math.round(v)))
+// A people range in ONE unit, chosen from the larger end: "0.8–1.6 lakh", not "80.4k–1.6 lakh".
+export const peopleRange = (lo, hi, country = 'India') => {
+  if (Math.round(lo) === Math.round(hi)) return people(lo, country)
+  const [d, u] = country === 'India' && hi >= 1e5 ? [1e5, ' lakh'] : hi >= 1e6 ? [1e6, 'M'] : hi >= 1000 ? [1e3, 'k'] : [1, '']
+  const f = (v) => (d === 1 ? String(Math.round(v)) : (v / d).toFixed(v / d < 10 ? 1 : 0))
+  return `${f(lo)}–${f(hi)}${u}`
+}
 export const pct = (v, d = 0) => `${(v * 100).toFixed(d)}%`
 export const f1 = (p, r) => (p + r > 0 ? (2 * p * r) / (p + r) : 0)
 

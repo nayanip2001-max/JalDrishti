@@ -89,7 +89,7 @@ function setGeo(map, id, data, layers) {
   }
 }
 
-export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera, modelDay, region, onRegionBox }) {
+export default function MapView({ base, manifest, scene, layers, opacity, basemap, compare, onPick, pick, camera, modelDay, region, onRegionBox, extra }) {
   const mainEl = useRef(null)
   const beforeEl = useRef(null)
   const maps = useRef({})
@@ -155,6 +155,11 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
     setImage(main, 'model', modelDay && tr && base + tr.image.replace('{date}', modelDay), corners, opacity.overlay, !!modelDay)
     setImage(main, 'prob', base + scene.prob, corners, opacity.overlay, layers.prob && !modelDay)
     setImage(main, 'cls', base + scene.cls, corners, opacity.overlay, layers.flood && !modelDay)
+    // Extra image layers under the flood classes: { dur, scar, game, rdur, rscar }: { url, opacity, corners? }
+    for (const id of ['dur', 'scar', 'game', 'rdur', 'rscar']) {
+      const x = extra?.[id]
+      setImage(main, 'x_' + id, x?.url, x?.corners ?? corners, x?.opacity ?? 0.8, !!x?.url, 'cls')
+    }
     const cmp = manifest.sensor_compare
     setImage(main, 'cmp', cmp && base + cmp.image, corners, opacity.overlay, !!(cmp && layers.compare && scene.date === cmp.date))
     const ref = manifest.refs[String(scene.track)]
@@ -165,7 +170,7 @@ export default function MapView({ base, manifest, scene, layers, opacity, basema
       setImage(main, 'population', base + il.population, corners, 0.8, layers.population, 'prob')
       setVectors(main, base, il, layers)
     }
-  }, [ready, scene, layers, opacity, base, corners, manifest, modelDay])
+  }, [ready, scene, layers, opacity, base, corners, manifest, modelDay, extra])
 
   useEffect(() => {
     const { main } = maps.current

@@ -269,6 +269,9 @@ export function DockIcon({ kind }) {
     <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="12" width="52" height="40" rx="10" fill="#BDF0C5" /><path d="M6 38 C 20 30, 34 46, 58 34 V52 H6Z" fill="#5DBBF7" /><path d="M32 8 C 22 8, 18 16, 18 21 C 18 31, 32 42, 32 42 C 32 42, 46 31, 46 21 C 46 16, 42 8, 32 8Z" fill="#FF6B8B" /><circle cx="32" cy="21" r="5.5" fill="#fff" /></svg>)
   if (kind === 'village') return (
     <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 30 L32 14 L50 30Z" fill="#F0866A" /><rect x="18" y="29" width="28" height="22" rx="2" fill="#FFF1DA" /><rect x="28" y="38" width="8" height="13" fill="#B5764A" /><path d="M6 46 q 6 -4 13 0 t 13 0 t 13 0 t 13 0 V58 H6Z" fill="#5DBBF7" /><circle cx="49" cy="15" r="9" fill="#FFD23F" /><path d="M45 15 l3 3 6 -7" stroke="#fff" strokeWidth="2.6" fill="none" strokeLinecap="round" /></svg>)
+  if (kind === 'game') return (
+    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 44 C 16 30, 26 50, 36 38 S 54 34, 58 30 V58 H6Z" fill="#8B8CF6" opacity=".85" /><path d="M6 50 q 8 -5 16 0 t 16 0 t 16 0 V58 H6Z" fill="#5DBBF7" />
+      <path d="M44 28 V8 M36 16 l8 -8 8 8" stroke="#FF6B8B" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" /><circle cx="16" cy="20" r="7" fill="#FFD23F" /></svg>)
   if (kind === 'watch') return (
     <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="12" width="48" height="44" rx="10" fill="#fff" stroke="#FFB26B" strokeWidth="3" /><rect x="8" y="12" width="48" height="12" rx="6" fill="#FFB26B" /><circle cx="20" cy="10" r="3" fill="#E5484D" /><circle cx="44" cy="10" r="3" fill="#E5484D" /><circle cx="32" cy="40" r="11" fill="#7C6CF2" /><path d="M29 34 L38 40 L29 46Z" fill="#fff" /></svg>)
   return (

@@ -50,6 +50,27 @@ NISAR sees a place every few days. For the days in between, each pixel blends th
 - **Validation (leave-one-pass-out, Assam + Thailand).** Each pass was hidden and predicted from the others. Blending beat copying the nearest pass on **17 of 20** passes (2 ties; sign test p = 0.0013), mean IoU 0.472 vs 0.423.
 - **Negative result.** We also built a per-pixel hidden Markov flood-state model driven by rain and terrain (`src/nisarflood/tracker.py`). Fitted on Thailand it helped in Assam, but fitted on Assam it failed in Thailand (0 of 7), and a physically constrained version was worse in both directions. It is not deployed.
 
+## Recovery and flood scars
+
+A flood map shows one day. **Recovery** shows the rhythm of the season: how long each field stayed under water, when it dried, and where the water came back. **Flood scars** check whether the river banks moved. Both work from the class maps of every pass, so they cost no extra downloads (`src/nisarflood/recovery.py`, `scripts/export_recovery.py`), and they run for any region in Map a Region's season mode.
+
+- **Days under water is a range, never one number.** Each 20 m pixel's passes, from all tracks, are merged in time order. Wet means confident flood only; "possible" counts as unknown, never as wet. The minimum is from the first to the last wet look; the maximum is from the last dry look before to the first dry look after. Passes are up to 12 days apart, so a single figure would be invented.
+- **Recovery curve:** the share of the flooded land still under water at each pass of one track, per land cover, plus days until half of it was dry. The recovery index is the mean dry share over the passes after the peak (0 = stayed wet, 100 = dried at once), and its formula is shown in the app.
+- **Flood scars**, following the area-based method of Rowland et al. (2016, SCREAM) and Langhorst & Pavelsky (2023, REAL): land→river pixels count as erosion and river→land pixels as new land. The river is open water connected to JRC permanent water within 1.5 km. Four safeguards apply:
+  - **River level:** water level changes look like bank change, which is REAL's main caveat. So only passes after the flood peak are compared, the river's size must be within 10% of before, and the change must be seen on two passes.
+  - **Noise floor:** the same computation between two pre-flood looks gives a false-change floor.
+  - **Hotspots:** a patch larger than every patch that noise produced counts as a candidate hotspot.
+  - **Rates:** one season only, so no yearly rates are given.
+
+  The review by Nagel et al. (2023) found radar in only one of 138 river-migration studies; NISAR sees banks through monsoon cloud.
+
+**What it found:**
+- **Assam:** 1,355 km² flooded at some pass. On track 40, which saw the 22 July peak, half of it was dry again within 24 days. 382 km² stayed under water about 4 weeks or more, and on 141 km² the water came back after the land had dried. Cropland recovered fastest (recovery index 93), ahead of trees and grass/wetland (74 each).
+- **Thailand:** not recovered. The water was still at its highest on the last pass (19 Oct), with 772 of 836 km² never seen dry again.
+- **Chennai:** a mixed picture. On track 149, half the flooded land dried within 12 days, but track 84 still saw the water rising on 11 Nov. Chennai's recovery is computed up to that pass: the live monitor maps new passes but does not keep every class map, so recovery is not refreshed live.
+- **River banks:** no change above the noise floor in any event, and no patch larger than the biggest patch that noise alone produced. NISAR saw no bank change this season that it could tell apart from noise. In Thailand there was no pass after the peak, so it isn't assessable yet.
+- **Map a Region, season mode (Majuli, Assam, 768 km², 22 Jul – 8 Sep, 7 passes):** the whole run took 12.9 minutes.
+
 ## Map any region
 
 **In the dashboard: the "Map a Region" tab** (every mode).
@@ -61,6 +82,8 @@ NISAR sees a place every few days. For the days in between, each pixel blends th
 Under the hood, `scripts/map_region.py` maps any area, two ways:
 
 - **From NISAR:** `python scripts/map_region.py --name mytown --bbox W S E N --date 2026-11-04` finds the best-covering pass within ±1 day and at least two earlier passes on the same track, streams only the subset and maps it.
+- **Season mode:** add `--until 2026-09-08` to also map every later pass of the same track and get recovery and flood scars for your area. In the dashboard, set "Also track recovery until".
+- **Speed:** only the 3 most recent "before" passes are used, and passes download 4 at a time in parallel. The script and the dashboard print an estimate before starting: about 8–14 minutes for a single date over about 760 km², longer in season mode.
 - **From your own files:** `--upload after_2026-11-04.tif --refs before_2026-10-11.tif before_2026-10-23.tif`. Uploads are checked before use: a projected CRS (not lat/lon), 1–30 m pixels, HH and HV bands, plausible backscatter (dB is converted), dates in the file names, references dated before the flood scene, and at least 50% overlap.
 
 Outputs: a GeoTIFF (class and probability), a GeoJSON of confident flood, a quicklook PNG and a summary marked *not validated for this region*. The same thing runs in a free notebook: [`notebooks/map_any_region.ipynb`](notebooks/map_any_region.ipynb) (open in Colab; asks for your free NASA Earthdata login).

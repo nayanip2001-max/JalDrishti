@@ -7,13 +7,14 @@ import { STRINGS, LANGS, PLACES } from './strings.js'
 import { readPixel } from '../lib/evidence.js'
 import { floodKm2, possibleKm2, peakOf, posts } from '../lib/format.js'
 import { MODES } from '../lib/modes.js'
+import { loadRecovery, recoveryAt } from '../lib/recovery.js'
 import './beginner.css'
 
 const store = {
   get: (k, d) => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* storage blocked */ } },
 }
-const TABS = ['where', 'village', 'watch', 'how']
+const TABS = ['where', 'village', 'watch', 'how', 'game']
 
 // ---- numbers people can picture: acres in India, rai in Thailand; lakh for big Indian counts
 function useFmt(lang, country) {
@@ -141,7 +142,7 @@ function PeopleGrid({ low, high, t, f }) {
 // ---- room 2: is my village flooded?
 function statusOf(px) {
   if (!px) return 'none'
-  const c = px.cls
+  const c = px.mapCls ?? px.cls            // the class exactly as the map draws it here
   if (c === 3 || c === 5) return 'flood'
   if (c === 4 || c === 6 || c === 7) return 'maybe'
   if (c === 2) return 'river'
@@ -156,6 +157,14 @@ function VillageRoom({ ctx, t, f, say, lang, goWatch }) {
   const [place, setPlace] = useState(null)
   const [px, setPx] = useState(undefined)            // undefined = not asked, null = no data
   const { pick, scene, manifest, base } = ctx
+  const [season, setSeason] = useState(null)
+  useEffect(() => {
+    if (!pick) return
+    let live = true
+    const dir = base + 'recovery/'
+    loadRecovery(dir).then((rec) => recoveryAt(dir, rec, pick)).then((x) => live && setSeason(x)).catch(() => live && setSeason(null))
+    return () => { live = false }
+  }, [pick, base])
   useEffect(() => {
     if (!pick) return
     let live = true
@@ -202,6 +211,20 @@ function VillageRoom({ ctx, t, f, say, lang, goWatch }) {
             <span>{t.onDay(f.date(scene.date))}</span>
             <Listen say={say} t={t} text={`${place ?? ''} ${WORD[st]} ${t.onDay(f.date(scene.date))}`} />
           </div>
+          {season && (
+            <div className="bg-season">
+              <small>🗓️ {t.season}</small>
+              {season.flooded ? (
+                <>
+                  <b>{t.underFor(season.dmin, season.dmax)}</b>
+                  <SeasonStrip s={season} />
+                  <span>{t.wetFrom(f.date(season.first, false), f.date(season.last, false))}</span>
+                  <span>{season.dryAgain ? `✅ ${t.dryBy(f.date(season.dryAgain, false))}` : `💧 ${t.notDryYet(f.date(season.lastLook, false))}`}</span>
+                  {season.again && <span>🔁 {t.cameBack}</span>}
+                </>
+              ) : <b>✅ {t.neverWet}</b>}
+            </div>
+          )}
           <div className="bg-answer-act">
             <button className="bg-btn" onClick={goWatch}>📅 {t.otherDays}</button>
             <small>{t.tapAgain}</small>
@@ -209,6 +232,18 @@ function VillageRoom({ ctx, t, f, say, lang, goWatch }) {
         </div>
       )}
     </div>
+  )
+}
+
+// a little calendar bar: the season, with the wet stretch in blue and the dry-again day in green
+function SeasonStrip({ s }) {
+  const t0 = +new Date(s.first + 'T00:00:00Z') - 14 * 864e5, t1 = +new Date(s.lastLook + 'T00:00:00Z')
+  const x = (d) => `${Math.max(0, Math.min(100, ((+new Date(d + 'T00:00:00Z') - t0) / (t1 - t0)) * 100))}%`
+  return (
+    <span className="bg-strip2" aria-hidden="true">
+      <i className="wet" style={{ left: x(s.first), width: `calc(${x(s.last)} - ${x(s.first)} + 6px)` }} />
+      {s.dryAgain && <i className="dry" style={{ left: x(s.dryAgain) }} />}
+    </span>
   )
 }
 
@@ -307,8 +342,69 @@ function How({ t, say, onDone, k, setK }) {
   )
 }
 
+// ---- room 5: Raise the river (a what-if game on the real height-above-stream terrain, HAND)
+const loadImg = (url) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url })
+const pixels = (img) => { const c = document.createElement('canvas'); c.width = img.width; c.height = img.height; const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(img, 0, 0); return g.getImageData(0, 0, img.width, img.height).data }
+function useTerrain(ctx) {
+  const [ter, setTer] = useState(null)
+  const m = ctx.manifest
+  useEffect(() => {
+    const files = m.anc?.files
+    if (!files?.length) return
+    let live = true
+    Promise.all(files.slice(0, 2).map((f) => loadImg(ctx.base + f))).then(([a1, a2]) => {
+      const d1 = pixels(a1), d2 = a2 && a2.width === a1.width && a2.height === a1.height ? pixels(a2) : null
+      const n = a1.width * a1.height, hand = new Float32Array(n), kind = new Uint8Array(n)   // kind: 0 land, 1 normal water, 2 no data / sea
+      const [lo, hi] = m.anc.scale.hand_m, [jl, jh] = m.anc.scale.jrc_pct
+      for (let i = 0; i < n; i++) {
+        hand[i] = lo + (d1[i * 4] / 255) * (hi - lo)
+        const jrc = jl + (d1[i * 4 + 2] / 255) * (jh - jl), wc = d2 ? d2[i * 4] : 1
+        kind[i] = wc === 0 ? 2 : jrc >= 50 || wc === 80 ? 1 : 0
+      }
+      const [w, s, e, nn] = m.aoi.bounds
+      const pxKm2 = ((e - w) * 111.32 * Math.cos(((s + nn) / 2) * Math.PI / 180) * (nn - s) * 110.57) / n
+      if (live) setTer({ w: a1.width, h: a1.height, hand, kind, pxKm2 })
+    }).catch(() => {})
+    return () => { live = false }
+  }, [m, ctx.base])
+  return ter
+}
+function floodImage(T, level) {
+  const c = document.createElement('canvas'); c.width = T.w; c.height = T.h
+  const g = c.getContext('2d'), im = g.createImageData(T.w, T.h), d = im.data
+  let n = 0
+  for (let i = 0; i < T.hand.length; i++) {
+    const k = T.kind[i]
+    if (k === 2) continue
+    if (k === 1) { d[i * 4] = 30; d[i * 4 + 1] = 64; d[i * 4 + 2] = 175; d[i * 4 + 3] = 210 }            // rivers and lakes: always water
+    else if (T.hand[i] < level) { d[i * 4] = 124; d[i * 4 + 1] = 108; d[i * 4 + 2] = 246; d[i * 4 + 3] = 175; n++ }
+  }
+  g.putImageData(im, 0, 0)
+  return { url: c.toDataURL('image/png'), km2: n * T.pxKm2 }
+}
+function Game({ ctx, t, f, say, level, setLevel, real, setReal, result }) {
+  const peak = peakOf(ctx.manifest)
+  const L = result ? f.land(result.km2) : null
+  return (
+    <div className="bg-room">
+      <span className="bg-tag">🎮 {t.gameTag}</span>
+      <Bubble say={say} t={t} mood="excited">{t.gameHello}</Bubble>
+      <div className="bg-game">
+        <div className="bg-game-top"><b>{t.riseBy(level)}</b><Gauge level={level / 5} label={t.riseBy(level)} /></div>
+        <input type="range" min={0} max={5} step={0.25} value={level} onChange={(e) => setLevel(+e.target.value)} aria-label={t.riseBy(level)} className="bg-slider" />
+        <div className="bg-slider-k"><span>0 m</span><span>5 m</span></div>
+        <div className="bg-game-out"><small>{t.gameLand}</small><b>{L ? L.n : '…'} <small>{L?.u}</small></b></div>
+      </div>
+      <button className={`bg-btn ${real ? '' : 'ghost'}`} onClick={() => { if (!real && ctx.scene.id !== peak.id) ctx.setScene(peak); setReal(!real) }} aria-pressed={real}>
+        {real ? '✓ ' : '🌊 '}{t.showReal(f.date(peak.date))}
+      </button>
+      {real && <p className="bg-note">🤔 {t.gameAsk}</p>}
+    </div>
+  )
+}
+
 // ---- the house
-export default function BeginnerApp({ ctx, events, eventId, onEvent, onMode, onHome, map, switching, loadError, onStay }) {
+export default function BeginnerApp({ ctx, events, eventId, onEvent, onMode, onHome, renderMap, switching, loadError, onStay }) {
   const [lang, setLangS] = useState(() => (store.get('jd-lang', 'en') === 'ta' ? 'ta' : 'en'))
   const [tab, setTab] = useState(() => {
     let seen = true
@@ -317,6 +413,15 @@ export default function BeginnerApp({ ctx, events, eventId, onEvent, onMode, onH
   })
   const [big, setBig] = useState(null)
   const [comicK, setComicK] = useState(0)
+  const [level, setLevel] = useState(0.5)
+  const [real, setReal] = useState(false)
+  const [game, setGame] = useState(null)
+  const ter = useTerrain(ctx)
+  useEffect(() => {
+    if (tab !== 'game' || !ter) return
+    const h = setTimeout(() => setGame(floodImage(ter, level)), 60)        // redraw shortly after the slider settles
+    return () => clearTimeout(h)
+  }, [tab, ter, level])
   const t = STRINGS[lang]
   const f = useFmt(lang, ctx.manifest.event.country)
   const say = useSpeech(lang)
@@ -351,11 +456,13 @@ export default function BeginnerApp({ ctx, events, eventId, onEvent, onMode, onH
       </header>
 
       <main className="bg-map">
-        {map}
+        {renderMap(tab === 'game' ? { flood: real, extra: game ? { game: { url: game.url, opacity: 0.8 } } : null } : {})}
         {tab === 'how' && <ComicStage k={comicK} t={t} />}
         <div className="bg-badge">🛰️ <span><b>{t.picture}</b> · {f.date(ctx.scene.date)}{live && ` · ${t.daysAgo(age)}`}</span><small>{t.notLive}</small></div>
         <div className="bg-legend">
-          <span><i className="lg-flood" />{t.flood}</span><span><i className="lg-maybe" />{t.maybe}</span><span><i className="lg-river" />{t.river}</span>
+          {tab === 'game' && <span><i className="lg-game" />{t.gameKey}</span>}
+          {(tab !== 'game' || real) && <><span><i className="lg-flood" />{t.flood}</span><span><i className="lg-maybe" />{t.maybe}</span></>}
+          <span><i className="lg-river" />{t.river}</span>
         </div>
         {switching && (
           <div className="bg-loading" role="status">
@@ -371,6 +478,7 @@ export default function BeginnerApp({ ctx, events, eventId, onEvent, onMode, onH
         {tab === 'village' && <VillageRoom ctx={ctx} t={t} f={f} say={say} lang={lang} goWatch={() => setTab('watch')} />}
         {tab === 'watch' && <Watch ctx={ctx} t={t} f={f} say={say} lang={lang} />}
         {tab === 'how' && <How t={t} say={say} k={comicK} setK={setComicK} onDone={() => { setTab('village'); setComicK(0) }} />}
+        {tab === 'game' && <Game ctx={ctx} t={t} f={f} say={say} level={level} setLevel={setLevel} real={real} setReal={setReal} result={game} />}
       </section>
 
       <nav className="bg-dock" aria-label="Sections">

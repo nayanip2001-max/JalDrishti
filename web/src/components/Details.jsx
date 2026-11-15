@@ -1,10 +1,12 @@
 // Drill-down panels shown in the right drawer: See → Click → Understand → Drill down → Verify → Analyse.
 import { Card, Metric, Badge, Explain, Note, KV, LinkButton, Icon } from './ui.jsx'
-import { RangeBars, ProbHistogram, TrackLines, ChartLegend } from './Charts.jsx'
+import { RangeBars, ProbHistogram, ChartLegend, ChartFrame } from './Charts.jsx'
+import { useEffect, useState } from 'react'
+import { loadRecovery, recoveryAt } from '../lib/recovery.js'
 import { ValidationView, SensorView } from './Science.jsx'
 import { atLeast } from '../lib/modes.js'
 import { GLOSSARY, glossaryText } from '../lib/glossary.js'
-import { fmtDate, fmtDateLong, floodKm2, possibleKm2, num, range, people, pct, posts, prevSameTrack, phaseOf, peakOf } from '../lib/format.js'
+import { fmtDate, fmtDateLong, floodKm2, possibleKm2, num, range, people, peopleRange, pct, posts, prevSameTrack, phaseOf, peakOf } from '../lib/format.js'
 
 const CLASS_LABELS = { 1: 'Dry land', 2: 'River / lake (normal water)', 3: 'Flood (open water)', 4: 'Possible flood',
   5: 'Flood under vegetation', 6: 'Possible flood under vegetation', 7: 'Uncertain' }
@@ -33,9 +35,6 @@ function FloodDetail({ ctx }) {
         <RangeBars rows={rows} unit=" km²" fmt={num} />
         {mode === 'beginner' && <p className="muted small">Only cyan and purple count as flood. Orange means the radar isn't sure.</p>}
       </Card>
-      <Card title="On the timeline">
-        <TrackLines manifest={m} scene={scene} onSelect={ctx.setScene} height={120} />
-      </Card>
       <div className="row-btns">
         <LinkButton onClick={() => open('probability')}>How confident?</LinkButton>
         {scene.exposure && <LinkButton onClick={() => open('people')}>Who is inside it?</LinkButton>}
@@ -57,9 +56,11 @@ function ProbabilityDetail({ ctx }) {
             <Metric big value={pct(h.confident_share)} label="of flagged area is high-confidence" color="var(--flood)" />
             <Metric value={num(possibleKm2(ctx.scene))} unit="km²" label="Possible (0.5–0.8)" color="var(--possible)" />
           </div>
-          <Card title="Probability distribution (p ≥ 0.1)"><ProbHistogram hist={h} />
-            <ChartLegend items={[{ label: 'Confident > 0.8', color: 'var(--flood)' }, { label: 'Possible', color: 'var(--possible)' }, { label: 'Uncertain', color: 'var(--uncertain)' }, { label: 'Unlikely', color: '#334155' }]} />
-          </Card>
+          <ChartFrame title="Flood probability on this pass" sub="mapped area per probability bin (p ≥ 0.1)" source="JalDrishti p_flood, 20 m"
+            caption="Most of a well-separated map sits in the solid cyan tier; a large orange/grey middle means a hard-to-call pass.">
+            {(wide) => <ProbHistogram hist={h} wide={wide} />}
+          </ChartFrame>
+          <ChartLegend items={[{ label: 'Confident > 0.8', color: 'var(--flood)' }, { label: 'Possible 0.5–0.8', color: 'var(--possible)' }, { label: 'Uncertain 0.35–0.5', color: 'var(--uncertain)' }, { label: 'Unlikely', color: '#475569' }]} />
         </>
       ) : <Note>The probability distribution appears after the next data export.</Note>}
       <KV rows={[['Confident', 'p > 0.8 → shown solid'], ['Possible', '0.5 < p ≤ 0.8 → shown faint'], ['Uncertain', '0.35 < p ≤ 0.5 → shown faint grey']]} />
@@ -69,30 +70,29 @@ function ProbabilityDetail({ ctx }) {
   )
 }
 
-function ExposureList({ ctx, keyLo, label, unit, fmt, color }) {
+function ExposureList({ ctx, keyLo, label, unit, fmt, fmtRange, color }) {
   const rows = Object.entries(ctx.scene.exposure.districts).map(([name, d]) => ({ label: name, lo: d.low[keyLo], hi: d.high[keyLo] }))
     .filter((r) => r.hi > 0).sort((a, b) => b.hi - a.hi)
   return (
     <Card title={`${label} by district`}>
-      <RangeBars rows={rows} unit={unit} fmt={fmt} color={color} onPick={(r) => ctx.open('district', { name: r.label })} />
+      <RangeBars rows={rows} unit={unit} fmt={fmt} fmtRange={fmtRange} color={color} onPick={(r) => ctx.open('district', { name: r.label })} />
       <p className="muted small">Solid = confident flood only · faint = including "possible".</p>
     </Card>
   )
 }
 
 function PeopleDetail({ ctx }) {
-  const { scene, mode, layers, setLayers, country, manifest: m } = ctx
+  const { scene, mode, layers, setLayers, country } = ctx
   const e = scene.exposure
   return (
     <div className="stack">
       <div className="metrics">
-        <Metric big value={range(e.low.people, e.high.people, (v) => people(v, country))} label="People living inside the flood extent" color="#f472b6" />
+        <Metric big value={peopleRange(e.low.people, e.high.people, country)} label="People living inside the flood extent" color="#f472b6" />
       </div>
       <Note kind="exposed"><Badge kind="exposed">Exposed</Badge> {mode === 'beginner' ? 'These people live where the map shows water. It does not mean all of them were hurt or had to leave.' : 'Population inside the mapped flood extent, not displaced or damaged.'} <Explain term="exposure" mode={mode} label="Explain" /></Note>
-      <ExposureList ctx={ctx} keyLo="people" label="People" fmt={(v) => people(v, country)} color="#f472b6" />
+      <ExposureList ctx={ctx} keyLo="people" label="People" fmt={(v) => people(v, country)} fmtRange={(a, b) => peopleRange(a, b, country)} color="#f472b6" />
       {atLeast(mode, 'intermediate') && <button className={`chip ${layers.population ? 'on' : ''}`} onClick={() => setLayers({ ...layers, population: !layers.population })}>{layers.population ? 'Hide' : 'Show'} population density on the map</button>}
       {atLeast(mode, 'advanced') && <p className="muted small">WorldPop 2025 constrained 100 m grid; each cell weighted by the flooded fraction of its 20 m pixels (average resampling). Low = classes 3+5, high = classes 3–6.</p>}
-      {m.event.caveat && <Note kind="warn">{m.event.caveat}</Note>}
     </div>
   )
 }
@@ -135,7 +135,7 @@ function DistrictDetail({ ctx, name }) {
       <p className="lead">{name} · {fmtDate(scene.date)}</p>
       {d ? (
         <div className="metrics">
-          <Metric value={range(d.low.people, d.high.people, (v) => people(v, country))} label="People in flooded area" color="#f472b6" />
+          <Metric value={peopleRange(d.low.people, d.high.people, country)} label="People in flooded area" color="#f472b6" />
           <Metric value={range(d.low.cropland_km2, d.high.cropland_km2)} unit="km²" label="Cropland under water" color="#84cc16" />
           <Metric value={range(d.low.roads_km, d.high.roads_km)} unit="km" label="Major roads" />
           <Metric value={range(d.low.rail_km, d.high.rail_km)} unit="km" label="Railway" />
@@ -146,7 +146,7 @@ function DistrictDetail({ ctx, name }) {
         <table className="tbl"><thead><tr><th>Date</th><th>People</th><th>Crop km²</th></tr></thead>
           <tbody>{posts(m).filter((s) => s.exposure?.districts?.[name]).map((s) => {
             const x = s.exposure.districts[name]
-            return <tr key={s.id} className={s.id === scene.id ? 'sel' : ''} onClick={() => ctx.setScene(s)}><td>{fmtDate(s.date)} · T{s.track}</td><td>{range(x.low.people, x.high.people, (v) => people(v, country))}</td><td>{range(x.low.cropland_km2, x.high.cropland_km2)}</td></tr>
+            return <tr key={s.id} className={s.id === scene.id ? 'sel' : ''} onClick={() => ctx.setScene(s)}><td>{fmtDate(s.date)} · T{s.track}</td><td>{peopleRange(x.low.people, x.high.people, country)}</td><td>{range(x.low.cropland_km2, x.high.cropland_km2)}</td></tr>
           })}</tbody></table>
         {mode !== 'beginner' && <p className="muted small">Different tracks cover different parts of the district; compare same-track rows.</p>}
       </Card>
@@ -191,61 +191,82 @@ function Clue({ label, v, range: r = 8, neutral, unit = '', title }) {
   )
 }
 
-// What the classifier saw at one pixel. Beginner = plain sentences; Advanced = raw values and log-odds terms.
+// The whole season at the clicked spot: how long it stayed under water, when it dried, whether water came back.
+function RecoveryHere({ ctx }) {
+  const [r, setR] = useState(null)
+  useEffect(() => {
+    let live = true
+    const dir = ctx.base + 'recovery/'
+    loadRecovery(dir).then((rec) => recoveryAt(dir, rec, ctx.pick)).then((x) => live && setR(x)).catch(() => live && setR(null))
+    return () => { live = false }
+  }, [ctx.base, ctx.pick])
+  if (!r) return null
+  if (!r.flooded) return <Note>Over the whole season: never seen confidently flooded here.</Note>
+  return (
+    <Card title="Over the whole season (100 m)" action={<button className="linkbtn" onClick={() => ctx.go('recovery')}>Recovery →</button>}>
+      <KV rows={[
+        ['Under water', `${fmtDate(r.first)} → ${fmtDate(r.last)} seen wet · ${r.dmin}${r.dmax != null ? `–${r.dmax}` : '+'} days`],
+        ['Dry again', r.dryAgain ? `seen dry on ${fmtDate(r.dryAgain)}` : `not seen dry by ${fmtDate(r.lastLook)}`],
+        r.again && ['Water came back', 'yes: it dried, then flooded again'],
+      ].filter(Boolean)} />
+    </Card>
+  )
+}
+
+// One clicked spot. The verdict is the class the map draws there; the numbers are 100 m averages around it.
+// The "physics cross-check" bars are the independent physics tests (radar mixture model and terrain priors) computed
+// alongside the AI model: they are NOT the model's internal reasons, so we say whether they agree with the map.
 function PixelDetail({ ctx }) {
   const { pixel: p, pick, mode, manifest: m, scene } = ctx
   if (!pick) return <Note>Click anywhere on the map.</Note>
   if (!p) return <Note>No NISAR coverage at this point on {fmtDate(scene.date)}.</Note>
-  const cls = p.cls ?? (p.pOpen > 0.8 ? 3 : p.pVeg > 0.8 ? 5 : p.pOpen > 0.5 ? 4 : p.pVeg > 0.5 ? 6 : 1)
+  const cls = p.mapCls ?? p.cls ?? (p.pOpen > 0.8 ? 3 : p.pVeg > 0.8 ? 5 : p.pOpen > 0.5 ? 4 : p.pVeg > 0.5 ? 6 : 1)
   const wc = p.wc ? m.anc?.worldcover?.[p.wc] ?? `class ${p.wc}` : null
-  const plain = [
-    p.hh != null && (p.hh < -15 ? 'The radar echo is very weak here, which is typical of calm water.' : p.hh < -10 ? 'The radar echo is fairly weak.' : 'The radar echo is strong: this looks like land, plants or buildings.'),
-    p.lBefore > 1 ? 'Before the flood, this spot looked like dry land.' : p.lBefore < -1 ? 'This spot already looked like water before the flood.' : null,
-    p.hand != null && (p.hand < 5 ? `It sits low, only about ${Math.max(0, p.hand).toFixed(0)} m above the nearest river.` : `It sits about ${p.hand.toFixed(0)} m above the nearest river.`),
-    p.jrc != null && (p.jrc >= 50 ? `It is water most of the time (${p.jrc.toFixed(0)}% of years): a river or lake.` : p.jrc > 5 ? `It is occasionally water (${p.jrc.toFixed(0)}% of the time since 1984).` : 'It is almost never covered by water normally.'),
-    wc && `The land here is ${wc.toLowerCase()}.`,
-  ].filter(Boolean)
+  const floodish = [3, 4, 5, 6].includes(cls)
+  const edge = (floodish && p.pFlood < 0.5) || (cls === 1 && p.pFlood >= 0.5)
+  // physics calls it flood only if it looks like water now (with terrain) AND was land before
+  const physFlood = p.lNow + p.lTerrain > 0 && p.lBefore > 0
+  const agree = cls === 2 || cls === 7 ? null : floodish === physFlood
   const rescue = p.hh != null && p.hand != null && p.hh < -15 && p.hand < 10
   return (
     <div className="stack">
       <div className="verdict" style={{ borderColor: CLASS_TONE[cls] }}>
         <span className="verdict-p" style={{ color: CLASS_TONE[cls] }}>{Math.round(p.pFlood * 100)}%</span>
-        <span><b style={{ color: CLASS_TONE[cls] }}>{CLASS_LABELS[cls]}</b><small>flood probability · {fmtDate(scene.date)}{p.district ? ` · ${p.district}` : ''}</small></span>
+        <span><b style={{ color: CLASS_TONE[cls] }}>{CLASS_LABELS[cls]}</b>
+          <small>as mapped on {fmtDate(scene.date)}{p.district ? ` · ${p.district}` : ''} · flood probability, 100 m average</small></span>
       </div>
-      {mode === 'beginner' ? (
-        <Card title="Why this spot?"><ul className="plain">{plain.map((t) => <li key={t}>{t}</li>)}</ul></Card>
-      ) : (
-        <Card title="Evidence (log-odds; cyan pushes towards flood)" action={<Explain term="change" mode={mode} />}>
-          <Clue label="Looks like water now" v={p.lNow} title="Scene-adaptive water/land mixture on this pass" />
-          <Clue label="Was dry before" v={p.lBefore} title="Same test on the reference passes; positive = it was land" />
-          <Clue label="Low ground / flat" v={p.lTerrain} title="HAND and slope priors" />
-          <Clue label="HH change" v={p.dHH} range={15} neutral unit=" dB" title="vs pre-flood reference median" />
-        </Card>
-      )}
-      {atLeast(mode, 'intermediate') && (
-        <Card title="Measured values">
-          <KV rows={[
-            ['HH backscatter', p.hh != null ? `${p.hh.toFixed(1)} dB` : '—', <Explain key="e" term="backscatter" mode={mode} />],
-            ['HV backscatter', p.hv != null ? `${p.hv.toFixed(1)} dB` : '—'],
-            ['Change vs before (HH)', `${p.dHH >= 0 ? '+' : ''}${p.dHH.toFixed(1)} dB`],
-            ['HAND', p.hand != null ? `${p.hand.toFixed(1)} m` : '—', <Explain key="h" term="hand" mode={mode} />],
-            ['Slope', p.slope != null ? `${p.slope.toFixed(1)}°` : '—'],
-            ['Historical water', p.jrc != null ? `${p.jrc.toFixed(0)}% of 1984–2021` : '—', <Explain key="j" term="jrc" mode={mode} />],
-            ['Land cover', wc ?? '—'],
-            p.density != null && ['Population density', `~${num(p.density)} people/km²`],
-          ]} />
-        </Card>
-      )}
+      {edge && <Note>This spot is at a flood edge: the 100 m average mixes flooded and dry pixels, so it can disagree with the 20 m class the map shows.</Note>}
+      <RecoveryHere ctx={ctx} />
+      <Card title="Physics cross-check" action={<Explain term="change" mode={mode} />}
+        tag={agree == null ? null : <Badge kind={agree ? 'observed' : 'predicted'}>{agree ? 'Agrees with the map' : 'Disagrees: treat with care'}</Badge>}>
+        <p className="muted small">Independent physics tests, not the AI model’s internal reasons. Cyan bars point towards flood, orange away.</p>
+        <Clue label="Dark like water now" v={p.lNow} title="Radar water/land mixture model fitted to this pass (log-odds)" />
+        <Clue label="Was land before" v={p.lBefore} title="Same test on the pre-flood reference passes; positive = it was land" />
+        <Clue label="Low, flat ground" v={p.lTerrain} title="HAND and slope priors (log-odds)" />
+        <Clue label="HH change vs before" v={p.dHH} range={15} neutral unit=" dB" title="Change from the pre-flood reference median" />
+      </Card>
+      <Card title="Measured here (100 m average)">
+        <KV rows={[
+          ['HH backscatter', p.hh != null ? `${p.hh.toFixed(1)} dB` : '—', <Explain key="e" term="backscatter" mode={mode} />],
+          ['HV backscatter', p.hv != null ? `${p.hv.toFixed(1)} dB` : '—'],
+          ['Change vs before (HH)', `${p.dHH >= 0 ? '+' : ''}${p.dHH.toFixed(1)} dB`],
+          ['HAND', p.hand != null ? `${p.hand.toFixed(1)} m` : '—', <Explain key="h" term="hand" mode={mode} />],
+          ['Slope', p.slope != null ? `${p.slope.toFixed(1)}°` : '—'],
+          ['Historical water', p.jrc != null ? `${p.jrc.toFixed(0)}% of 1984–2021` : '—', <Explain key="j" term="jrc" mode={mode} />],
+          ['Land cover', wc ?? '—'],
+          p.density != null && ['Population density', `~${num(p.density)} people/km²`],
+        ]} />
+      </Card>
       {mode === 'advanced' && (
         <Card title="Model trace">
           <KV rows={[
             ['p_open (new open water)', p.pOpen.toFixed(3)], ['p_veg (under vegetation)', p.pVeg.toFixed(3)], ['p_flood', p.pFlood.toFixed(3)],
-            ['Class code', `${cls} · ${CLASS_LABELS[cls]}`],
-            ['Physics rescue (HH < −15 dB & HAND < 10 m)', p.hh == null ? '—' : rescue ? 'applies' : 'does not apply'],
+            ['Class on the map', `${cls} · ${CLASS_LABELS[cls]}`],
+            ['Physics rescue (HH < −15 dB & HAND < 10 m)', p.hh == null ? '—' : rescue ? 'conditions met (100 m mean)' : 'not met (100 m mean)'],
             ['Permanent water (JRC ≥ 50%)', p.jrc == null ? '—' : p.jrc >= 50 ? 'yes: excluded' : 'no'],
             ['Coordinates', `${pick[1].toFixed(5)}°N, ${pick[0].toFixed(5)}°E`],
           ]} />
-          <p className="muted small">Values sampled from 100 m lookups (decision made at 20 m). LightGBM per-pixel feature contributions are not shipped; physics log-odds terms above and global feature importance (Features) explain the decision.</p>
+          <p className="muted small">The decision is made at 20 m by LightGBM (+ rescue rule); its per-pixel feature contributions are not shipped. Values here are 100 m means; the class is the 20 m class drawn on the map.</p>
         </Card>
       )}
     </div>

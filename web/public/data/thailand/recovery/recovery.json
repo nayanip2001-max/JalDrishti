@@ -1,0 +1,618 @@
+{
+ "method": "Per-pixel merge of every NISAR pass (all tracks): wet = confident flood (classes 3, 5), dry = class 1. Days under water is a range: min = last wet look - first wet look; max = first dry look after - last dry look before.",
+ "looks": [
+  {
+   "date": "2026-09-13",
+   "track": 112,
+   "kind": "null_test"
+  },
+  {
+   "date": "2026-09-18",
+   "track": 4,
+   "kind": "null_test"
+  },
+  {
+   "date": "2026-09-18",
+   "track": 11,
+   "kind": "null_test"
+  },
+  {
+   "date": "2026-09-25",
+   "track": 112,
+   "kind": "post"
+  },
+  {
+   "date": "2026-09-30",
+   "track": 4,
+   "kind": "post"
+  },
+  {
+   "date": "2026-09-30",
+   "track": 11,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-07",
+   "track": 112,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-12",
+   "track": 4,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-12",
+   "track": 11,
+   "kind": "post"
+  },
+  {
+   "date": "2026-10-19",
+   "track": 112,
+   "kind": "post"
+  }
+ ],
+ "days": [
+  0,
+  5,
+  5,
+  12,
+  17,
+  17,
+  24,
+  29,
+  29,
+  36
+ ],
+ "corners": [
+  [
+   100.19515682795478,
+   14.604825869688394
+  ],
+  [
+   100.90774542708257,
+   14.604825869688394
+  ],
+  [
+   100.90774542708257,
+   13.695451015482448
+  ],
+  [
+   100.19515682795478,
+   13.695451015482448
+  ]
+ ],
+ "totals": {
+  "flooded_km2": 836.1,
+  "days_min_median": 12,
+  "days_max_median": 24,
+  "still_wet_km2": 771.5,
+  "reflooded_km2": 20.4,
+  "longer_than_4_weeks_km2": 0.0,
+  "recovery_index": null,
+  "half_dry_days": null,
+  "recovering": false
+ },
+ "covers": {
+  "Cropland": {
+   "flooded_km2": 803.6,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 751.3,
+   "reflooded_km2": 18.6,
+   "longer_than_4_weeks_km2": 0.0,
+   "recovery_index": null,
+   "half_dry_days": null
+  },
+  "Trees": {
+   "flooded_km2": 10.4,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 4.6,
+   "reflooded_km2": 0.6,
+   "longer_than_4_weeks_km2": 0.0,
+   "recovery_index": 5.8,
+   "half_dry_days": null
+  },
+  "Grass / wetland": {
+   "flooded_km2": 20.5,
+   "days_min_median": 0,
+   "days_max_median": 12,
+   "still_wet_km2": 14.7,
+   "reflooded_km2": 1.0,
+   "longer_than_4_weeks_km2": 0.0,
+   "recovery_index": null,
+   "half_dry_days": null
+  }
+ },
+ "curves": {
+  "dates": [
+   "2026-09-25\u00b7T112",
+   "2026-10-07\u00b7T112",
+   "2026-10-19\u00b7T112"
+  ],
+  "all": [
+   0.5056,
+   0.6611,
+   0.7789
+  ],
+  "Cropland": [
+   0.5117,
+   0.6686,
+   0.7875
+  ],
+  "Trees": [
+   0.1944,
+   0.299,
+   0.2818
+  ],
+  "Built-up": [
+   null,
+   null,
+   null
+  ],
+  "Grass / wetland": [
+   0.2562,
+   0.3557,
+   0.4769
+  ]
+ },
+ "curves_by_track": {
+  "112": {
+   "dates": [
+    "2026-09-25\u00b7T112",
+    "2026-10-07\u00b7T112",
+    "2026-10-19\u00b7T112"
+   ],
+   "all": [
+    0.5056,
+    0.6611,
+    0.7789
+   ],
+   "Cropland": [
+    0.5117,
+    0.6686,
+    0.7875
+   ],
+   "Trees": [
+    0.1944,
+    0.299,
+    0.2818
+   ],
+   "Built-up": [
+    null,
+    null,
+    null
+   ],
+   "Grass / wetland": [
+    0.2562,
+    0.3557,
+    0.4769
+   ]
+  },
+  "11": {
+   "dates": [
+    "2026-09-30\u00b7T11",
+    "2026-10-12\u00b7T11"
+   ],
+   "all": [
+    0.5796,
+    0.5559
+   ],
+   "Cropland": [
+    0.5846,
+    0.5609
+   ],
+   "Trees": [
+    0.3887,
+    0.3277
+   ],
+   "Built-up": [
+    null,
+    null
+   ],
+   "Grass / wetland": [
+    0.5556,
+    0.5476
+   ]
+  },
+  "4": {
+   "dates": [
+    "2026-09-30\u00b7T4",
+    "2026-10-12\u00b7T4"
+   ],
+   "all": [
+    0.6156,
+    0.4946
+   ],
+   "Cropland": [
+    0.6248,
+    0.5051
+   ],
+   "Trees": [
+    0.5273,
+    0.3319
+   ],
+   "Built-up": [
+    null,
+    null
+   ],
+   "Grass / wetland": [
+    0.512,
+    0.3976
+   ]
+  }
+ },
+ "main_track": 112,
+ "districts": {
+  "Ban Mo": {
+   "flooded_km2": 12.3,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 11.2,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Ban": {
+   "flooded_km2": 33.0,
+   "days_min_median": 19,
+   "days_max_median": 19,
+   "still_wet_km2": 31.6,
+   "reflooded_km2": 0.6,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Bua Thong": {
+   "flooded_km2": 3.8,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 2.9,
+   "reflooded_km2": 0.3,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Len": {
+   "flooded_km2": 52.8,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 43.7,
+   "reflooded_km2": 3.5,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Pa-In": {
+   "flooded_km2": 18.9,
+   "days_min_median": 12,
+   "days_max_median": 12,
+   "still_wet_km2": 16.9,
+   "reflooded_km2": 0.9,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Pahan": {
+   "flooded_km2": 18.0,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 16.6,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Pla Ma": {
+   "flooded_km2": 42.6,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 42.4,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Sai": {
+   "flooded_km2": 44.7,
+   "days_min_median": 24,
+   "days_max_median": 24,
+   "still_wet_km2": 44.4,
+   "reflooded_km2": 0.1,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Bang Yai": {
+   "flooded_km2": 2.3,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 2.1,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Don Phut": {
+   "flooded_km2": 7.9,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 7.8,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Khlong Luang": {
+   "flooded_km2": 3.0,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 2.4,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Khlong Sam Wa": {
+   "flooded_km2": 5.2,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 3.3,
+   "reflooded_km2": 0.3,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Lam Luk Ka": {
+   "flooded_km2": 34.1,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 32.0,
+   "reflooded_km2": 0.9,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Lat Bua Luang": {
+   "flooded_km2": 55.7,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 53.2,
+   "reflooded_km2": 0.6,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Lat Krabang": {
+   "flooded_km2": 5.6,
+   "days_min_median": 12,
+   "days_max_median": 12,
+   "still_wet_km2": 4.2,
+   "reflooded_km2": 1.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Lat Lum Kaeo": {
+   "flooded_km2": 24.8,
+   "days_min_median": 12,
+   "days_max_median": 19,
+   "still_wet_km2": 20.1,
+   "reflooded_km2": 2.2,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Maha Rat": {
+   "flooded_km2": 20.8,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 20.0,
+   "reflooded_km2": 0.2,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Mueang Ang Thong": {
+   "flooded_km2": 8.4,
+   "days_min_median": 12,
+   "days_max_median": 19,
+   "still_wet_km2": 7.9,
+   "reflooded_km2": 0.2,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Mueang Pathum Thani": {
+   "flooded_km2": 3.8,
+   "days_min_median": 0,
+   "days_max_median": 17,
+   "still_wet_km2": 1.5,
+   "reflooded_km2": 0.5,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Mueang Suphan Buri": {
+   "flooded_km2": 11.6,
+   "days_min_median": 24,
+   "days_max_median": 24,
+   "still_wet_km2": 11.4,
+   "reflooded_km2": 0.1,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Nakhon Chai Si": {
+   "flooded_km2": 6.7,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 6.0,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Nakhon Luang": {
+   "flooded_km2": 14.9,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 14.3,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Nong Chok": {
+   "flooded_km2": 30.9,
+   "days_min_median": 12,
+   "days_max_median": 12,
+   "still_wet_km2": 27.7,
+   "reflooded_km2": 1.5,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Nong Khae": {
+   "flooded_km2": 8.4,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 6.8,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Nong Suea": {
+   "flooded_km2": 8.9,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 7.1,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Pa Mok": {
+   "flooded_km2": 6.2,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 5.6,
+   "reflooded_km2": 0.1,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Phachi": {
+   "flooded_km2": 5.3,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 4.5,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Phak Hai": {
+   "flooded_km2": 60.4,
+   "days_min_median": 24,
+   "days_max_median": 24,
+   "still_wet_km2": 59.6,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Phra Nakhon Si Ayutthaya": {
+   "flooded_km2": 15.1,
+   "days_min_median": 12,
+   "days_max_median": 19,
+   "still_wet_km2": 13.8,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Phutthamonthon": {
+   "flooded_km2": 4.7,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 4.4,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Sai Noi": {
+   "flooded_km2": 23.5,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 16.9,
+   "reflooded_km2": 2.2,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Sam Khok": {
+   "flooded_km2": 5.1,
+   "days_min_median": 12,
+   "days_max_median": 19,
+   "still_wet_km2": 4.1,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Samko": {
+   "flooded_km2": 2.9,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 2.5,
+   "reflooded_km2": 0.1,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Sena": {
+   "flooded_km2": 59.8,
+   "days_min_median": 24,
+   "days_max_median": 24,
+   "still_wet_km2": 59.0,
+   "reflooded_km2": 0.5,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Song Phi Nong": {
+   "flooded_km2": 10.6,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 10.5,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Tha Ruea": {
+   "flooded_km2": 8.7,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 7.0,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Thanyaburi": {
+   "flooded_km2": 2.8,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 2.5,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Uthai": {
+   "flooded_km2": 16.2,
+   "days_min_median": 0,
+   "days_max_median": 24,
+   "still_wet_km2": 15.1,
+   "reflooded_km2": 0.0,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Wang Noi": {
+   "flooded_km2": 27.3,
+   "days_min_median": 12,
+   "days_max_median": 24,
+   "still_wet_km2": 26.6,
+   "reflooded_km2": 0.1,
+   "longer_than_4_weeks_km2": 0.0
+  },
+  "Wiset Chai Chan": {
+   "flooded_km2": 37.8,
+   "days_min_median": 24,
+   "days_max_median": 24,
+   "still_wet_km2": 36.8,
+   "reflooded_km2": 0.4,
+   "longer_than_4_weeks_km2": 0.0
+  }
+ },
+ "scars": {
+  "track": 112,
+  "pre": "2026-09-13",
+  "post": [
+   {
+    "date": "2026-10-19",
+    "stage_diff": 0.186
+   }
+  ],
+  "erosion_km2": 12.42,
+  "accretion_km2": 3.0,
+  "bank_km": 1431.4,
+  "mean_retreat_m": 8.7,
+  "mean_advance_m": 2.1,
+  "min_detectable_m": 7.0,
+  "after_peak": false,
+  "stage_ok": false,
+  "noise": {
+   "looks": [
+    "2026-09-13\u00b7T112",
+    "2026-09-18\u00b7T4"
+   ],
+   "erosion_km2": 0.14,
+   "accretion_km2": 0.03,
+   "retreat_m": 2.3,
+   "advance_m": 0.5,
+   "cross_track": true
+  },
+  "hotspot_min_km2": 0.008,
+  "hotspots": [],
+  "hotspot_count": 0,
+  "hotspot_km2": 0,
+  "erosion_significant": false,
+  "accretion_significant": false
+ },
+ "duration_classes": {
+  "1": "< 2 weeks",
+  "2": "2\u20134 weeks",
+  "3": "4\u20138 weeks",
+  "4": "> 8 weeks",
+  "5": "not seen dry again"
+ },
+ "duration_colors": {
+  "1": "#bae6fd",
+  "2": "#60a5fa",
+  "3": "#6366f1",
+  "4": "#7c3aed",
+  "5": "#f43f5e"
+ }
+}

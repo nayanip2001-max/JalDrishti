@@ -9,6 +9,7 @@ import { ObservationsView, FeaturesView, ModelView, ValidationView, DataView } f
 import { DETAILS } from './components/Details.jsx'
 import { LiveView, LiveBanner } from './components/Live.jsx'
 import { RegionView } from './components/Region.jsx'
+import { RecoveryView } from './components/Recovery.jsx'
 import BeginnerApp from './beginner/BeginnerApp.jsx'
 import { Icon, Boundary } from './components/ui.jsx'
 import { readPixel } from './lib/evidence.js'
@@ -23,12 +24,14 @@ const SciBanner = lazy(() => import('./science/ScienceTab.jsx').then((m) => ({ d
 const BANNER = { observations: 'prep', features: 'features', model: 'model', validation: 'accuracy', impact: 'impact' }
 // Beginner map: flood classes on a satellite basemap, nothing else.
 const BEGINNER_LAYERS = { ...LENS_LAYERS.science, sar: false }
+const NO_REGION = {}
+const BEGINNER_NO_FLOOD = { ...BEGINNER_LAYERS, flood: false }
 
 const latestOf = (m) => { const ps = postsOf(m); return ps[ps.length - 1] }
 
 const DATA = `${import.meta.env.BASE_URL}data/`
 const SECTIONS = { overview: Overview, event: EventView, flood: FloodView, temporal: TemporalView, impact: ImpactView, how: HowItWorks,
-  observations: ObservationsView, features: FeaturesView, model: ModelView, validation: ValidationView, data: DataView, live: LiveView, region: RegionView, science: ScienceTab }
+  observations: ObservationsView, features: FeaturesView, model: ModelView, validation: ValidationView, data: DataView, live: LiveView, region: RegionView, science: ScienceTab, recovery: RecoveryView }
 const store = {
   get: (k, d) => { try { return localStorage.getItem(k) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, v) } catch { /* storage blocked */ } },
@@ -141,6 +144,9 @@ export default function App({ onHome }) {
 
   if (!manifest || !scene) return <div className="loading">{loadError ? 'Could not load this event. Check the connection and reload.' : <><span className="spinner" />Loading NISAR observations…</>}</div>
   const switching = manifest.aoi.id !== eventId
+  const dashExtra = { dur: layers.dur ? { url: shown + 'recovery/duration.webp', opacity: 0.85 } : null, scar: layers.scar ? { url: shown + 'recovery/scars.webp', opacity: 1 } : null,
+    rdur: region.result?.recovery?.dur && section === 'region' && (region.showRec?.dur ?? true) ? { url: region.result.recovery.dur, corners: region.result.recovery.corners, opacity: 0.85 } : null,
+    rscar: region.result?.recovery?.scar && section === 'region' && region.showRec?.scar ? { url: region.result.recovery.scar, corners: region.result.recovery.corners, opacity: 1 } : null }
 
   const ctx = { manifest, scene, setScene: pickScene, modelDay, setModelDay, mode, lens, layers, setLayers, setLayersCompare, opacity, setOpacity, basemap, setBasemap,
     compare, setCompare, open, go, flyTo, pick, pixel, country: manifest.event.country, startTour: () => setStory(0), base: shown, live, region, setRegion,
@@ -157,8 +163,8 @@ export default function App({ onHome }) {
     return (
       <BeginnerApp ctx={ctx} events={events} eventId={eventId} onMode={setMode} onHome={onHome} switching={switching} loadError={loadError}
         onEvent={(id) => { setLoadError(null); setEventId(id) }} onStay={() => setEventId(manifest.aoi.id)}
-        map={<MapView key={manifest.aoi.id} base={shown} manifest={manifest} scene={scene} layers={BEGINNER_LAYERS} opacity={opacity}
-          basemap="satellite" compare={false} onPick={onPick} pick={pick} camera={camera} modelDay={null} region={{}} />} />
+        renderMap={(o = {}) => <MapView key={manifest.aoi.id} base={shown} manifest={manifest} scene={scene} layers={o.flood === false ? BEGINNER_NO_FLOOD : BEGINNER_LAYERS}
+          opacity={opacity} basemap="satellite" compare={false} onPick={onPick} pick={pick} camera={camera} modelDay={null} region={NO_REGION} extra={o.extra} />} />
     )
   }
 
@@ -169,12 +175,14 @@ export default function App({ onHome }) {
         onHelp={() => open('help')} onSeeing={() => open('seeing')} onHome={onHome} />
       <NavRail items={nav} section={section} onSection={go} />
       <main className="stage">
-        <MapView key={manifest.aoi.id} base={shown} manifest={manifest} scene={scene} layers={layers} opacity={opacity}
+        <MapView key={manifest.aoi.id} base={shown} manifest={manifest} scene={scene} layers={layers} opacity={opacity} extra={dashExtra}
           basemap={basemap} compare={compare} onPick={onPick} pick={pick} camera={camera} modelDay={modelDay}
           region={region} onRegionBox={(box) => setRegion((r) => ({ ...r, box, name: r.name, check: null, drawing: false }))} />
         {section === 'region' && (region.box || region.result)
           ? <div className="legend-float">{region.box && <span><i style={{ border: '2px dashed #f59e0b' }} />Your area</span>}
-            {region.result && <span><i style={{ background: '#22d3ee' }} />Confident flood (your result, not validated here)</span>}</div>
+            {region.result && <span><i style={{ background: '#22d3ee' }} />Confident flood (your result, not validated here)</span>}
+            {region.result?.recovery?.dur && (region.showRec?.dur ?? true) && <><span><i style={{ background: '#bae6fd' }} />&lt; 2 wk</span><span><i style={{ background: '#60a5fa' }} />2–4 wk</span><span><i style={{ background: '#6366f1' }} />4–8 wk</span><span><i style={{ background: '#7c3aed' }} />&gt; 8 wk</span><span><i style={{ background: '#f43f5e' }} />Not dry again</span></>}
+            {region.result?.recovery?.scar && region.showRec?.scar && <><span><i style={{ background: '#f97316' }} />Land → river</span><span><i style={{ background: '#facc15' }} />River → land</span></>}</div>
           : <MapLegend manifest={manifest} layers={layers} mode={mode} scene={scene} modelDay={modelDay} />}
         {modelDay && <div className="live-banner modelled" role="status"><b>MODELLED</b> · {modelDay}: estimate between passes, not an observation. <button onClick={() => setModelDay(null)}>Show observed</button></div>}
         {isLive && story === null && !modelDay && <LiveBanner manifest={manifest} live={live} scene={scene} onLatest={() => setScene(latestOf(manifest))} />}
