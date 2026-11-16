@@ -1528,6 +1528,178 @@
     "confident_share": 0.06
    },
    "ev3": "ev/T156_2026-11-04_3.png"
+  },
+  {
+   "id": "T156_2026-11-16",
+   "track": 156,
+   "date": "2026-11-16",
+   "kind": "post",
+   "refs": [
+    "2026-06-25",
+    "2026-07-07",
+    "2026-07-19",
+    "2026-08-12",
+    "2026-08-24",
+    "2026-09-05",
+    "2026-09-17",
+    "2026-09-29",
+    "2026-10-11"
+   ],
+   "mode": "DHDH",
+   "method": "v2-lgbm",
+   "areas_km2": {
+    "dry": 2260.4,
+    "permanent / pre-existing water": 550.4,
+    "flood (open water)": 1.2,
+    "possible flood (open water)": 51.5,
+    "flooded vegetation": 2.8,
+    "possible flooded vegetation": 11.7,
+    "uncertain": 23.2
+   },
+   "exposure": {
+    "low": {
+     "people": 8581,
+     "cropland_km2": 0.5,
+     "builtup_km2": 0.0,
+     "roads_km": 5.8,
+     "rail_km": 0.6
+    },
+    "high": {
+     "people": 59196,
+     "cropland_km2": 29.4,
+     "builtup_km2": 0.46,
+     "roads_km": 26.1,
+     "rail_km": 2.3
+    },
+    "districts": {
+     "Chengalputtu": {
+      "low": {
+       "people": 1153,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.0,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 8912,
+       "cropland_km2": 2.8,
+       "builtup_km2": 0.07,
+       "roads_km": 4.1,
+       "rail_km": 0.0
+      }
+     },
+     "Chennai": {
+      "low": {
+       "people": 1320,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 0.6,
+       "rail_km": 0.3
+      },
+      "high": {
+       "people": 5049,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.01,
+       "roads_km": 1.9,
+       "rail_km": 0.8
+      }
+     },
+     "Kancheepuram": {
+      "low": {
+       "people": 1966,
+       "cropland_km2": 0.0,
+       "builtup_km2": 0.0,
+       "roads_km": 1.1,
+       "rail_km": 0.0
+      },
+      "high": {
+       "people": 15679,
+       "cropland_km2": 4.0,
+       "builtup_km2": 0.27,
+       "roads_km": 4.1,
+       "rail_km": 0.1
+      }
+     },
+     "Thiruvallur": {
+      "low": {
+       "people": 4117,
+       "cropland_km2": 0.4,
+       "builtup_km2": 0.0,
+       "roads_km": 3.2,
+       "rail_km": 0.2
+      },
+      "high": {
+       "people": 29469,
+       "cropland_km2": 22.6,
+       "builtup_km2": 0.12,
+       "roads_km": 15.9,
+       "rail_km": 1.3
+      }
+     }
+    }
+   },
+   "cls": "cls/T156_2026-11-16.webp",
+   "prob": "prob/T156_2026-11-16.webp",
+   "ev": [
+    "ev/T156_2026-11-16_1.png",
+    "ev/T156_2026-11-16_2.png"
+   ],
+   "sar": "sar/T156_2026-11-16.webp",
+   "obs": {
+    "granule": "NISAR_L2_UR_GCOV_035_156_A_008_4005_DHDH_A_20261116T000827_20261116T000842_P05036_F_P_J_001",
+    "direction": "Ascending",
+    "frame": 8,
+    "polarisations": [
+     "HH",
+     "HV"
+    ],
+    "native_resolution": "10 m (multilooked 2\u00d72 to 20 m)",
+    "product": "NISAR L2 GCOV Urgent Response (low-latency), frequency A",
+    "product_type": "UR",
+    "quantity": "RTC \u03b3\u2070 (terrain-flattened backscatter), dB",
+    "processing": "20 m grid, 5\u00d75 Lee filter",
+    "asf_url": "https://search.asf.alaska.edu/#/?searchType=List%20Search&searchList=NISAR_L2_UR_GCOV_035_156_A_008_4005_DHDH_A_20261116T000827_20261116T000842_P05036_F_P_J_001"
+   },
+   "prob_hist": {
+    "bins": 20,
+    "km2": [
+     2501.9,
+     123.0,
+     54.8,
+     32.0,
+     45.8,
+     40.4,
+     12.5,
+     8.5,
+     6.6,
+     8.1,
+     52.7,
+     3.0,
+     2.5,
+     2.0,
+     1.7,
+     1.5,
+     1.2,
+     1.1,
+     0.9,
+     0.8
+    ],
+    "confident_share": 0.06
+   },
+   "ev3": "ev/T156_2026-11-16_3.png",
+   "live": {
+    "acquired": "2026-11-16T00:08:27Z",
+    "available": "2026-11-16T07:52:01Z",
+    "processing_end": "2026-11-16T19:41:58Z",
+    "latency_h": {
+     "acquired_to_available": 7.73,
+     "acquired_to_first_product": 7.73,
+     "available_to_detected": 11.8,
+     "processing": 0.03,
+     "acquired_to_map": 19.56
+    },
+    "product": "UR"
+   }
   }
  ],
  "refs": {
