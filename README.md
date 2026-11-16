@@ -8,7 +8,7 @@ Every map in the app is built from real NISAR observations, and every accuracy n
 
 **Live demo:** https://nayanip2001-max.github.io/JalDrishti/ · **Events:** Upper Assam, India (Jul 2026) · Chao Phraya, Thailand (Sep–Oct 2026) · **Chennai, India — live** (northeast monsoon, Oct–Nov 2026)
 
----
+----
 
 ## What it shows
 
